@@ -63,7 +63,9 @@
     self.email = @"";
 
     [[HXAnSocialManager manager]fetchFriendInfo];
+
     [HXIMManager manager].isGetTopicList = NO;
+    
     if (clientId)
     {
         [HXIMManager manager].clientId = [clientId mutableCopy];

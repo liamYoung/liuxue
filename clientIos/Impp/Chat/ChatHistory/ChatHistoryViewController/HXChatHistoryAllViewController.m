@@ -1,12 +1,12 @@
 //
-//  HXChatHistoryViewController.m
+//  HXChatHistoryAllViewController.m
 //  Impp
 //
 //  Created by hsujahhu on 2015/3/17.
 //  Copyright (c) 2015年 hsujahhu. All rights reserved.
 //
 
-#import "HXChatHistoryViewController.h"
+#import "HXChatHistoryAllViewController.h"
 #import "HXAppUtility.h"
 #import "HXChatViewController.h"
 #import "HXChat+Additions.h"
@@ -20,21 +20,21 @@
 #import "NotificationCenterUtil.h"
 #import "HXTabBarViewController.h"
 #import "HXIMManager.h"
-#import "HXChatHistoryTableViewCell.h"
-#import "HXChatHistoryAllViewController.h"
+#import "HXCustomTableViewCell.h"
 #import "UIColor+CustomColor.h"
 #import <CoreData/CoreData.h>
 #define VIEW_WIDTH self.view.frame.size.width
 
-@interface HXChatHistoryViewController ()<UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate, UISearchDisplayDelegate, UIActionSheetDelegate>
+@interface HXChatHistoryAllViewController ()<UITableViewDataSource, UITableViewDelegate,NSFetchedResultsControllerDelegate,UISearchBarDelegate, UISearchDisplayDelegate, UIActionSheetDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *chatHistoryArray;
 @property (strong, nonatomic) NSMutableArray *chatHistoryFilterArray;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) UISearchBar* searchBar;
 @property (strong, nonatomic) UISearchDisplayController* searchController;
 @end
 
-@implementation HXChatHistoryViewController
+@implementation HXChatHistoryAllViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -123,16 +123,14 @@
 
 - (void)createButtonTapped
 {
-    HXChatHistoryAllViewController *vc = [[HXChatHistoryAllViewController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - TableView Delegate Datasource
 
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return 74;
+    return 48;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
@@ -142,6 +140,8 @@
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"title %d",self.chatHistoryArray.count);
+
     if (tableView == self.searchController.searchResultsTableView)
         return self.chatHistoryFilterArray.count;
     else
@@ -150,35 +150,40 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    static NSString *cellIdentifier = @"chatHistoryCell";
+    static NSString *cellIdentifier = @"friendListCell";
     
-    HXChat *chatSession;
+    HXCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSString *title;
+    NSString *photoUrl;
+    NSInteger badgeValue = 0;
     
-    if (tableView == self.searchController.searchResultsTableView)
-        chatSession = self.chatHistoryFilterArray[indexPath.row];
-    else
-        chatSession = self.chatHistoryArray[indexPath.row];
+    if (tableView == self.searchController.searchResultsTableView) {
+        NSMutableDictionary *dic = self.chatHistoryFilterArray[indexPath.row];
+        title = [dic objectForKey:@"name"];
+//        photoUrl = user.photoURL;
+        
+    }else{
+        NSMutableDictionary *dic = self.chatHistoryArray[indexPath.row];
+        title = [dic objectForKey:@"name"];
+//        photoUrl = user.photoURL;
+    }
+    NSLog(@"title %@",title);
     
-    HXMessage *lastMessage = [ChatUtil getLastMessage:chatSession];
-    NSString *lastStr = [MessageUtil configureLastMessage:lastMessage];
-    NSInteger unreadCount = [ChatUtil unreadCount:chatSession];
-    
-    NSString *userName = [NSString stringWithFormat:@"%@ (%d)",chatSession.topicName,(int)chatSession.users.count + 1];
-    NSString *photoUrl = chatSession.topicOwner.photoURL;
-
-    if ([lastStr isEqualToString:@""]) lastStr = @"...";
-    
-    HXChatHistoryTableViewCell *cell = [[HXChatHistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                                                         reuseIdentifier:cellIdentifier
-                                                                                   title:userName
-                                                                                subtitle:lastStr
-                                                                               timestamp:lastMessage.timestamp
-                                                                                photoUrl:photoUrl
-                                                                        placeholderImage:[UIImage imageNamed:@"friend_default"]
-                                                                              badgeValue:unreadCount];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (cell == nil)
+    {
+        cell = [[HXCustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                            reuseIdentifier:cellIdentifier
+                                                      title:title
+                                                   photoUrl:photoUrl
+                                                      image:[UIImage imageNamed:@"friend_default"]
+                                                 badgeValue:badgeValue
+                                                      style:HXCustomCellStyleDefault];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }else{
+        [cell reuseCellWithTitle:title photoUrl:photoUrl image:[UIImage imageNamed:@"friend_default"] badgeValue:badgeValue];
+    }
+//    cell.defaultDelegate = self;
+    [cell setIndexValue:indexPath.row];
     return cell;
 }
 
@@ -186,15 +191,25 @@
 {
     [self.searchBar resignFirstResponder];
     
-    HXChat *chatSession;
+    NSMutableDictionary *dic;
     if (tableView == self.searchController.searchResultsTableView)
-        chatSession = self.chatHistoryFilterArray[indexPath.row];
+        dic = self.chatHistoryFilterArray[indexPath.row];
     else
-        chatSession = self.chatHistoryArray[indexPath.row];
+        dic = self.chatHistoryArray[indexPath.row];
     
-    BOOL isTopicMode = [chatSession.topicId isEqualToString:@""] ? NO:YES;
-    HXChatViewController *chatVc = [[HXChatViewController alloc]initWithChatInfo:chatSession setTopicMode:isTopicMode];
-    [self.navigationController pushViewController:chatVc animated:YES];
+//    BOOL isTopicMode = [chatSession.topicId isEqualToString:@""] ? NO:YES;
+//    HXChatViewController *chatVc = [[HXChatViewController alloc]initWithChatInfo:chatSession setTopicMode:isTopicMode];
+    
+    [[[HXIMManager manager]anIM] addClients:[NSSet setWithObject:[HXIMManager manager].clientId] toTopicId:[dic objectForKey:@"id"] success:^(NSString *topicId) {
+        NSLog(@"AnIM addClients successful");
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:RefreshChatHistory object:nil];
+
+        [self dismissViewControllerAnimated:YES completion:nil];
+
+    } failure:^(ArrownockException *exception) {
+        NSLog(@"AnIm addClients failed, error : %@", exception.getMessage);
+    }];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -229,22 +244,38 @@
 #pragma mark - Fetch Chat History in DB
 - (void)fetchChatHistory
 {
-    [HXUserAccountManager manager].userInfo = [UserUtil getHXUserByClientId:[HXIMManager manager].clientId];
-    self.chatHistoryArray = [[[HXUserAccountManager manager].userInfo.topics allObjects]mutableCopy];
-    self.chatHistoryArray = [[self.chatHistoryArray sortedArrayUsingComparator:(NSComparator)^(HXChat* obj1, HXChat* obj2){
-        NSString *lastName1 = obj1.topicName;
-        NSString *lastName2 = obj2.topicName;
-        return [lastName1 compare:lastName2]; }] mutableCopy];
-
-//    for (int i = 0; i < [self.chatHistoryArray count]; i ++)
-//    {
-//        NSLog(@"HHHHHHHHHHHH  %@", [self.chatHistoryArray objectAtIndex:i]);
-//
+//    NSError* error;
+//    [self.fetchedResultsController performFetch:&error];
+//    if (error) {
+//        NSLog(@"error: %@", [error localizedDescription]);
+//    }
+//    [self.chatHistoryArray removeAllObjects];
+//    
+//    if ([HXUserAccountManager manager].userId) {
+//        for (int i = 0; i < self.fetchedResultsController.fetchedObjects.count; i++) {
+//            HXChat* chat = self.fetchedResultsController.fetchedObjects[i];
+//            [self.chatHistoryArray addObject:chat];
+//        }
 //    }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
+    [[[HXIMManager manager] anIM] getTopicList:^(NSMutableArray *topicList) {
+        NSLog(@"success log get All TopicList : %@",topicList);
+        [self.chatHistoryArray removeAllObjects];
+        
+        [self.chatHistoryArray addObjectsFromArray:topicList];
+        
+        for (int i = 0; i < [self.chatHistoryArray count]; i ++)
+        {
+            NSLog(@"HHHHHHHHHHHH  %@", [self.chatHistoryArray objectAtIndex:i]);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+
+    } failure:^(ArrownockException *exception) {
+        NSLog(@"failrue log get All TopicList : %@",[exception getMessage]);
+    }];
 }
 #pragma mark - UISearchBar Delegate
 
@@ -262,8 +293,7 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"userName contains[c] %@", searchText];    
-    resultPredicate = [NSPredicate predicateWithFormat:@"topicName contains[c] %@", searchText];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"ANY users.UserName contains[c] %@ || topicName contains[c] %@", searchText,searchText];
     self.chatHistoryFilterArray = [[self.chatHistoryArray filteredArrayUsingPredicate:resultPredicate]mutableCopy];
 }
 
@@ -286,6 +316,65 @@
     BOOL isTopicMode = [noticeInfo[@"mode"] isEqualToString:@"topic"] ? YES:NO;
     HXChatViewController *chatVc = [[HXChatViewController alloc]initWithChatInfo:chatSession setTopicMode:isTopicMode];
     [self.navigationController pushViewController:chatVc animated:NO];
+}
+
+#pragma mark - Fetched results controller
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"HXChat"
+                                              inManagedObjectContext:[CoreDataUtil sharedContext]];
+    [fetchRequest setIncludesPropertyValues:NO];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat
+                                :@"currentClientId == %@ && ANY messages != nil",
+                                [HXIMManager manager].clientId]];
+    //[fetchRequest setPredicate:nil];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"updatedTimestamp"
+                                                                   ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                        managedObjectContext:[CoreDataUtil sharedContext]
+                                          sectionNameKeyPath:nil
+                                                   cacheName:nil];
+    
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+#ifdef DEBUG
+        // Do NOT use abort() in product.
+        abort();
+#endif
+    }
+    
+    return _fetchedResultsController;
+}
+
+-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+    //[self.tableView reloadData];
+    return;
 }
 
 - (void)didReceiveMemoryWarning {

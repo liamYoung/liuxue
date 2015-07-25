@@ -17,7 +17,7 @@
 "登入" =	"Login";
 "您的用戶名稱必須是大小寫的英文字母" =	"Alphanumeric characters only";
 
-"搜尋好友和群組" =	"Search Friends and Groups";
+"搜尋群組" =	"Search Groups";
 "好友請求" =	"Friend Request";
 "群組列表" =	"Groups";
 "好友列表" =	"Friends";
@@ -43,7 +43,7 @@
 "已接受" =	"Accepted";
 "已拒絕" =	"Declined";
 
-"搜尋好友和群組" =	"Search Friends and Groups";
+"搜尋好友" =	"Search Friends";
 
 "取消" =	"Cancel";
 

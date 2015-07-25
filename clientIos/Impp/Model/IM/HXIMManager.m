@@ -118,6 +118,7 @@
         /* just get topic once */
         if (!self.isGetTopicList) {
             [self.anIM getTopicList:_clientId success:^(NSMutableArray *topicList) {
+                NSLog(@"success log get my TopicList : %@",topicList);
                 NSMutableSet *topicIds = [[NSMutableSet alloc]initWithCapacity:0];
                 for (NSDictionary *dic in topicList){
                     /* EXAMPLE
@@ -138,7 +139,7 @@
                 
                 [[NSNotificationCenter defaultCenter]postNotificationName:RefreshFriendList object:nil];
             } failure:^(ArrownockException *exception) {
-                NSLog(@"AnIm getTopicList failed, error : %@", exception.getMessage);
+                NSLog(@"AnIm get my TopicList failed, error : %@", exception.getMessage);
             }];
             self.isGetTopicList = YES;
         }

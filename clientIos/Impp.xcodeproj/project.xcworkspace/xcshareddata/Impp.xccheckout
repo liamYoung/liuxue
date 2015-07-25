@@ -10,43 +10,29 @@
 	<string>Impp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>41932CD03C33BC3B2624762135296BABE420F02A</key>
-		<string>code.csdn.net:arrownock/arrownock-impp-ios.git</string>
-		<key>51DC890C0E892719D981357E4B06BE7313538E3A</key>
-		<string>git.arrownock.com:arrownock/arrownock-impp-ios.git</string>
+		<key>30417d94-7e6d-0535-65d0-ce57b7db7bff</key>
+		<string>https://haoyilinde%40163.com@github.com/liamYoung/liuxue.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Impp.xcodeproj</string>
+	<string>trunk/clientIos/Impp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>41932CD03C33BC3B2624762135296BABE420F02A</key>
-		<string>../..</string>
-		<key>51DC890C0E892719D981357E4B06BE7313538E3A</key>
-		<string>../../../arrownock-impp-ios</string>
+		<key>30417d94-7e6d-0535-65d0-ce57b7db7bff</key>
+		<string>../../../..</string>
 	</dict>
-	<key>IDESourceControlProjectURL</key>
-	<string>code.csdn.net:arrownock/arrownock-impp-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>41932CD03C33BC3B2624762135296BABE420F02A</string>
+	<string>30417d94-7e6d-0535-65d0-ce57b7db7bff</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
+			<string>public.vcs.subversion</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>51DC890C0E892719D981357E4B06BE7313538E3A</string>
+			<string>30417d94-7e6d-0535-65d0-ce57b7db7bff</string>
 			<key>IDESourceControlWCCName</key>
-			<string>arrownock-impp-ios</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>41932CD03C33BC3B2624762135296BABE420F02A</string>
-			<key>IDESourceControlWCCName</key>
-			<string>arrownock-impp-ios-code</string>
+			<string>liuxue.git</string>
 		</dict>
 	</array>
 </dict>

@@ -115,7 +115,6 @@ NSFetchedResultsControllerDelegate,UISearchBarDelegate>
 
 - (void)finishButtonTapped
 {
-    
     NSMutableArray *selectedItems = [[NSMutableArray alloc]initWithCapacity:0];
     NSMutableArray *selectedClientIds = [[NSMutableArray alloc]initWithCapacity:0];
     NSMutableString* topicName = [[NSMutableString alloc] init];
@@ -123,6 +122,7 @@ NSFetchedResultsControllerDelegate,UISearchBarDelegate>
     /* add currentUser */
     HXUser *currentUser = [HXUserAccountManager manager].userInfo;
     [topicName setString:currentUser.userName];
+    [selectedClientIds addObject:currentUser.clientId];
     
     for (HXUser *user in self.selectedFriendsArray)
     {
