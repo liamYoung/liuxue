@@ -75,31 +75,6 @@
 - (void)initView
 {
     
-    /* search bar */
-    self.contactSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f,0.0f,VIEW_WIDTH, 44.0f)];
-    [self.contactSearchBar setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-    [self.contactSearchBar setAutocorrectionType:UITextAutocorrectionTypeNo];
-    [self.contactSearchBar setTranslucent:NO];
-    [self.contactSearchBar setShowsCancelButton:NO];
-    self.contactSearchBar.delegate = self;
-    self.contactSearchBar.tintColor = [UIColor color11];
-    self.contactSearchBar.placeholder = NSLocalizedString(@"搜尋好友", nil);
-    
-    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitle:NSLocalizedString(@"取消", nil)];
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTintColor:[UIColor color2]];
-    [self.view addSubview:self.contactSearchBar];
-    
-    /* search controller */
-    self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.contactSearchBar contentsController:self];
-    
-    [self.searchController setValue:[NSNumber numberWithInt:UITableViewStyleGrouped]
-                             forKey:@"_searchResultsTableViewStyle"];
-    self.searchController.searchResultsTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.searchController.searchResultsTitle = @"沒有結果";
-    [self setSearchController:self.searchController];
-    [self.searchController setDelegate:self];
-    [self.searchController setSearchResultsDelegate:self];
-    [self.searchController setSearchResultsDataSource:self];
     
     /* tableView */
     CGRect frame = self.view.frame;

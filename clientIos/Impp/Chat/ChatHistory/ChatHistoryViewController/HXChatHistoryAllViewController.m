@@ -72,29 +72,7 @@
 - (void)initView
 {
     CGRect frame;
-    
-    /* search bar */
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f,0.0f,VIEW_WIDTH, 44.0f)];
-    [self.searchBar setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-    [self.searchBar setAutocorrectionType:UITextAutocorrectionTypeNo];
-    [self.searchBar setTranslucent:NO];
-    [self.searchBar setShowsCancelButton:NO];
-    self.searchBar.delegate = self;
-    self.searchBar.tintColor = [UIColor color11];
-    self.searchBar.placeholder = NSLocalizedString(@"搜尋群組", nil);
-    
-    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitle:NSLocalizedString(@"取消", nil)];
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTintColor:[UIColor color2]];
-    [self.view addSubview:self.searchBar];
-    
-    /* search controller */
-    self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
-    self.searchController.searchResultsTitle = @"沒有結果";
-    self.searchController.searchResultsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self setSearchController:self.searchController];
-    [self.searchController setDelegate:self];
-    [self.searchController setSearchResultsDelegate:self];
-    [self.searchController setSearchResultsDataSource:self];
+
     
     frame = self.view.frame;
     frame.origin.y = self.searchBar.frame.size.height + self.searchBar.frame.origin.y;
@@ -201,9 +179,20 @@
 //    HXChatViewController *chatVc = [[HXChatViewController alloc]initWithChatInfo:chatSession setTopicMode:isTopicMode];
     
     [[[HXIMManager manager]anIM] addClients:[NSSet setWithObject:[HXIMManager manager].clientId] toTopicId:[dic objectForKey:@"id"] success:^(NSString *topicId) {
-        NSLog(@"AnIM addClients successful");
+        NSLog(@"AnIM addClients successful :%@",dic);
         
-        [[NSNotificationCenter defaultCenter]postNotificationName:RefreshChatHistory object:nil];
+         HXUser *currentUser = [HXUserAccountManager manager].userInfo;
+         NSMutableArray *selectedItems = [[NSMutableArray alloc]initWithCapacity:0];
+        [selectedItems addObject:currentUser];
+        
+        HXChat *topicChatSession = [ChatUtil createChatSessionWithUser:selectedItems                                                               topicId:[dic objectForKey:@"id"]
+                                                             topicName:[dic objectForKey:@"name"]
+                                                       currentUserName:[HXUserAccountManager manager].userInfo.userName
+                                                    topicOwnerClientId:[dic objectForKey:@"owner"]];
+        
+        
+        [currentUser addTopicsObject:topicChatSession];
+        //[[NSNotificationCenter defaultCenter]postNotificationName:RefreshChatHistory object:nil];
 
         [self dismissViewControllerAnimated:YES completion:nil];
 
@@ -257,6 +246,8 @@
 //            [self.chatHistoryArray addObject:chat];
 //        }
 //    }
+    
+//        [[[HXIMManager manager] anIM] getTopicList:[HXUserAccountManager manager].userId  success:^(NSMutableArray *topicList) {
     
     [[[HXIMManager manager] anIM] getTopicList:^(NSMutableArray *topicList) {
         NSLog(@"success log get All TopicList : %@",topicList);

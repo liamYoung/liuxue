@@ -79,7 +79,7 @@
         [self.contentView addSubview:self.timestampLabel];
     }
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(74, 10, self.timestampLabel.frame.origin.x - 15 - 74, 16)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(74, 10, 200, 16)];
     self.titleLabel.text = self.title;
     self.titleLabel.font = [UIFont fontWithName:@"STHeitiTC-Medium" size:16];
     self.titleLabel.textColor = [UIColor color4];

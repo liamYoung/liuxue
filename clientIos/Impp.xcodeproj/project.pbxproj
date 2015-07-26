@@ -502,12 +502,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		134E054F1AC29B7F00ADFA33 /* ChatHistory */ = {
+		134E054F1AC29B7F00ADFA33 /* first */ = {
 			isa = PBXGroup;
 			children = (
 				134E057E1AC507CC00ADFA33 /* ChatHistoryViewController */,
 				134E057A1AC5075F00ADFA33 /* View */,
 			);
+			name = first;
 			path = ChatHistory;
 			sourceTree = "<group>";
 		};
@@ -1062,7 +1063,7 @@
 			isa = PBXGroup;
 			children = (
 				134E05401AC29B7F00ADFA33 /* Chat */,
-				134E054F1AC29B7F00ADFA33 /* ChatHistory */,
+				134E054F1AC29B7F00ADFA33 /* first */,
 			);
 			path = Chat;
 			sourceTree = "<group>";

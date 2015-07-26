@@ -141,6 +141,7 @@ NSFetchedResultsControllerDelegate,UISearchBarDelegate>
     if (self.topicSession){
         [[[HXIMManager manager]anIM] addClients:clientIds toTopicId:self.topicSession.topicId success:^(NSString *topicId) {
             NSLog(@"AnIM addClients successful");
+            [self anIMDidAddTopic:topicId];
         } failure:^(ArrownockException *exception) {
             NSLog(@"AnIm addClients failed, error : %@", exception.getMessage);
         }]; 
@@ -199,6 +200,10 @@ NSFetchedResultsControllerDelegate,UISearchBarDelegate>
 
 #pragma mark HXIMManager topic delegate method
 
+- (void)anIMDidAddTopic:(NSString *)topicId
+{
+    
+}
 - (void)anIMDidCreateTopic:(NSString *)topicId
 {
     [self.tempChatInfo setObject:topicId forKey:@"topicId"];

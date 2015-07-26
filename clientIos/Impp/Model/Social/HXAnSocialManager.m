@@ -80,6 +80,7 @@
     
     [[HXAnSocialManager manager]sendRequest:@"friends/list.json" method:AnSocialManagerGET params:params success:^(NSDictionary* response){
         
+        NSLog(@"data init");
         NSLog(@"success log: %@",[response description]);
         NSMutableArray *tempfriends = [[NSMutableArray alloc]initWithCapacity:0];
         NSMutableArray *tempUserArray = [[NSMutableArray alloc]initWithCapacity:0];

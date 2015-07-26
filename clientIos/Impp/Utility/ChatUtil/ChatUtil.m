@@ -274,6 +274,7 @@
     [CoreDataUtil getWithEntityName:NSStringFromClass([HXChat class])
                           predicate:[NSPredicate predicateWithFormat
                                      :@"topicId == %@ && currentClientId == %@",topicId, [HXIMManager manager].clientId]];
+    
     for(HXChat* cs in results){
         NSLog(@"chat exist!! chat info: %@", [cs toDict]);
     }
@@ -290,6 +291,10 @@
 
 + (HXMessage *)getLastMessage:(HXChat *)chatSession
 {
+    NSLog(@"chatSession: %@",chatSession);
+//    if (chatSession.) {
+//        <#statements#>
+//    }
     NSArray* results =
     [CoreDataUtil getWithEntityName:@"HXMessage"
                           predicate:[NSPredicate predicateWithFormat:
