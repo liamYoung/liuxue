@@ -74,6 +74,7 @@
 		9F8B848A1B64E33D006363B8 /* liao.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8B84891B64E33D006363B8 /* liao.png */; };
 		9F8B84901B64E387006363B8 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848D1B64E387006363B8 /* OTPageScrollView.m */; };
 		9F8B84911B64E387006363B8 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848F1B64E387006363B8 /* OTPageView.m */; };
+		FCE72C2E1B64E42F00823CEA /* HXSetinitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */; };
 		FE0758311AD563A100D14F46 /* HXCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758301AD563A100D14F46 /* HXCommentViewController.m */; };
 		FE0758341AD5661700D14F46 /* HXCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758331AD5661700D14F46 /* HXCommentView.m */; };
 		FE0758371AD56C2F00D14F46 /* HXCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758361AD56C2F00D14F46 /* HXCommentTableViewCell.m */; };
@@ -268,6 +269,8 @@
 		9F8B848D1B64E387006363B8 /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
 		9F8B848E1B64E387006363B8 /* OTPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageView.h; sourceTree = "<group>"; };
 		9F8B848F1B64E387006363B8 /* OTPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageView.m; sourceTree = "<group>"; };
+		FCE72C2C1B64E42F00823CEA /* HXSetinitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSetinitViewController.h; sourceTree = "<group>"; };
+		FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSetinitViewController.m; sourceTree = "<group>"; };
 		FE07582F1AD563A100D14F46 /* HXCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommentViewController.h; sourceTree = "<group>"; };
 		FE0758301AD563A100D14F46 /* HXCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCommentViewController.m; sourceTree = "<group>"; };
 		FE0758321AD5661700D14F46 /* HXCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommentView.h; sourceTree = "<group>"; };
@@ -1114,6 +1117,8 @@
 		FEF416771AB7E2C900C7FFC7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				FCE72C2C1B64E42F00823CEA /* HXSetinitViewController.h */,
+				FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */,
 				FEF416831AB7E3D800C7FFC7 /* HXSettingsViewController.h */,
 				FEF416841AB7E3D800C7FFC7 /* HXSettingsViewController.m */,
 			);
@@ -1291,6 +1296,7 @@
 				FE6CF4901AB82A3900D27905 /* HXMessage.m in Sources */,
 				FE0758371AD56C2F00D14F46 /* HXCommentTableViewCell.m in Sources */,
 				FE6CF48F1AB82A3900D27905 /* HXMessage+Additions.m in Sources */,
+				FCE72C2E1B64E42F00823CEA /* HXSetinitViewController.m in Sources */,
 				FE6CF47C1AB81D5C00D27905 /* HXUser+Additions.m in Sources */,
 				13D4BCF41AD3B0F30059FF4A /* HXPost+Additions.m in Sources */,
 				134E05551AC29B7F00ADFA33 /* HXMapViewController.m in Sources */,
