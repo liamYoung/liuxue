@@ -70,6 +70,9 @@
 		4EBEE1ED1B11C1D100278866 /* libArrownock-i386-2.23.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBEE1E51B11C1D100278866 /* libArrownock-i386-2.23.1.a */; };
 		4EBEE1EE1B11C1D100278866 /* libArrownock-x86_64-2.23.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBEE1E61B11C1D100278866 /* libArrownock-x86_64-2.23.1.a */; };
 		9F8365421B636AB8009571FB /* HXChatHistoryAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8365411B636AB8009571FB /* HXChatHistoryAllViewController.m */; };
+		9F8B84801B64910F006363B8 /* School.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B847F1B64910F006363B8 /* School.m */; };
+		9F8B84861B64A736006363B8 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B84831B64A736006363B8 /* OTPageScrollView.m */; };
+		9F8B84871B64A736006363B8 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B84851B64A736006363B8 /* OTPageView.m */; };
 		FE0758311AD563A100D14F46 /* HXCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758301AD563A100D14F46 /* HXCommentViewController.m */; };
 		FE0758341AD5661700D14F46 /* HXCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758331AD5661700D14F46 /* HXCommentView.m */; };
 		FE0758371AD56C2F00D14F46 /* HXCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758361AD56C2F00D14F46 /* HXCommentTableViewCell.m */; };
@@ -257,6 +260,12 @@
 		4EBEE1E61B11C1D100278866 /* libArrownock-x86_64-2.23.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libArrownock-x86_64-2.23.1.a"; sourceTree = "<group>"; };
 		9F8365401B636AB8009571FB /* HXChatHistoryAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXChatHistoryAllViewController.h; sourceTree = "<group>"; };
 		9F8365411B636AB8009571FB /* HXChatHistoryAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXChatHistoryAllViewController.m; sourceTree = "<group>"; };
+		9F8B847E1B64910F006363B8 /* School.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = School.h; sourceTree = "<group>"; };
+		9F8B847F1B64910F006363B8 /* School.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = School.m; sourceTree = "<group>"; };
+		9F8B84821B64A736006363B8 /* OTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageScrollView.h; sourceTree = "<group>"; };
+		9F8B84831B64A736006363B8 /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
+		9F8B84841B64A736006363B8 /* OTPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageView.h; sourceTree = "<group>"; };
+		9F8B84851B64A736006363B8 /* OTPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageView.m; sourceTree = "<group>"; };
 		FE07582F1AD563A100D14F46 /* HXCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommentViewController.h; sourceTree = "<group>"; };
 		FE0758301AD563A100D14F46 /* HXCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCommentViewController.m; sourceTree = "<group>"; };
 		FE0758321AD5661700D14F46 /* HXCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommentView.h; sourceTree = "<group>"; };
@@ -607,6 +616,8 @@
 				13D4BD001AD4C02D0059FF4A /* Wall */,
 				135FD1EC1AC939CF00FB3BDD /* HXDiscoverViewController.h */,
 				135FD1ED1AC939CF00FB3BDD /* HXDiscoverViewController.m */,
+				9F8B847E1B64910F006363B8 /* School.h */,
+				9F8B847F1B64910F006363B8 /* School.m */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -808,6 +819,18 @@
 			path = Arrownock;
 			sourceTree = "<group>";
 		};
+		9F8B84811B64A736006363B8 /* OTPageView */ = {
+			isa = PBXGroup;
+			children = (
+				9F8B84821B64A736006363B8 /* OTPageScrollView.h */,
+				9F8B84831B64A736006363B8 /* OTPageScrollView.m */,
+				9F8B84841B64A736006363B8 /* OTPageView.h */,
+				9F8B84851B64A736006363B8 /* OTPageView.m */,
+			);
+			name = OTPageView;
+			path = ../../../../Downloads/OTPageScrollView/OTPageView;
+			sourceTree = "<group>";
+		};
 		FE0758221AD5627300D14F46 /* Comment */ = {
 			isa = PBXGroup;
 			children = (
@@ -988,6 +1011,7 @@
 		FEF416431AB7D6AA00C7FFC7 = {
 			isa = PBXGroup;
 			children = (
+				9F8B84811B64A736006363B8 /* OTPageView */,
 				4EBEE1D01B11C1D100278866 /* ArrownockSDK */,
 				133A56661ACD620000D5A43A /* ThirdParty */,
 				FEF4164E1AB7D6AA00C7FFC7 /* Impp */,
@@ -1259,6 +1283,7 @@
 				FE6CF47C1AB81D5C00D27905 /* HXUser+Additions.m in Sources */,
 				13D4BCF41AD3B0F30059FF4A /* HXPost+Additions.m in Sources */,
 				134E05551AC29B7F00ADFA33 /* HXMapViewController.m in Sources */,
+				9F8B84861B64A736006363B8 /* OTPageScrollView.m in Sources */,
 				134E053E1AC2976E00ADFA33 /* HXFriendRequestTableViewCell.m in Sources */,
 				FE6CF4701AB80E2100D27905 /* HXLoadingView.m in Sources */,
 				FE6CF49F1AB82B4600D27905 /* UserUtil.m in Sources */,
@@ -1282,6 +1307,7 @@
 				FE6CF49E1AB82B4600D27905 /* MessageUtil.m in Sources */,
 				FEF416851AB7E3D800C7FFC7 /* HXSettingsViewController.m in Sources */,
 				133A56841ACD620000D5A43A /* PHFComposeBarView_TextView.m in Sources */,
+				9F8B84801B64910F006363B8 /* School.m in Sources */,
 				134E05791AC4221C00ADFA33 /* HXUser.m in Sources */,
 				FE6CF4821AB8243100D27905 /* CoreDataUtil.m in Sources */,
 				135FD2041ACABB9500FB3BDD /* HXCustomTableViewCell.m in Sources */,
@@ -1295,6 +1321,7 @@
 				13D4BCE81AD3A5C50059FF4A /* HXLike.m in Sources */,
 				FE07583E1AD59D9400D14F46 /* HXCreatePostViewController.m in Sources */,
 				133A56821ACD620000D5A43A /* PHFComposeBarView.m in Sources */,
+				9F8B84871B64A736006363B8 /* OTPageView.m in Sources */,
 				FE6CF4A71AB8308F00D27905 /* HXTabBarViewController.m in Sources */,
 				135FD1E91AC9059400FB3BDD /* UIFont+customFont.m in Sources */,
 				134E05681AC29CA000ADFA33 /* HXIMManager.m in Sources */,
