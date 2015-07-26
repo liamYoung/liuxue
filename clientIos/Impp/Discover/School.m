@@ -212,7 +212,7 @@
                         
                         UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(75, 5, 120, 40)];
                         labelName.text = [dic objectForKey:@"username"];
-                        labelName.font = [UIFont systemFontOfSize:30];
+                        labelName.font = [UIFont systemFontOfSize:24];
                         [cell addSubview:labelName];
                         
                         UILabel *labelXi = [[UILabel alloc] initWithFrame:CGRectMake(60, 45, cell.frame.size.width - 120, 40)];
