@@ -19,6 +19,8 @@
 #import "HXAppUtility.h"
 #import "HXAnSocialManager.h"
 #import <SDWebImage/UIButton+WebCache.h>
+#import "HXChatViewController.h"
+#import "HXIMManager.h"
 
 @interface School ()<UITableViewDataSource, UITableViewDelegate, OTPageScrollViewDataSource,OTPageScrollViewDelegate,NSURLConnectionDataDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -95,11 +97,16 @@
     label.text = [dic objectForKey:@"name"];
     [cell addSubview:label];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 156, cell.frame.size.width, 200) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 156, cell.frame.size.width, 201) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [cell addSubview:tableView];
+    
+    if (index == 0)
+    {
+        self.tableView = tableView;
+    }
     
     [self.dicTable setObject:tableView forKey:[NSString stringWithFormat:@"%d", index]];
     
@@ -112,7 +119,8 @@
         NSLog(@"success log: %@",[response description]);
         NSArray *array = [[response objectForKey:@"response"] objectForKey:@"users"];
         [self.dicData setObject:array forKey:[NSString stringWithFormat:@"%d", index]];
-        [tableView reloadData];
+        
+        [self.tableView reloadData];
     } failure:^(NSDictionary *response) {
         NSLog(@"failure log: %@",[response description]);
     }];
@@ -138,11 +146,11 @@
     {
         if ([tableView isEqual:[self.dicTable objectForKey:key]])
         {
-            for (id key2 in self.dicTable)
+            for (id key2 in self.dicData)
             {
                 if ([key isEqualToString:key2])
                 {
-                    NSLog(@"Find key3 : %@ , value3: %@",key2,[self.dicTable objectForKey:key2]);
+                    NSLog(@"Find ");
                     NSArray *array = [self.dicData objectForKey:key2];
                     return [array count];
                 }
@@ -189,6 +197,7 @@
 
                         UIImage *imageLiao = [UIImage imageNamed:@"liao.png"];
                         UIButton *btnLiao = [UIButton buttonWithType:UIButtonTypeCustom];
+                        [btnLiao setTag:indexPath.row];
                         [btnLiao setFrame:CGRectMake(160, 15, imageLiao.size.width, imageLiao.size.height)];
                         [btnLiao setImage:imageLiao forState:UIControlStateNormal];
                         [btnLiao addTarget:self action:@selector(talkAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -230,6 +239,36 @@
 - (void)talkAction:(UIButton *)btn
 {
     NSLog(@"talkAction %d", btn.tag);
+    
+    //self.userInfo.clientId
+    //self.userInfo.userName
+    
+//    [self.tableView ]
+    for (id key in self.dicTable)
+    {
+        if ([self.tableView isEqual:[self.dicTable objectForKey:key]])
+        {
+            for (id key2 in self.dicData)
+            {
+                if ([key isEqualToString:key2])
+                {
+                    NSLog(@"talkAction true");
+                    
+                    NSArray *array = [self.dicData objectForKey:key2];
+                    NSDictionary *dic = [array objectAtIndex:btn.tag];
+                    NSString *strClientId = [dic objectForKey:@"clientId"];
+                    NSString *strName = [dic objectForKey:@"username"];
+                    
+                    HXChatViewController *chatVc = [[HXIMManager manager] getChatViewWithTargetClientId:strClientId targetUserName:strName currentUserName:[HXUserAccountManager manager].userName];
+                    [self.navigationController pushViewController:chatVc animated:YES];
+                    
+                    return;
+                }
+            }
+        }
+    }
+
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -266,6 +305,9 @@
 {
     NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
     NSLog(@"scrollViewDidEndDecelerating cell at %d",index);
+    
+    self.tableView = [self.dicTable objectForKey:[NSString stringWithFormat:@"%d",index]];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
