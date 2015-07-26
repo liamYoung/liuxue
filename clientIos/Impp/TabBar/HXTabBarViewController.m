@@ -55,9 +55,9 @@
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:bageNumber];
     
     if (bageNumber)
-        tabBarItem1.badgeValue = [NSString stringWithFormat:@"%ld",(long)bageNumber];
+        tabBarItem2.badgeValue = [NSString stringWithFormat:@"%ld",(long)bageNumber];
     else
-        tabBarItem1.badgeValue = nil;
+        tabBarItem2.badgeValue = nil;
 
 }
 
@@ -88,9 +88,9 @@
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:bageNumber];
     
     if (bageNumber)
-        tabBarItem1.badgeValue = [NSString stringWithFormat:@"%ld",(long)bageNumber];
+        tabBarItem2.badgeValue = [NSString stringWithFormat:@"%ld",(long)bageNumber];
     else
-        tabBarItem1.badgeValue = nil;
+        tabBarItem2.badgeValue = nil;
     
     tabBarItem2.title = NSLocalizedString(@"信息", nil);
     [tabBarItem2 setImage:[[UIImage imageNamed:@"tab02"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];

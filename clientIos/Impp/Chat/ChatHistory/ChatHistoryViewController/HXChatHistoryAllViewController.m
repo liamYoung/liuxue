@@ -255,10 +255,19 @@
         
         [self.chatHistoryArray addObjectsFromArray:topicList];
         
+        NSMutableArray *pDeleArray = [[NSMutableArray alloc] initWithCapacity:10];
         for (int i = 0; i < [self.chatHistoryArray count]; i ++)
         {
-            NSLog(@"HHHHHHHHHHHH  %@", [self.chatHistoryArray objectAtIndex:i]);
+            NSMutableDictionary *dic = [self.chatHistoryArray objectAtIndex:i];
+           // NSLog(@"HHHHHHHHHHHH  %@", [self.chatHistoryArray objectAtIndex:i]);
+            NSArray *ppar = [dic objectForKey:@"parties"];
+            for (int j = 0; j < [ppar count]; j++) {
+                if ([[ppar objectAtIndex:j] isEqualToString:[HXIMManager manager].clientId]) {
+                    [pDeleArray addObject:dic];
+                }
+            }
         }
+        [self.chatHistoryArray removeObjectsInArray:pDeleArray];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];

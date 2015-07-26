@@ -1,12 +1,12 @@
 //
-//  HXSettingsViewController.m
+//  HXSetinitViewController.m
 //  Impp
 //
 //  Created by hsujahhu on 2015/3/17.
 //  Copyright (c) 2015年 hsujahhu. All rights reserved.
 //
 
-#import "HXSettingsViewController.h"
+#import "HXSetinitViewController.h"
 #import "HXAppUtility.h"
 #import "HXUserAccountManager.h"
 #import "UIColor+CustomColor.h"
@@ -19,20 +19,17 @@
 #import "CoreDataUtil.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MobileCoreServices/UTCoreTypes.h>
-#import "HXIMManager.h"
-#import "HXAnSocialManager.h"
-#import "UserUtil.h"
+#import "UIView+Toast.h"
 #define SCREEN_WIDTH self.view.frame.size.width
 #define SCREEN_HEIGHT self.view.frame.size.height
 
-@interface HXSettingsViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate,UITableViewDataSource, UITableViewDelegate>
+@interface HXSetinitViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) UIImageView *photoImageView;
-@property (strong, nonatomic) UILabel *userNameLabel;
+@property (strong, nonatomic) UITextField *userNameLabel;
 @property (strong, nonatomic) NSData *photo;
-@property (strong, nonatomic) UITableView* tableView;
 @end
 
-@implementation HXSettingsViewController
+@implementation HXSetinitViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,26 +47,10 @@
 
 - (void)initView
 {
-    
-    CGRect frame;
-    frame = self.view.frame;
-    CGRect tableFrame = CGRectMake(0 , 120  , frame.size.width, frame.size.height);
-
-    self.tableView = [[UITableView alloc] initWithFrame:tableFrame
-                                                  style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    //self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self.view addSubview:self.tableView];
-    
-    
-    
     UITapGestureRecognizer *photoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped)];
     self.photoImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"friend_default"]];
-    self.photoImageView.frame = CGRectMake(20, 60, 80, 80);
-    self.photoImageView.layer.cornerRadius = 80/2;
+    self.photoImageView.frame = CGRectMake((SCREEN_WIDTH - 138)/2, SCREEN_HEIGHT *.2, 138, 138);
+    self.photoImageView.layer.cornerRadius = 138/2;
     self.photoImageView.clipsToBounds = YES;
     self.photoImageView.layer.masksToBounds = YES;
     self.photoImageView.userInteractionEnabled = YES;
@@ -90,30 +71,119 @@
                        }];
     }
     
-    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,90,SCREEN_WIDTH, 28)];
+    
+    
+    self.userNameLabel = [[UITextField alloc] initWithFrame:CGRectMake(0,
+                                                                   self.photoImageView.frame.size.height + self.photoImageView.frame.origin.y + 55,SCREEN_WIDTH, 28)];
     [self.userNameLabel setBackgroundColor:[UIColor clearColor]];
-    [self.userNameLabel setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:28]];
-    [self.userNameLabel setTextColor:[UIColor color1]];
+    [self.userNameLabel setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:24]];
+    [self.userNameLabel setTextColor:[UIColor whiteColor]];
     self.userNameLabel.text = [HXUserAccountManager manager].userInfo.userName;
     self.userNameLabel.textAlignment = NSTextAlignmentCenter;
+    self.userNameLabel.delegate = self;
     [self.view addSubview:self.userNameLabel];
     
     
+    UILabel *nickName = [[UILabel alloc] initWithFrame:CGRectMake(0,
+                                                                  self.userNameLabel.frame.origin.y -40 ,SCREEN_WIDTH, 28)];
+    [nickName setBackgroundColor:[UIColor clearColor]];
+    [nickName setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:18]];
+    [nickName setTextColor:[HXAppUtility colorWithHexString:@"ecf0f3" alpha:1.0f] ];
+    nickName.text = @"名字:";
+    nickName.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:nickName];
+    
+    
+    HXCustomButton *logoutButton = [[HXCustomButton alloc]initWithTitle:NSLocalizedString(@"开始旅程", nil) titleColor:[UIColor whiteColor] backgroundColor:[UIColor whiteColor]];
+    [logoutButton addTarget:self action:@selector(logoutButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    CGRect frame;
+    frame = logoutButton.frame;
+    frame.origin.x = (SCREEN_WIDTH - logoutButton.frame.size.width)/2;
+    frame.origin.y = self.userNameLabel.frame.size.height + self.userNameLabel.frame.origin.y + 70;
+    logoutButton.frame = frame;
+    [self.view addSubview:logoutButton];
+    
+    
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.userNameLabel resignFirstResponder];
+    return YES;
 }
 
-#pragma mark - Listener
--(void)addRegisetView{
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+    NSMutableArray *errorMessages = [[NSMutableArray alloc]initWithCapacity:0];
+    
+    NSUInteger num = [self.userNameLabel.text length];
+    if (num<1) {
+        NSString *error = NSLocalizedString(@"名字太短，你想干嘛？", nil);
+        [errorMessages addObject:error];
+    }
+    
+    if (num>7) {
+        NSString *error = NSLocalizedString(@"名字单词不能操过7个", nil);
+        [errorMessages addObject:error];
+    }
+    
+    NSString *errorMessage = @"";
+    if ([errorMessages count]) {
+        for (int i = 0; i < errorMessages.count ; i++){
+            if (i == 0) {
+                errorMessage = [NSString stringWithFormat:@"%@",errorMessages[i]];
+            }else
+                errorMessage = [NSString stringWithFormat:@"%@\n%@",errorMessage,errorMessages[i]];
+        }
+        [self.view makeImppToast:errorMessage navigationBarHeight:0];
+    }
+    else{
+        [self changeProfileNickName];
+    }
+    
+    
+    
     
 }
+#pragma mark - Listener
+
 - (void)logoutButtonTapped
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [[HXUserAccountManager manager]userSignedOut];
-    HXLoginSignupViewController *lgVc = [[HXLoginSignupViewController alloc]init];
     
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:lgVc];
+    NSMutableArray *errorMessages = [[NSMutableArray alloc]initWithCapacity:0];
     
-    [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+    NSUInteger num = [self.userNameLabel.text length];
+    if (num<1) {
+        NSString *error = NSLocalizedString(@"名字太短，你想干嘛？", nil);
+        [errorMessages addObject:error];
+    }
+    
+    if (num>7) {
+        NSString *error = NSLocalizedString(@"名字单词不能操过8个", nil);
+        [errorMessages addObject:error];
+    }
+    
+    NSString *errorMessage = @"";
+    if ([errorMessages count]) {
+        for (int i = 0; i < errorMessages.count ; i++){
+            if (i == 0) {
+                errorMessage = [NSString stringWithFormat:@"%@",errorMessages[i]];
+            }else
+                errorMessage = [NSString stringWithFormat:@"%@\n%@",errorMessage,errorMessages[i]];
+        }
+        [self.view makeImppToast:errorMessage navigationBarHeight:0];
+    }
+    else{
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                                 bundle: nil];
+        UITabBarController *tbVc = [mainStoryboard instantiateViewControllerWithIdentifier:@"HXTabBarViewController"];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [UIApplication sharedApplication].keyWindow.rootViewController = tbVc;
+        
+        [self.view removeFromSuperview];
+        
+    }
+    
 }
 
 - (void)photoTapped
@@ -238,6 +308,37 @@
 }
 
 #pragma mark - Helper
+- (void)changeProfileNickName
+{
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:[HXUserAccountManager manager].userInfo.userId forKey:@"user_id"];
+    [params setObject:[self.userNameLabel text] forKey:@"first_name"];
+
+    
+    [[HXAnSocialManager manager]sendRequest:USERS_UPDATE method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
+        
+        NSLog(@"success log: %@",[response description]);
+        
+        
+    }failure:^(NSDictionary* response){
+        NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
+        
+        if ([response objectForKey:@"meta"]) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"無法更改"
+                                                            message:@"出現一點問題"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"好"
+                                                  otherButtonTitles:nil, nil];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [alert show];
+            });
+        }
+        
+    }];
+    
+}
 - (void)changeProfilePhoto:(NSData *)image
 {
     if (!self.photo)return;
@@ -304,66 +405,6 @@
     
 }
 
-
-
-
-#pragma mark - TableView Delegate Datasource
-
-- (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
-{
-    return 74;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 2;
-}
-
-- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
-{
-    static NSString *cellIdentifier = @"chatHistoryCell";
-    
-    
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        
-            
-        NSDictionary *customData = @{@"name":@"3123",
-                                     @"notification_alert":@"申请信息"};
-        
-        
-        [[[HXIMManager manager]anIM] sendMessage:[NSString stringWithFormat:@"满测斯特大学，计算机系 %@",[HXUserAccountManager manager].userId]
-                                              customData:customData
-                                               toClients:[NSSet setWithObject:@"AIM8F07EKUKNPMX38W656QC"]
-                                          needReceiveACK:YES];
-    }
-    else if (indexPath.row == 1){
-         [self logoutButtonTapped];
-    }
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return YES if you want the specified item to be editable.
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
- 
-}
 
 
 @end

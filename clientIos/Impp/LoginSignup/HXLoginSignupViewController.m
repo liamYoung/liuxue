@@ -13,11 +13,12 @@
 #import "UIView+Toast.h"
 #import "UserUtil.h"
 #import "UIColor+CustomColor.h"
-
+#import "HXSetinitViewController.h"
 #define SCREEN_WIDTH self.view.frame.size.width
 #define SCREEN_HEIGHT self.view.frame.size.height
 
 @interface HXLoginSignupViewController ()<UITextFieldDelegate>
+@property (strong, nonatomic) UITextField *nickNameText;
 @property (strong, nonatomic) UITextField *userNameText;
 @property (strong, nonatomic) UITextField *passwordText;
 @end
@@ -45,12 +46,13 @@
 
 - (void)initView
 {
+    [self.navigationController setNavigationBarHidden:YES animated:YES]; //隐藏
     self.view.backgroundColor = [UIColor color1];
     CGRect frame;
     
     UIImageView *loginLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_logo"]];
     frame = loginLogo.frame;
-    frame.origin.y = SCREEN_HEIGHT *.18;
+    frame.origin.y = SCREEN_HEIGHT *.12;
     frame.size.width = SCREEN_WIDTH *.52;
     frame.size.height = SCREEN_WIDTH*.52 * loginLogo.image.size.height/loginLogo.image.size.width;
     frame.origin.x = (SCREEN_WIDTH - frame.size.width)/2;
@@ -68,6 +70,7 @@
     
     UITapGestureRecognizer *returnKeyBoardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnKeyBoardTapped)];
     [self.view addGestureRecognizer:returnKeyBoardTap];
+    
     
     self.userNameText = [[UITextField alloc]initWithFrame:CGRectMake(10,0, textBg.frame.size.width-20, 38)];
     self.userNameText.textAlignment = NSTextAlignmentLeft;
@@ -162,11 +165,15 @@
             dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 1.0f * NSEC_PER_SEC);
             dispatch_after(delay, myBackgroundQ, ^(void){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                                             bundle: nil];
-                    UITabBarController *tbVc = [mainStoryboard instantiateViewControllerWithIdentifier:@"HXTabBarViewController"];
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [UIApplication sharedApplication].keyWindow.rootViewController = tbVc;
+                    HXSetinitViewController *tbVc = [[HXSetinitViewController alloc] init];
+
+                    [self.navigationController pushViewController:tbVc animated:NO];
+                    
+//                    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+//                                                                             bundle: nil];
+//                    UITabBarController *tbVc = [mainStoryboard instantiateViewControllerWithIdentifier:@"HXTabBarViewController"];
+//                    [self dismissViewControllerAnimated:YES completion:nil];
+//                    [UIApplication sharedApplication].keyWindow.rootViewController = tbVc;
                 });
             });
         });
@@ -233,11 +240,14 @@
             dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 1.0f * NSEC_PER_SEC);
             dispatch_after(delay, myBackgroundQ, ^(void){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                                             bundle: nil];
-                    UITabBarController *tbVc = [mainStoryboard instantiateViewControllerWithIdentifier:@"HXTabBarViewController"];
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [UIApplication sharedApplication].keyWindow.rootViewController = tbVc;
+                    
+                    HXSetinitViewController *tbVc = [[HXSetinitViewController alloc] init];
+                    [self.navigationController pushViewController:tbVc animated:NO];
+//                    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+//                                                                             bundle: nil];
+//                    UITabBarController *tbVc = [mainStoryboard instantiateViewControllerWithIdentifier:@"HXTabBarViewController"];
+//                    [self dismissViewControllerAnimated:YES completion:nil];
+//                    [UIApplication sharedApplication].keyWindow.rootViewController = tbVc;
                 });
             });
         });

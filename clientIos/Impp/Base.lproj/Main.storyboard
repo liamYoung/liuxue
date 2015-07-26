@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Z0M-xg-RAx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="SPa-0A-dTa">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -81,6 +81,25 @@
             </objects>
             <point key="canvasLocation" x="3679" y="1218"/>
         </scene>
+        <!--Login Signup View Controller-->
+        <scene sceneID="FYe-Gz-TfP">
+            <objects>
+                <viewController id="qvk-DJ-Wxb" customClass="HXLoginSignupViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4z3-Zo-tmD"/>
+                        <viewControllerLayoutGuide type="bottom" id="kw4-up-byY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BLf-Qv-tzS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="TOH-PY-fuP"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h2O-dB-AmZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1035" y="309"/>
+        </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="IVm-HK-pwA">
             <objects>
@@ -159,23 +178,21 @@
             </objects>
             <point key="canvasLocation" x="1262" y="1218"/>
         </scene>
-        <!--Login Signup View Controller-->
-        <scene sceneID="3hl-Tt-ahH">
+        <!--Navigation Controller-->
+        <scene sceneID="Dvo-nC-8xw">
             <objects>
-                <viewController id="Z0M-xg-RAx" customClass="HXLoginSignupViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Idv-Ou-iCy"/>
-                        <viewControllerLayoutGuide type="bottom" id="cuG-pd-Pr5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gs7-5g-gld">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LLb-dl-jKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="SPa-0A-dTa" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ENZ-5S-mjz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qvk-DJ-Wxb" kind="relationship" relationship="rootViewController" id="rHU-pb-VyQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cvd-Ad-0sG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-287" y="390"/>
+            <point key="canvasLocation" x="-1820" y="309"/>
         </scene>
         <!--Item-->
         <scene sceneID="ai8-hw-zFS">
