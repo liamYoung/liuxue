@@ -17,10 +17,15 @@
 #import "OTPageView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "HXAppUtility.h"
+#import "HXAnSocialManager.h"
+#import <SDWebImage/UIButton+WebCache.h>
 
-@interface School ()<OTPageScrollViewDataSource,OTPageScrollViewDelegate,NSURLConnectionDataDelegate>
+@interface School ()<UITableViewDataSource, UITableViewDelegate, OTPageScrollViewDataSource,OTPageScrollViewDelegate,NSURLConnectionDataDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *discoverArray;
+@property (nonatomic, retain) NSMutableDictionary *dicTable;
+@property (nonatomic, retain) NSMutableDictionary *dicData;
+
 @end
 
 @implementation School
@@ -36,6 +41,8 @@
     if (self == [super init])
     {
         self.discoverArray = [array copy];
+        self.dicTable = [[NSMutableDictionary alloc] initWithCapacity:0];
+        self.dicData = [[NSMutableDictionary alloc] initWithCapacity:0];
     }
     return self;
 }
@@ -88,13 +95,160 @@
     label.text = [dic objectForKey:@"name"];
     [cell addSubview:label];
     
-    UILabel *labelDes = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, cell.frame.size.width - 20, 160)];
-    labelDes.lineBreakMode = NSLineBreakByWordWrapping;
-    labelDes.numberOfLines = 0;
-    labelDes.text = [dic objectForKey:@"des"];
-    [cell addSubview:labelDes];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 160, cell.frame.size.width, 190) style:UITableViewStylePlain];
+//    [tableView setBackgroundColor:[UIColor redColor]];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [cell addSubview:tableView];
+    
+    [self.dicTable setObject:tableView forKey:[NSString stringWithFormat:@"%d", index]];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:@99 forKey:@"limit"];
+    [params setObject:@"yang" forKey:@"username"];
+    //    [params setObject:[dic objectForKey:@"name"] forKey:@"XXX"];
+    
+    [[HXAnSocialManager manager] sendRequest:@"users/search.json" method:AnSocialManagerGET params:params success:^(NSDictionary *response) {
+        NSLog(@"success log: %@",[response description]);
+        NSArray *array = [[response objectForKey:@"response"] objectForKey:@"users"];
+        [self.dicData setObject:array forKey:[NSString stringWithFormat:@"%d", index]];
+        [tableView reloadData];
+//        for (int i = 0; i < [array count]; i ++)
+//        {
+//            NSDictionary *dicXuejie = [array objectAtIndex:i];
+//            [self.dicTable setObject:array forKey:[NSString stringWithFormat:@"%d", index]];
+//
+//            //[NSURL URLWithString:[[dicXuejie objectForKey:@"photo"] objectForKey:@"url"]]
+////            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+////            [btn setFrame:CGRectMake(i * 50, 310, 40, 40)];
+////            [btn setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"pic"]] forState:UIControlStateNormal];
+////            [cell addSubview:btn];
+////            [btn setTag:i];
+////            [btn addTarget:self action:@selector(xuejieChose:) forControlEvents:UIControlEventTouchUpInside];
+//        }
+    } failure:^(NSDictionary *response) {
+        NSLog(@"failure log: %@",[response description]);
+    }];
+
+
+    return cell;
+}
+
+#pragma mark - Table view delegate method
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 65;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    for (id key in self.dicTable)
+    {
+        if ([tableView isEqual:[self.dicTable objectForKey:key]])
+        {
+            for (id key2 in self.dicTable)
+            {
+                if ([key isEqualToString:key2])
+                {
+                    NSLog(@"Find key3 : %@ , value3: %@",key2,[self.dicTable objectForKey:key2]);
+                    NSArray *array = [self.dicData objectForKey:key2];
+                    return [array count];
+                }
+            }
+        }
+    }
+    
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"discoverCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell == nil)
+    {
+        for (id key in self.dicTable)
+        {
+            if ([tableView isEqual:[self.dicTable objectForKey:key]])
+            {
+                for (id key2 in self.dicTable)
+                {
+                    if ([key isEqualToString:key2])
+                    {
+                        NSLog(@"Find key3 : %@ , value3: %@",key2,[self.dicTable objectForKey:key2]);
+                        NSArray *array = [self.dicData objectForKey:key2];
+                        NSDictionary *dic = [array objectAtIndex:indexPath.row];
+//                        cell = [[HXCustomTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier title:[dic objectForKey:@"username"] photoUrl:nil image:[UIImage imageNamed:@"explore_circle"] badgeValue:0 style:HXCustomCellStyleDefault];
+                        cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, 65)];
+                        
+                        UIButton *btnInfo = [UIButton buttonWithType:UIButtonTypeCustom];
+                        [btnInfo setFrame:CGRectMake(0, 0, 320, 65)];
+//                        [btnInfo setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"pic"]] forState:UIControlStateNormal];
+                        [btnInfo addTarget:self action:@selector(cellAction:) forControlEvents:UIControlEventTouchUpInside];
+                        [cell addSubview:btnInfo];
+                        
+                        UIButton *btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
+                        [btnHead setFrame:CGRectMake(10, 20, 50, 50)];
+                        [btnHead setImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"explore_circle"]];
+                        [btnHead addTarget:self action:@selector(headAction:) forControlEvents:UIControlEventTouchUpInside];
+                        [cell addSubview:btnHead];
+
+                        UIButton *btnLiao = [UIButton buttonWithType:UIButtonTypeCustom];
+                        [btnLiao setFrame:CGRectMake(0, 0, 60, 40)];
+                        [btnLiao setImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"explore_circle"]];
+                        [btnLiao addTarget:self action:@selector(talkAction:) forControlEvents:UIControlEventTouchUpInside];
+                        [cell addSubview:btnLiao];
+
+                        
+                        UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(75, 5, 120, 40)];
+                        labelName.text = [dic objectForKey:@"username"];
+                        labelName.font = [UIFont systemFontOfSize:30];
+                        [cell addSubview:labelName];
+                        
+                        UILabel *labelXi = [[UILabel alloc] initWithFrame:CGRectMake(60, 45, cell.frame.size.width - 120, 40)];
+                        labelXi.text = [dic objectForKey:@"updated_at"];
+                        [cell addSubview:labelXi];
+
+                    }
+                }
+            }
+        }
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+- (void)cellAction:(UIButton *)btn
+{
+    NSLog(@"cellAction %d", btn.tag);
+}
+
+- (void)headAction:(UIButton *)btn
+{
+    NSLog(@"headAction %d", btn.tag);
+}
+
+- (void)talkAction:(UIButton *)btn
+{
+    NSLog(@"talkAction %d", btn.tag);
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"AAAAAAAAAAAAAAA ");
+//    HXWallViewController *vc = [[HXWallViewController alloc]initWithWallInfo:[[HXUserAccountManager manager].userInfo.toDict mutableCopy]];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (CGSize)sizeCellForPageScrollView:(OTPageScrollView*)pageScrollView

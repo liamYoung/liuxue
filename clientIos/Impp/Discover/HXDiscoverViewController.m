@@ -66,7 +66,6 @@
         NSDictionary *dic = self.discoverArray[index];
 
     UIImage *image = [UIImage imageNamed:@"card"];
-    NSLog(@"image %@",image);
     
     UIView *cell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [image size].width, [image size].height)];
     UIImageView *imageViewBg = [[UIImageView alloc] initWithImage:image];
@@ -81,9 +80,10 @@
     label.text = [dic objectForKey:@"name"];
     [cell addSubview:label];
 
-    UILabel *labelDes = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, cell.frame.size.width - 20, 160)];
+    UILabel *labelDes = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, cell.frame.size.width - 20, 135)];
     labelDes.lineBreakMode = NSLineBreakByWordWrapping;
     labelDes.numberOfLines = 0;
+//    [labelDes setBackgroundColor:[UIColor redColor]];
     labelDes.text = [dic objectForKey:@"des"];
     [cell addSubview:labelDes];
 
