@@ -8,9 +8,9 @@
 
 #import "UIColor+CustomColor.h"
 
-#define COLOR1 @"5cb5b5"
-#define COLOR2 @"52aaaa"
-#define COLOR3 @"429b9b"
+#define COLOR1 @"58aeef"
+#define COLOR2 @"58aeef"
+#define COLOR3 @"58aeef"
 
 #define COLOR4 @"000000"
 #define COLOR5 @"ffffff"

@@ -80,7 +80,7 @@
     tabBarItem3 = [tabBar.items objectAtIndex:2];
     tabBarItem4 = [tabBar.items objectAtIndex:3];
     
-    tabBarItem1.title = NSLocalizedString(@"聊天", nil);
+    tabBarItem1.title = NSLocalizedString(@"联盟", nil);
     [tabBarItem1 setImage:[[UIImage imageNamed:@"tab01"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [tabBarItem1 setSelectedImage:[[UIImage imageNamed:@"tab01"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     
@@ -92,15 +92,15 @@
     else
         tabBarItem1.badgeValue = nil;
     
-    tabBarItem2.title = NSLocalizedString(@"好友", nil);
+    tabBarItem2.title = NSLocalizedString(@"信息", nil);
     [tabBarItem2 setImage:[[UIImage imageNamed:@"tab02"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [tabBarItem2 setSelectedImage:[[UIImage imageNamed:@"tab02"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     
-    tabBarItem3.title = NSLocalizedString(@"發現", nil);
+    tabBarItem3.title = NSLocalizedString(@"学长", nil);
     [tabBarItem3 setImage:[[UIImage imageNamed:@"tab03"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [tabBarItem3 setSelectedImage:[[UIImage imageNamed:@"tab03"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     
-    tabBarItem4.title = NSLocalizedString(@"設定", nil);
+    tabBarItem4.title = NSLocalizedString(@"我", nil);
     [tabBarItem4 setImage:[[UIImage imageNamed:@"tab04"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [tabBarItem4 setSelectedImage:[[UIImage imageNamed:@"tab04"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     
