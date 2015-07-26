@@ -50,6 +50,10 @@
 
 - (void)initView
 {
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 300)];
+    imageView.backgroundColor=[UIColor color1];
+    [self.view addSubview:imageView];
+    
     
     CGRect frame;
     frame = self.view.frame;
@@ -68,7 +72,7 @@
     
     UITapGestureRecognizer *photoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped)];
     self.photoImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"friend_default"]];
-    self.photoImageView.frame = CGRectMake(20, 60, 80, 80);
+    self.photoImageView.frame = CGRectMake(20, 20, 80, 80);
     self.photoImageView.layer.cornerRadius = 80/2;
     self.photoImageView.clipsToBounds = YES;
     self.photoImageView.layer.masksToBounds = YES;
@@ -90,10 +94,10 @@
                        }];
     }
     
-    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,90,SCREEN_WIDTH, 28)];
+    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,30,SCREEN_WIDTH, 28)];
     [self.userNameLabel setBackgroundColor:[UIColor clearColor]];
     [self.userNameLabel setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:28]];
-    [self.userNameLabel setTextColor:[UIColor color1]];
+    [self.userNameLabel setTextColor:[UIColor whiteColor]];
     self.userNameLabel.text = [HXUserAccountManager manager].userInfo.userName;
     self.userNameLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.userNameLabel];

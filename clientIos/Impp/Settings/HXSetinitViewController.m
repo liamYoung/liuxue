@@ -20,6 +20,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "UIView+Toast.h"
+#import "HXIMManager.h"
+#import "ChatUtil.h"
 #define SCREEN_WIDTH self.view.frame.size.width
 #define SCREEN_HEIGHT self.view.frame.size.height
 
@@ -103,7 +105,42 @@
     logoutButton.frame = frame;
     [self.view addSubview:logoutButton];
     
+    [self addInitGroubs];
+}
+
+-(void)addInitGroubs{
+    NSMutableArray *pTops = [[NSMutableArray alloc] initWithCapacity:10];
+    NSMutableDictionary *t1 = [NSMutableDictionary dictionaryWithObject:@"55b32733f38d6648f7000005" forKey:@"id"];
+    [t1 setObject:@"留学联盟" forKey:@"name"];
+    [t1 setObject:@"AIMTUQUOEQIQFOEPFQC8Q06" forKey:@"owner"];
+    [pTops addObject:t1];
     
+    for (int i = 0; i < [pTops count]; i++) {
+        NSDictionary *dic = [pTops objectAtIndex:i];
+        
+        [[[HXIMManager manager]anIM] addClients:[NSSet setWithObject:[HXIMManager manager].clientId] toTopicId:[dic objectForKey:@"id"] success:^(NSString *topicId) {
+            
+            HXUser *currentUser = [HXUserAccountManager manager].userInfo;
+            NSMutableArray *selectedItems = [[NSMutableArray alloc]initWithCapacity:0];
+            [selectedItems addObject:currentUser];
+            
+            HXChat *topicChatSession = [ChatUtil createChatSessionWithUser:selectedItems                                                               topicId:@"55b32733f38d6648f7000005"
+                                                                 topicName:[dic objectForKey:@"name"]
+                                                           currentUserName:[HXUserAccountManager manager].userInfo.userName
+                                                        topicOwnerClientId:[dic objectForKey:@"owner"]];
+            
+            
+            [currentUser addTopicsObject:topicChatSession];
+            //[[NSNotificationCenter defaultCenter]postNotificationName:RefreshChatHistory object:nil];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        } failure:^(ArrownockException *exception) {
+            NSLog(@"AnIm addClients failed, error : %@", exception.getMessage);
+        }];
+    }
+    
+
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

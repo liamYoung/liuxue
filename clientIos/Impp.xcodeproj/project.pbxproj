@@ -462,12 +462,13 @@
 			path = SZTextView;
 			sourceTree = "<group>";
 		};
-		134E05341AC2976E00ADFA33 /* FriendList */ = {
+		134E05341AC2976E00ADFA33 /* second */ = {
 			isa = PBXGroup;
 			children = (
 				134E05351AC2976E00ADFA33 /* HXFriendViewController.h */,
 				134E05361AC2976E00ADFA33 /* HXFriendViewController.m */,
 			);
+			name = second;
 			path = FriendList;
 			sourceTree = "<group>";
 		};
@@ -1131,7 +1132,7 @@
 				13D4BD211AD7BB150059FF4A /* FriendProfile */,
 				135FD1F61ACA9ED100FB3BDD /* FriendSearch */,
 				134E05821AC512F000ADFA33 /* FriendSelect */,
-				134E05341AC2976E00ADFA33 /* FriendList */,
+				134E05341AC2976E00ADFA33 /* second */,
 				134E05371AC2976E00ADFA33 /* FriendRequest */,
 			);
 			path = Friend;

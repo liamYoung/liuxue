@@ -237,22 +237,35 @@
 {
     [self.composeView textFieldResignFirstResponder];
     
-    NSString *button1 = NSLocalizedString(@"編輯群組名稱", nil);
-    NSString *button2 = NSLocalizedString(@"邀請成員", nil);
-    NSString *button3 = NSLocalizedString(@"退出群組", nil);
+//    NSString *button1 = NSLocalizedString(@"編輯群組名稱", nil);
+//    NSString *button2 = NSLocalizedString(@"邀請成員", nil);
+    NSString *button3 = NSLocalizedString(@"取消关注", nil);
     
     if (self.chatInfo.topicOwner && [self.chatInfo.topicOwner.clientId isEqualToString:[HXIMManager manager].clientId]) {
-       button3 = NSLocalizedString(@"刪除並解散群組", nil);
+        NSString *button1 = NSLocalizedString(@"編輯公众号名稱", nil);
+       button3 = NSLocalizedString(@"刪除公众号", nil);
+        NSString *cancelTitle = NSLocalizedString(@"取消", nil);
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                      initWithTitle:nil
+                                      delegate:self
+                                      cancelButtonTitle:cancelTitle
+                                      destructiveButtonTitle:nil
+                                      otherButtonTitles: button1,button3, nil];
+        [actionSheet showInView:self.view];
+        
+    }
+    else{
+        NSString *cancelTitle = NSLocalizedString(@"取消", nil);
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                      initWithTitle:nil
+                                      delegate:self
+                                      cancelButtonTitle:cancelTitle
+                                      destructiveButtonTitle:nil
+                                      otherButtonTitles: button3, nil];
+        [actionSheet showInView:self.view];
     }
     
-    NSString *cancelTitle = NSLocalizedString(@"取消", nil);
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:nil
-                                  delegate:self
-                                  cancelButtonTitle:cancelTitle
-                                  destructiveButtonTitle:nil
-                                  otherButtonTitles:button1, button2, button3, nil];
-    [actionSheet showInView:self.view];
+
 }
 
 #pragma mark - UIActionsheet Delegate
@@ -260,55 +273,60 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     
-    switch (buttonIndex) {
-        case 0: {
-            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"編輯群組名稱", nil)
-                                                             message:NSLocalizedString(@"請輸入這個群組的名稱", nil)
-                                                            delegate:self
-                                                   cancelButtonTitle:NSLocalizedString(@"取消", nil)
-                                                   otherButtonTitles:NSLocalizedString(@"儲存", nil),nil];
-            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-            self.alertTextField = [alert textFieldAtIndex:0];
-            [alert show];
-            
-            break;
-        }
-        case 1: {
-            HXFriendSelectionViewController *vc = [[HXFriendSelectionViewController alloc]initWithTopicSession:self.chatInfo];
-            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-            [self presentViewController:nav animated:YES completion:nil];
-            break;
-        }
-        case 2: {
-            NSString *clientId = [HXIMManager manager].clientId;
-            
-            if (self.chatInfo.topicOwner && [self.chatInfo.topicOwner.clientId isEqualToString:[HXIMManager manager].clientId]) {
-                [[[HXIMManager manager]anIM] removeTopic:self.targetTopicId success:^(NSString *topicId) {
-                    NSLog(@"AnIM removeTopic successful");
-                } failure:^(ArrownockException *exception) {
-                    NSLog(@"AnIm removeTopic failed, error : %@", exception.getMessage);
-                }];
-                 
-                [UserUtil removeTopic:self.chatInfo from:clientId];
-                [ChatUtil deleteChat:self.chatInfo];
-            }else{
-                [[[HXIMManager manager]anIM] removeClients:[NSSet setWithObject:clientId] fromTopicId:self.targetTopicId success:^(NSString *topicId) {
-                    NSLog(@"AnIM removeClients successful");
-                } failure:^(ArrownockException *exception) {
-                    NSLog(@"AnIm removeClients failed, error : %@", exception.getMessage);
-                }];
-                [ChatUtil deleteChatHistory:self.chatInfo];
-                [UserUtil removeTopic:self.chatInfo from:clientId];
+    if (self.chatInfo.topicOwner && [self.chatInfo.topicOwner.clientId isEqualToString:[HXIMManager manager].clientId]) {
+        switch (buttonIndex) {
+            case 0: {
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"編輯群組名稱", nil)
+                                                                 message:NSLocalizedString(@"請輸入這個群組的名稱", nil)
+                                                                delegate:self
+                                                       cancelButtonTitle:NSLocalizedString(@"取消", nil)
+                                                       otherButtonTitles:NSLocalizedString(@"儲存", nil),nil];
+                alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                self.alertTextField = [alert textFieldAtIndex:0];
+                [alert show];
+                
+                break;
             }
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            break;
+            case 1: {
+                [self cancleTopic];
+                break;
+            }
+            default:
+                break;
         }
-        default:
-            break;
     }
-}
+    else{
+        if (buttonIndex == 0) {
+            
+            [self cancleTopic];
+        }
+    }
 
+}
+-(void)cancleTopic{
+    NSString *clientId = [HXIMManager manager].clientId;
+    
+    if (self.chatInfo.topicOwner && [self.chatInfo.topicOwner.clientId isEqualToString:[HXIMManager manager].clientId]) {
+        [[[HXIMManager manager]anIM] removeTopic:self.targetTopicId success:^(NSString *topicId) {
+            NSLog(@"AnIM removeTopic successful");
+        } failure:^(ArrownockException *exception) {
+            NSLog(@"AnIm removeTopic failed, error : %@", exception.getMessage);
+        }];
+        
+        [UserUtil removeTopic:self.chatInfo from:clientId];
+        [ChatUtil deleteChat:self.chatInfo];
+    }else{
+        [[[HXIMManager manager]anIM] removeClients:[NSSet setWithObject:clientId] fromTopicId:self.targetTopicId success:^(NSString *topicId) {
+            NSLog(@"AnIM removeClients successful");
+        } failure:^(ArrownockException *exception) {
+            NSLog(@"AnIm removeClients failed, error : %@", exception.getMessage);
+        }];
+        [ChatUtil deleteChatHistory:self.chatInfo];
+        [UserUtil removeTopic:self.chatInfo from:clientId];
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - UIAlertView Delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -525,6 +543,10 @@
 
 #pragma mark - TableView Delegate Datasource
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    
+}
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     
