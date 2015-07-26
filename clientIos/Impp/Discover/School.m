@@ -95,8 +95,7 @@
     label.text = [dic objectForKey:@"name"];
     [cell addSubview:label];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 160, cell.frame.size.width, 190) style:UITableViewStylePlain];
-//    [tableView setBackgroundColor:[UIColor redColor]];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 156, cell.frame.size.width, 200) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -114,23 +113,9 @@
         NSArray *array = [[response objectForKey:@"response"] objectForKey:@"users"];
         [self.dicData setObject:array forKey:[NSString stringWithFormat:@"%d", index]];
         [tableView reloadData];
-//        for (int i = 0; i < [array count]; i ++)
-//        {
-//            NSDictionary *dicXuejie = [array objectAtIndex:i];
-//            [self.dicTable setObject:array forKey:[NSString stringWithFormat:@"%d", index]];
-//
-//            //[NSURL URLWithString:[[dicXuejie objectForKey:@"photo"] objectForKey:@"url"]]
-////            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-////            [btn setFrame:CGRectMake(i * 50, 310, 40, 40)];
-////            [btn setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"pic"]] forState:UIControlStateNormal];
-////            [cell addSubview:btn];
-////            [btn setTag:i];
-////            [btn addTarget:self action:@selector(xuejieChose:) forControlEvents:UIControlEventTouchUpInside];
-//        }
     } failure:^(NSDictionary *response) {
         NSLog(@"failure log: %@",[response description]);
     }];
-
 
     return cell;
 }
@@ -204,19 +189,21 @@
 
                         UIImage *imageLiao = [UIImage imageNamed:@"liao.png"];
                         UIButton *btnLiao = [UIButton buttonWithType:UIButtonTypeCustom];
-                        [btnLiao setFrame:CGRectMake(cell.frame.size.width - 50, 0, btnLiao.frame.size.width, btnLiao.frame.size.height)];
+                        [btnLiao setFrame:CGRectMake(160, 15, imageLiao.size.width, imageLiao.size.height)];
                         [btnLiao setImage:imageLiao forState:UIControlStateNormal];
                         [btnLiao addTarget:self action:@selector(talkAction:) forControlEvents:UIControlEventTouchUpInside];
                         [cell addSubview:btnLiao];
 
                         
-                        UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(75, 5, 120, 40)];
+                        UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 100, 30)];
                         labelName.text = [dic objectForKey:@"username"];
-                        labelName.font = [UIFont systemFontOfSize:24];
+                        labelName.font = [UIFont systemFontOfSize:18];
                         [cell addSubview:labelName];
                         
-                        UILabel *labelXi = [[UILabel alloc] initWithFrame:CGRectMake(60, 45, cell.frame.size.width - 120, 40)];
+                        UILabel *labelXi = [[UILabel alloc] initWithFrame:CGRectMake(50, 40, 80, 20)];
                         labelXi.text = [dic objectForKey:@"updated_at"];
+                        [labelXi setTextColor:[UIColor grayColor]];
+                        labelXi.font = [UIFont systemFontOfSize:12];
                         [cell addSubview:labelXi];
 
                     }
