@@ -71,9 +71,9 @@
 		4EBEE1EE1B11C1D100278866 /* libArrownock-x86_64-2.23.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBEE1E61B11C1D100278866 /* libArrownock-x86_64-2.23.1.a */; };
 		9F8365421B636AB8009571FB /* HXChatHistoryAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8365411B636AB8009571FB /* HXChatHistoryAllViewController.m */; };
 		9F8B84801B64910F006363B8 /* School.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B847F1B64910F006363B8 /* School.m */; };
-		9F8B848A1B64E33D006363B8 /* liao.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8B84891B64E33D006363B8 /* liao.png */; };
 		9F8B84901B64E387006363B8 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848D1B64E387006363B8 /* OTPageScrollView.m */; };
 		9F8B84911B64E387006363B8 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848F1B64E387006363B8 /* OTPageView.m */; };
+		9F8B84951B64E51A006363B8 /* liao.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8B84941B64E51A006363B8 /* liao.png */; };
 		FCE72C2E1B64E42F00823CEA /* HXSetinitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */; };
 		FE0758311AD563A100D14F46 /* HXCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758301AD563A100D14F46 /* HXCommentViewController.m */; };
 		FE0758341AD5661700D14F46 /* HXCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758331AD5661700D14F46 /* HXCommentView.m */; };
@@ -264,11 +264,11 @@
 		9F8365411B636AB8009571FB /* HXChatHistoryAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXChatHistoryAllViewController.m; sourceTree = "<group>"; };
 		9F8B847E1B64910F006363B8 /* School.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = School.h; sourceTree = "<group>"; };
 		9F8B847F1B64910F006363B8 /* School.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = School.m; sourceTree = "<group>"; };
-		9F8B84891B64E33D006363B8 /* liao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = liao.png; path = ../../../../../Downloads/liao.png; sourceTree = "<group>"; };
 		9F8B848C1B64E387006363B8 /* OTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageScrollView.h; sourceTree = "<group>"; };
 		9F8B848D1B64E387006363B8 /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
 		9F8B848E1B64E387006363B8 /* OTPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageView.h; sourceTree = "<group>"; };
 		9F8B848F1B64E387006363B8 /* OTPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageView.m; sourceTree = "<group>"; };
+		9F8B84941B64E51A006363B8 /* liao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liao.png; sourceTree = "<group>"; };
 		FCE72C2C1B64E42F00823CEA /* HXSetinitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSetinitViewController.h; sourceTree = "<group>"; };
 		FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSetinitViewController.m; sourceTree = "<group>"; };
 		FE07582F1AD563A100D14F46 /* HXCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommentViewController.h; sourceTree = "<group>"; };
@@ -827,7 +827,7 @@
 		9F8B84881B64E32F006363B8 /* Resouce */ = {
 			isa = PBXGroup;
 			children = (
-				9F8B84891B64E33D006363B8 /* liao.png */,
+				9F8B84941B64E51A006363B8 /* liao.png */,
 			);
 			name = Resouce;
 			sourceTree = "<group>";
@@ -1268,7 +1268,7 @@
 				FEF416601AB7D6AA00C7FFC7 /* LaunchScreen.xib in Resources */,
 				133A56851ACD620000D5A43A /* LICENSE in Resources */,
 				FEF4165D1AB7D6AA00C7FFC7 /* Images.xcassets in Resources */,
-				9F8B848A1B64E33D006363B8 /* liao.png in Resources */,
+				9F8B84951B64E51A006363B8 /* liao.png in Resources */,
 				133A56871ACD620000D5A43A /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
