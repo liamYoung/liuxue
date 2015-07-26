@@ -197,14 +197,15 @@
                         [cell addSubview:btnInfo];
                         
                         UIButton *btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
-                        [btnHead setFrame:CGRectMake(10, 20, 50, 50)];
+                        [btnHead setFrame:CGRectMake(10, 17, 30, 30)];
                         [btnHead setImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"explore_circle"]];
                         [btnHead addTarget:self action:@selector(headAction:) forControlEvents:UIControlEventTouchUpInside];
                         [cell addSubview:btnHead];
 
+                        UIImage *imageLiao = [UIImage imageNamed:@"liao.png"];
                         UIButton *btnLiao = [UIButton buttonWithType:UIButtonTypeCustom];
-                        [btnLiao setFrame:CGRectMake(0, 0, 60, 40)];
-                        [btnLiao setImageWithURL:[NSURL URLWithString:@""] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"explore_circle"]];
+                        [btnLiao setFrame:CGRectMake(cell.frame.size.width - 50, 0, btnLiao.frame.size.width, btnLiao.frame.size.height)];
+                        [btnLiao setImage:imageLiao forState:UIControlStateNormal];
                         [btnLiao addTarget:self action:@selector(talkAction:) forControlEvents:UIControlEventTouchUpInside];
                         [cell addSubview:btnLiao];
 
