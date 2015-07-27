@@ -238,6 +238,11 @@
 {
     NSDictionary* dict = @{@"userName":userInfo[@"username"],
                            @"userId":userInfo[@"id"],
+                           @"age":userInfo[@"age"]?userInfo[@"age"]:[NSNumber numberWithInt:1],
+                           @"collage":userInfo[@"customFields"]?userInfo[@"customFields"][@"collage"]:@"",
+                           @"major":userInfo[@"customFields"]?userInfo[@"customFields"][@"major"]:@"",
+                           @"gender":userInfo[@"gender"]?userInfo[@"gender"]:@"",
+                           @"firstName":userInfo[@"firstName"] ?userInfo[@"firstName"] : userInfo[@"username"],
                            @"clientId":userInfo[@"clientId"] ?userInfo[@"clientId"] : @"",
                            @"photoId":userInfo[@"photo"][@"id"] ? userInfo[@"photo"][@"id"] : @"",
                            @"photoURL":userInfo[@"photo"][@"url"] ? userInfo[@"photo"][@"url"] : @"",

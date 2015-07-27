@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="HXChat" representedClassName="HXChat" syncable="YES">
         <attribute name="currentClientId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="currentUserName" optional="YES" attributeType="String" syncable="YES"/>
@@ -78,9 +78,13 @@
         <relationship name="postOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HXUser" inverseName="posts" inverseEntity="HXUser" syncable="YES"/>
     </entity>
     <entity name="HXUser" representedClassName="HXUser" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="clientId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="coverPhotoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="currentUserId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="major" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
@@ -98,6 +102,6 @@
         <element name="HXLike" positionX="-486" positionY="90" width="128" height="193"/>
         <element name="HXMessage" positionX="421" positionY="-60" width="128" height="285"/>
         <element name="HXPost" positionX="-495" positionY="81" width="128" height="300"/>
-        <element name="HXUser" positionX="-702" positionY="45" width="128" height="240"/>
+        <element name="HXUser" positionX="-702" positionY="45" width="128" height="300"/>
     </elements>
 </model>

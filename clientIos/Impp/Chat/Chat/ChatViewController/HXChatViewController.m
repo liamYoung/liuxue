@@ -31,7 +31,7 @@
 #import <CoreData/CoreData.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreLocation/CoreLocation.h>
-
+#import "HXUserAccountManager.h"
 #define NAV_BAR_HEIGHT 0
 #define IS_OS_8_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -146,7 +146,8 @@
         }else {
             self.targetTopicId = self.chatInfo.topicId;
         }
-        self.currentUserName = [UserUtil getHXUserByClientId:[HXIMManager manager].clientId].userName;
+        
+        self.currentUserName =  [UserUtil getHXUserByClientId:[HXIMManager manager].clientId].userName;
         [self initView];
         [self initNavigationBar];
     }
@@ -187,7 +188,12 @@
 
 - (void)initNavigationBar
 {
-    NSString *title = self.isTopicMode ? [NSString stringWithFormat:@"%@(%d)",self.chatInfo.topicName,(int)self.chatInfo.users.count+1] : self.chatInfo.targetUserName;
+    NSLog(@"%@",self.chatInfo.targetUserName);
+    
+    NSLog(@"%@",self.chatInfo.targetClientId);
+    NSLog(@"%@",self.chatInfo.users);
+    
+    NSString *title = self.isTopicMode ? [NSString stringWithFormat:@"%@",self.chatInfo.topicName] : self.chatInfo.targetUserName;
     [HXAppUtility initNavigationTitle:title
                          barTintColor:[UIColor color1]
                    withViewController:self];

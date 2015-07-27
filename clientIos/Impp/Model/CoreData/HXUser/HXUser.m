@@ -19,9 +19,13 @@
 @dynamic photoId;
 @dynamic photoURL;
 @dynamic userId;
+@dynamic nickName;
 @dynamic userName;
 @dynamic topics;
 @dynamic friends;
 @dynamic follows;
+@dynamic collage;
+@dynamic major;
+@dynamic age;
 
 @end

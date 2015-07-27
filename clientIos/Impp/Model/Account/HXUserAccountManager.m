@@ -9,7 +9,9 @@
 #import "HXUserAccountManager.h"
 #import "HXAnSocialManager.h"
 #import "HXIMManager.h"
-
+#import "UserUtil.h"
+#import "HXAnSocialManager.h"
+#import "AnSocialPathConstant.h"
 @interface HXUserAccountManager ()
 @property (strong, nonatomic) NSMutableDictionary *clientIdToContactsInfoDic;
 @end
@@ -57,7 +59,12 @@
     self.userId = userId;
     self.userName = name;
     self.clientId = clientId;
-    self.nickName = name;
+    if ( self.userInfo.nickName != nil) {
+        self.nickName = self.userInfo.nickName;
+    }
+    else{
+        self.nickName =name;
+    }
     self.photoUrl = self.userInfo.photoURL;
     self.coverPhotoUrl = self.userInfo.coverPhotoURL;
     self.email = @"";
@@ -98,5 +105,78 @@
     self.userInfo = nil;
     [[NSUserDefaults standardUserDefaults] setObject:nil
                                               forKey:@"lastLoggedInUser"];
+}
+- (void)saveUserIntoDB:(NSDictionary *)userInfo
+{
+    /* save user info into DB */
+    NSDictionary *reformedUser = [UserUtil reformUserInfoDic:userInfo];
+    HXUser *hxUser = [UserUtil getHXUserByUserId:reformedUser[@"userId"]] ?
+    [UserUtil getHXUserByUserId:reformedUser[@"userId"]] : [UserUtil getHXUserByClientId:reformedUser[@"clientId"]];
+    
+    if (hxUser == nil) {
+        hxUser = [HXUser initWithDict:reformedUser];
+    }else{
+        //update
+        [hxUser setValuesFromDict:reformedUser];
+    }
+    [HXUserAccountManager manager].userInfo = hxUser;
+    
+}
+- (void)refreshUserInfo:(NSDictionary *)userInfo
+{
+     NSDictionary *reformedUser = [UserUtil reformUserInfoDic:userInfo];
+     HXUser *hxUser = [HXUser initWithDict:reformedUser];
+    
+     [HXUserAccountManager manager].userInfo = hxUser;
+    
+    self.age = hxUser.age;
+    self.userId = hxUser.userId;
+    self.userName = hxUser.userName;
+    self.clientId = hxUser.clientId;
+    if ( self.userInfo.nickName != nil) {
+        self.nickName = self.userInfo.nickName;
+    }
+    else{
+        self.nickName = hxUser.userName;
+    }
+    self.photoUrl = self.userInfo.photoURL;
+    self.coverPhotoUrl = self.userInfo.coverPhotoURL;
+    self.email = @"";
+
+    
+    
+    
+}
+- (void)updateUser
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:[HXUserAccountManager manager].userInfo.userId forKey:@"user_id"];
+    
+    
+    [[HXAnSocialManager manager]sendRequest:USERS_UPDATE method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
+        
+        NSDictionary *user = [[response objectForKey:@"response"] objectForKey:@"user"];
+       [[HXUserAccountManager manager] refreshUserInfo:user];
+        NSLog(@"success log: %@",[response description]);
+        NSLog(@"collage:%@",[HXUserAccountManager manager].userInfo.collage);
+        NSLog(@"major:%@",[HXUserAccountManager manager].userInfo.major);
+        
+    }failure:^(NSDictionary* response){
+        NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
+        
+        if ([response objectForKey:@"meta"]) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"用户资料更新错误"
+                                                            message:@"出現一點問題"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"好"
+                                                  otherButtonTitles:nil, nil];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [alert show];
+            });
+        }
+        
+    }];
+
 }
 @end

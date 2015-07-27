@@ -74,6 +74,15 @@
 		9F8B84901B64E387006363B8 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848D1B64E387006363B8 /* OTPageScrollView.m */; };
 		9F8B84911B64E387006363B8 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848F1B64E387006363B8 /* OTPageView.m */; };
 		9F8B84951B64E51A006363B8 /* liao.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8B84941B64E51A006363B8 /* liao.png */; };
+		FC6664811B65C9A70048A7D3 /* ApplyFor.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC6664801B65C9A70048A7D3 /* ApplyFor.xib */; };
+		FC6664841B65C9EF0048A7D3 /* ApplyFor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664831B65C9EF0048A7D3 /* ApplyFor.m */; };
+		FC6664921B65CAD80048A7D3 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664871B65CAD80048A7D3 /* LewPopupBackgroundView.m */; };
+		FC6664931B65CAD80048A7D3 /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664891B65CAD80048A7D3 /* LewPopupViewAnimationDrop.m */; };
+		FC6664941B65CAD80048A7D3 /* LewPopupViewAnimationFade.m in Sources */ = {isa = PBXBuildFile; fileRef = FC66648B1B65CAD80048A7D3 /* LewPopupViewAnimationFade.m */; };
+		FC6664951B65CAD80048A7D3 /* LewPopupViewAnimationSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = FC66648D1B65CAD80048A7D3 /* LewPopupViewAnimationSlide.m */; };
+		FC6664961B65CAD80048A7D3 /* LewPopupViewAnimationSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = FC66648F1B65CAD80048A7D3 /* LewPopupViewAnimationSpring.m */; };
+		FC6664971B65CAD80048A7D3 /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664911B65CAD80048A7D3 /* UIViewController+LewPopupViewController.m */; };
+		FC860FD71B6654B90090A4C4 /* SchoolCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FC860FD61B6654B90090A4C4 /* SchoolCard.m */; };
 		FCE72C2E1B64E42F00823CEA /* HXSetinitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */; };
 		FE0758311AD563A100D14F46 /* HXCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758301AD563A100D14F46 /* HXCommentViewController.m */; };
 		FE0758341AD5661700D14F46 /* HXCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758331AD5661700D14F46 /* HXCommentView.m */; };
@@ -269,6 +278,23 @@
 		9F8B848E1B64E387006363B8 /* OTPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageView.h; sourceTree = "<group>"; };
 		9F8B848F1B64E387006363B8 /* OTPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageView.m; sourceTree = "<group>"; };
 		9F8B84941B64E51A006363B8 /* liao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liao.png; sourceTree = "<group>"; };
+		FC6664801B65C9A70048A7D3 /* ApplyFor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ApplyFor.xib; path = ../ApplyFor.xib; sourceTree = "<group>"; };
+		FC6664821B65C9EF0048A7D3 /* ApplyFor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyFor.h; sourceTree = "<group>"; };
+		FC6664831B65C9EF0048A7D3 /* ApplyFor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyFor.m; sourceTree = "<group>"; };
+		FC6664861B65CAD80048A7D3 /* LewPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupBackgroundView.h; sourceTree = "<group>"; };
+		FC6664871B65CAD80048A7D3 /* LewPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupBackgroundView.m; sourceTree = "<group>"; };
+		FC6664881B65CAD80048A7D3 /* LewPopupViewAnimationDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationDrop.h; sourceTree = "<group>"; };
+		FC6664891B65CAD80048A7D3 /* LewPopupViewAnimationDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationDrop.m; sourceTree = "<group>"; };
+		FC66648A1B65CAD80048A7D3 /* LewPopupViewAnimationFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationFade.h; sourceTree = "<group>"; };
+		FC66648B1B65CAD80048A7D3 /* LewPopupViewAnimationFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationFade.m; sourceTree = "<group>"; };
+		FC66648C1B65CAD80048A7D3 /* LewPopupViewAnimationSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSlide.h; sourceTree = "<group>"; };
+		FC66648D1B65CAD80048A7D3 /* LewPopupViewAnimationSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSlide.m; sourceTree = "<group>"; };
+		FC66648E1B65CAD80048A7D3 /* LewPopupViewAnimationSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSpring.h; sourceTree = "<group>"; };
+		FC66648F1B65CAD80048A7D3 /* LewPopupViewAnimationSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSpring.m; sourceTree = "<group>"; };
+		FC6664901B65CAD80048A7D3 /* UIViewController+LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LewPopupViewController.h"; sourceTree = "<group>"; };
+		FC6664911B65CAD80048A7D3 /* UIViewController+LewPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LewPopupViewController.m"; sourceTree = "<group>"; };
+		FC860FD51B6654B90090A4C4 /* SchoolCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolCard.h; sourceTree = "<group>"; };
+		FC860FD61B6654B90090A4C4 /* SchoolCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolCard.m; sourceTree = "<group>"; };
 		FCE72C2C1B64E42F00823CEA /* HXSetinitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSetinitViewController.h; sourceTree = "<group>"; };
 		FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSetinitViewController.m; sourceTree = "<group>"; };
 		FE07582F1AD563A100D14F46 /* HXCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommentViewController.h; sourceTree = "<group>"; };
@@ -624,6 +650,8 @@
 				135FD1ED1AC939CF00FB3BDD /* HXDiscoverViewController.m */,
 				9F8B847E1B64910F006363B8 /* School.h */,
 				9F8B847F1B64910F006363B8 /* School.m */,
+				FC860FD51B6654B90090A4C4 /* SchoolCard.h */,
+				FC860FD61B6654B90090A4C4 /* SchoolCard.m */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -844,6 +872,25 @@
 			path = OTPageView;
 			sourceTree = "<group>";
 		};
+		FC6664851B65CAD80048A7D3 /* popupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FC6664861B65CAD80048A7D3 /* LewPopupBackgroundView.h */,
+				FC6664871B65CAD80048A7D3 /* LewPopupBackgroundView.m */,
+				FC6664881B65CAD80048A7D3 /* LewPopupViewAnimationDrop.h */,
+				FC6664891B65CAD80048A7D3 /* LewPopupViewAnimationDrop.m */,
+				FC66648A1B65CAD80048A7D3 /* LewPopupViewAnimationFade.h */,
+				FC66648B1B65CAD80048A7D3 /* LewPopupViewAnimationFade.m */,
+				FC66648C1B65CAD80048A7D3 /* LewPopupViewAnimationSlide.h */,
+				FC66648D1B65CAD80048A7D3 /* LewPopupViewAnimationSlide.m */,
+				FC66648E1B65CAD80048A7D3 /* LewPopupViewAnimationSpring.h */,
+				FC66648F1B65CAD80048A7D3 /* LewPopupViewAnimationSpring.m */,
+				FC6664901B65CAD80048A7D3 /* UIViewController+LewPopupViewController.h */,
+				FC6664911B65CAD80048A7D3 /* UIViewController+LewPopupViewController.m */,
+			);
+			path = popupViewController;
+			sourceTree = "<group>";
+		};
 		FE0758221AD5627300D14F46 /* Comment */ = {
 			isa = PBXGroup;
 			children = (
@@ -1024,6 +1071,7 @@
 		FEF416431AB7D6AA00C7FFC7 = {
 			isa = PBXGroup;
 			children = (
+				FC6664851B65CAD80048A7D3 /* popupViewController */,
 				9F8B848B1B64E387006363B8 /* OTPageView */,
 				4EBEE1D01B11C1D100278866 /* ArrownockSDK */,
 				133A56661ACD620000D5A43A /* ThirdParty */,
@@ -1118,6 +1166,9 @@
 		FEF416771AB7E2C900C7FFC7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				FC6664821B65C9EF0048A7D3 /* ApplyFor.h */,
+				FC6664831B65C9EF0048A7D3 /* ApplyFor.m */,
+				FC6664801B65C9A70048A7D3 /* ApplyFor.xib */,
 				FCE72C2C1B64E42F00823CEA /* HXSetinitViewController.h */,
 				FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */,
 				FEF416831AB7E3D800C7FFC7 /* HXSettingsViewController.h */,
@@ -1266,6 +1317,7 @@
 			files = (
 				FEF4165B1AB7D6AA00C7FFC7 /* Main.storyboard in Resources */,
 				13A7E5631ADCB8A300AC0C29 /* Localizable.strings in Resources */,
+				FC6664811B65C9A70048A7D3 /* ApplyFor.xib in Resources */,
 				FEF416601AB7D6AA00C7FFC7 /* LaunchScreen.xib in Resources */,
 				133A56851ACD620000D5A43A /* LICENSE in Resources */,
 				FEF4165D1AB7D6AA00C7FFC7 /* Images.xcassets in Resources */,
@@ -1323,35 +1375,42 @@
 				134E053D1AC2976E00ADFA33 /* HXFriendViewController.m in Sources */,
 				13D4BD031AD4C0580059FF4A /* HXWallViewController.m in Sources */,
 				FE6CF49E1AB82B4600D27905 /* MessageUtil.m in Sources */,
+				FC860FD71B6654B90090A4C4 /* SchoolCard.m in Sources */,
 				FEF416851AB7E3D800C7FFC7 /* HXSettingsViewController.m in Sources */,
 				133A56841ACD620000D5A43A /* PHFComposeBarView_TextView.m in Sources */,
 				9F8B84801B64910F006363B8 /* School.m in Sources */,
 				134E05791AC4221C00ADFA33 /* HXUser.m in Sources */,
+				FC6664971B65CAD80048A7D3 /* UIViewController+LewPopupViewController.m in Sources */,
 				FE6CF4821AB8243100D27905 /* CoreDataUtil.m in Sources */,
 				135FD2041ACABB9500FB3BDD /* HXCustomTableViewCell.m in Sources */,
 				13D4BCEB1AD3A5DD0059FF4A /* HXPost.m in Sources */,
 				135FD1EE1AC939CF00FB3BDD /* HXDiscoverViewController.m in Sources */,
 				FEF416551AB7D6AA00C7FFC7 /* AppDelegate.m in Sources */,
 				13A7E56A1ADE259900AC0C29 /* HXChat.m in Sources */,
+				FC6664961B65CAD80048A7D3 /* LewPopupViewAnimationSpring.m in Sources */,
 				13D4BD241AD7BB400059FF4A /* HXFriendProfileViewController.m in Sources */,
 				13D4BD201AD6715A0059FF4A /* HXChatHistoryTableViewCell.m in Sources */,
 				FEF416821AB7E3C000C7FFC7 /* HXLoginSignupViewController.m in Sources */,
 				13D4BCE81AD3A5C50059FF4A /* HXLike.m in Sources */,
 				FE07583E1AD59D9400D14F46 /* HXCreatePostViewController.m in Sources */,
+				FC6664931B65CAD80048A7D3 /* LewPopupViewAnimationDrop.m in Sources */,
 				133A56821ACD620000D5A43A /* PHFComposeBarView.m in Sources */,
 				9F8B84911B64E387006363B8 /* OTPageView.m in Sources */,
 				FE6CF4A71AB8308F00D27905 /* HXTabBarViewController.m in Sources */,
 				135FD1E91AC9059400FB3BDD /* UIFont+customFont.m in Sources */,
+				FC6664841B65C9EF0048A7D3 /* ApplyFor.m in Sources */,
 				134E05681AC29CA000ADFA33 /* HXIMManager.m in Sources */,
 				13D4BD0C1AD4CF0F0059FF4A /* HXPostTableViewCell.m in Sources */,
 				13D4BCF11AD3ABE90059FF4A /* HXLike+Additions.m in Sources */,
 				133A56831ACD620000D5A43A /* PHFComposeBarView_Button.m in Sources */,
 				134E05811AC507CC00ADFA33 /* HXChatHistoryViewController.m in Sources */,
+				FC6664941B65CAD80048A7D3 /* LewPopupViewAnimationFade.m in Sources */,
 				13D4BD1D1AD6457E0059FF4A /* HXRoundButton.m in Sources */,
 				134E056B1AC29CA000ADFA33 /* HXAnSocialManager.m in Sources */,
 				135FD1EA1AC9059400FB3BDD /* UILabel+customLabel.m in Sources */,
 				9F8365421B636AB8009571FB /* HXChatHistoryAllViewController.m in Sources */,
 				FE0758341AD5661700D14F46 /* HXCommentView.m in Sources */,
+				FC6664951B65CAD80048A7D3 /* LewPopupViewAnimationSlide.m in Sources */,
 				FE0758411AD7532E00D14F46 /* HXLikeCommentButton.m in Sources */,
 				135FD1F91ACA9EF400FB3BDD /* HXFriendSearchViewController.m in Sources */,
 				135FD2331ACBFF0900FB3BDD /* HXComposeView.m in Sources */,
@@ -1362,6 +1421,7 @@
 				134E053F1AC2976E00ADFA33 /* HXFriendRequestViewController.m in Sources */,
 				13D4BCEE1AD3A65E0059FF4A /* HXComment+Additions.m in Sources */,
 				135FD1E81AC9059400FB3BDD /* UIColor+CustomColor.m in Sources */,
+				FC6664921B65CAD80048A7D3 /* LewPopupBackgroundView.m in Sources */,
 				FEF416521AB7D6AA00C7FFC7 /* main.m in Sources */,
 				13D4BCF81AD3C0A30059FF4A /* PostUtil.m in Sources */,
 				13D4BD191AD629BA0059FF4A /* HXAnLiveViewController.m in Sources */,
@@ -1532,6 +1592,7 @@
 				PRODUCT_NAME = Impp;
 				PROVISIONING_PROFILE = "";
 				PUBLIC_HEADERS_FOLDER_PATH = Impp.app/Headers;
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
 			name = Debug;
@@ -1572,6 +1633,7 @@
 				PRODUCT_NAME = Impp;
 				PROVISIONING_PROFILE = "";
 				PUBLIC_HEADERS_FOLDER_PATH = Impp.app/Headers;
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
 			name = Release;

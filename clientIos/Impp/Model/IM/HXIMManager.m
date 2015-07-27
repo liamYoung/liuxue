@@ -426,6 +426,7 @@
 - (HXChatViewController *)getChatViewWithTargetClientId:(NSString *)targetClientId targetUserName:(NSString *)targetUserName currentUserName:(NSString *)currentUserName
 {
     HXChat *chatSession = [ChatUtil createChatSessionWithCurrentClientId:[HXIMManager manager].clientId targetClientId:targetClientId currentUserName:currentUserName targetUserName:targetUserName];
+    NSLog(@"[HXIMManager manager].clientId %@",chatSession.targetUserName);
     HXChatViewController *chatVc = [[HXChatViewController alloc]initWithChatInfo:chatSession setTopicMode:NO];
     return chatVc;
 }

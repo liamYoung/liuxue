@@ -20,6 +20,11 @@
 @property (nonatomic, retain) NSString * photoURL;
 @property (nonatomic, retain) NSString * userId;
 @property (nonatomic, retain) NSString * userName;
+@property (nonatomic, retain) NSString * nickName;
+
+@property (nonatomic, retain) NSString * collage;
+@property (nonatomic, retain) NSString * major;
+@property (nonatomic, retain) NSNumber * age;
 @property (nonatomic, retain) NSSet *topics;
 @property (nonatomic, retain) NSSet *friends;
 @property (nonatomic, retain) NSSet *follows;

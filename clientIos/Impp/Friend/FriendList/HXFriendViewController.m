@@ -23,6 +23,7 @@
 #import "HXChatHistoryTableViewCell.h"
 #import "UIColor+CustomColor.h"
 #import <CoreData/CoreData.h>
+#import "HXAnSocialManager.h"
 #define VIEW_WIDTH self.view.frame.size.width
 
 @interface HXFriendViewController ()<UITableViewDataSource, UITableViewDelegate,NSFetchedResultsControllerDelegate,UISearchBarDelegate, UISearchDisplayDelegate>
@@ -132,7 +133,7 @@
     NSInteger unreadCount = [ChatUtil unreadCount:chatSession];
     
     if (![chatSession.topicId isEqualToString:@""]) {
-        NSString *topicName = [NSString stringWithFormat:@"%@ (%d)",chatSession.topicName,(int)chatSession.users.count + 1];
+        NSString *topicName = [NSString stringWithFormat:@"%@ ",chatSession.topicName];
         HXChatHistoryTableViewCell *cell = [[HXChatHistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                                              reuseIdentifier:cellIdentifier
                                                                                        title:topicName
@@ -147,17 +148,19 @@
         return cell;
     }else{
         NSArray *users = [chatSession.users allObjects];
+      
         NSString *userName;
         NSString *photoUrl;
         for(HXUser *user in users){
+            
             if (![user.userName isEqualToString:[HXUserAccountManager manager].userInfo.userName]) {
-                userName = user.userName;
+                userName = user.nickName;
                 photoUrl = user.photoURL;
             }
         }
         if (!users.count) {
             HXUser *user = [UserUtil getHXUserByClientId:chatSession.targetClientId];
-            userName = user.userName;
+            userName = user.nickName;
             photoUrl = user.photoURL;
             [chatSession addUsersObject:user];
         }
@@ -195,30 +198,30 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here for when you hit delete
-        // Remove the row from data model
-        NSMutableArray* chatSessions;
-        if (tableView == self.searchController.searchResultsTableView)
-            chatSessions = self.chatHistoryFilterArray;
-        else
-            chatSessions = self.chatHistoryArray;
-        
-        [ChatUtil deleteChatHistory:chatSessions[indexPath.row]];
-        [chatSessions removeObjectAtIndex:indexPath.row];
-        
-        // Request table view to reload
-        [tableView beginUpdates];
-        [tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]]
-                         withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tableView endUpdates];
-        [self.tableView reloadData];
-    }
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        //add code here for when you hit delete
+//        // Remove the row from data model
+//        NSMutableArray* chatSessions;
+//        if (tableView == self.searchController.searchResultsTableView)
+//            chatSessions = self.chatHistoryFilterArray;
+//        else
+//            chatSessions = self.chatHistoryArray;
+//        
+//        [ChatUtil deleteChatHistory:chatSessions[indexPath.row]];
+//        [chatSessions removeObjectAtIndex:indexPath.row];
+//        
+//        // Request table view to reload
+//        [tableView beginUpdates];
+//        [tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]]
+//                         withRowAnimation:UITableViewRowAnimationAutomatic];
+//        [tableView endUpdates];
+//        [self.tableView reloadData];
+//    }
 }
 
 

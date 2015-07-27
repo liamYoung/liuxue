@@ -80,7 +80,7 @@
     [self.userNameLabel setBackgroundColor:[UIColor clearColor]];
     [self.userNameLabel setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:24]];
     [self.userNameLabel setTextColor:[UIColor whiteColor]];
-    self.userNameLabel.text = [HXUserAccountManager manager].userInfo.userName;
+    self.userNameLabel.text = [HXUserAccountManager manager].userInfo.nickName;
     self.userNameLabel.textAlignment = NSTextAlignmentCenter;
     self.userNameLabel.delegate = self;
     [self.view addSubview:self.userNameLabel];
@@ -347,7 +347,6 @@
 #pragma mark - Helper
 - (void)changeProfileNickName
 {
-    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:[HXUserAccountManager manager].userInfo.userId forKey:@"user_id"];
     [params setObject:[self.userNameLabel text] forKey:@"first_name"];
@@ -355,8 +354,10 @@
     
     [[HXAnSocialManager manager]sendRequest:USERS_UPDATE method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
         
+        NSDictionary *user = [[response objectForKey:@"response"] objectForKey:@"user"];
+        [[HXUserAccountManager manager] refreshUserInfo:user];
         NSLog(@"success log: %@",[response description]);
-        
+        [HXUserAccountManager manager].nickName = [self.userNameLabel text];
         
     }failure:^(NSDictionary* response){
         NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
@@ -396,6 +397,9 @@
     [[HXAnSocialManager manager]sendRequest:USERS_UPDATE method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
         
         NSLog(@"success log: %@",[response description]);
+        
+        NSDictionary *user = [[response objectForKey:@"response"] objectForKey:@"user"];
+        [[HXUserAccountManager manager] refreshUserInfo:user];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [load loadCompleted];

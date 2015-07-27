@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>272AC15E-B7AA-4565-9B60-D7C9A4D09D4E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Impp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>41932CD03C33BC3B2624762135296BABE420F02A</key>
+		<string>code.csdn.net:arrownock/arrownock-impp-ios.git</string>
+		<key>51DC890C0E892719D981357E4B06BE7313538E3A</key>
+		<string>git.arrownock.com:arrownock/arrownock-impp-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Impp.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>41932CD03C33BC3B2624762135296BABE420F02A</key>
+		<string>../..</string>
+		<key>51DC890C0E892719D981357E4B06BE7313538E3A</key>
+		<string>../../../arrownock-impp-ios</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>code.csdn.net:arrownock/arrownock-impp-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>41932CD03C33BC3B2624762135296BABE420F02A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>51DC890C0E892719D981357E4B06BE7313538E3A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>arrownock-impp-ios</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>41932CD03C33BC3B2624762135296BABE420F02A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>arrownock-impp-ios-code</string>
+		</dict>
+	</array>
+</dict>
+</plist>

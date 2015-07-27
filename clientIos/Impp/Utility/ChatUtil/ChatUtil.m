@@ -132,9 +132,9 @@
             targetUser = [HXUser initWithDict:@{@"clientId":targetClientId,
                                                 @"userName":targetUserName}];
         }
-        
+        NSLog(@"targetUser.userName:%@",targetUser.userName);
         NSDictionary *dic = @{@"targetClientId":targetClientId,
-                              @"targetUserName":targetUser.userName,
+                              @"targetUserName":targetUser.nickName,
                               @"currentClientId":currentClientId,
                               @"currentUserName":currentUser.userName};
         
@@ -143,6 +143,7 @@
         [chatSession addUsersObject:targetUser];
         //[chatSession addUsersObject:currentUser];
         
+        NSLog(@"targetUser.userName:%@",chatSession.targetUserName);
         NSError *error;
         [[CoreDataUtil sharedContext] save:&error];
         if (error) {

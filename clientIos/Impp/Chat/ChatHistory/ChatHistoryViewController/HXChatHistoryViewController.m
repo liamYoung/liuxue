@@ -141,7 +141,7 @@
     NSString *lastStr = [MessageUtil configureLastMessage:lastMessage];
     NSInteger unreadCount = [ChatUtil unreadCount:chatSession];
     
-    NSString *userName = [NSString stringWithFormat:@"%@ (%d)",chatSession.topicName,(int)chatSession.users.count + 1];
+    NSString *userName = [NSString stringWithFormat:@"%@",chatSession.topicName];
     NSString *photoUrl = chatSession.topicOwner.photoURL;
 
     if ([lastStr isEqualToString:@""]) lastStr = @"...";
@@ -177,7 +177,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -110,7 +110,7 @@
     NSString *URLPath = [NSString stringWithFormat:@"http://7xkmqv.com1.z0.glb.clouddn.com/configSchoolCon.json"];
     NSURL *URL = [NSURL URLWithString:URLPath];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL
-                                                cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                             timeoutInterval:20.0];
 
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {

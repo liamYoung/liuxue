@@ -22,6 +22,12 @@
 #import "HXIMManager.h"
 #import "HXAnSocialManager.h"
 #import "UserUtil.h"
+#import "ApplyFor.h"
+#import "UIViewController+LewPopupViewController.h"
+#import "LewPopupViewAnimationFade.h"
+#import "LewPopupViewAnimationSlide.h"
+#import "LewPopupViewAnimationSpring.h"
+#import "LewPopupViewAnimationDrop.h"
 #define SCREEN_WIDTH self.view.frame.size.width
 #define SCREEN_HEIGHT self.view.frame.size.height
 
@@ -81,6 +87,7 @@
     [self.view addSubview:self.photoImageView];
     
     if ([HXUserAccountManager manager].photoUrl){
+        NSLog(@"url:%@",[HXUserAccountManager manager].photoUrl);
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         [manager downloadWithURL:[NSURL URLWithString:[HXUserAccountManager manager].photoUrl]
                          options:0
@@ -98,7 +105,7 @@
     [self.userNameLabel setBackgroundColor:[UIColor clearColor]];
     [self.userNameLabel setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:28]];
     [self.userNameLabel setTextColor:[UIColor whiteColor]];
-    self.userNameLabel.text = [HXUserAccountManager manager].userInfo.userName;
+    self.userNameLabel.text = [HXUserAccountManager manager].userInfo.nickName;
     self.userNameLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.userNameLabel];
     
@@ -262,7 +269,8 @@
     [[HXAnSocialManager manager]sendRequest:USERS_UPDATE method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
         
         NSLog(@"success log: %@",[response description]);
-        
+         NSDictionary *user = [[response objectForKey:@"response"] objectForKey:@"user"];
+        [[HXUserAccountManager manager] saveUserIntoDB:user];
         dispatch_async(dispatch_get_main_queue(), ^{
             [load loadCompleted];
             
@@ -298,6 +306,7 @@
     }];
 }
 
+
 - (void)cancelBarButtonTapped
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -313,9 +322,10 @@
 
 #pragma mark - TableView Delegate Datasource
 
+
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return 74;
+    return 44;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
@@ -330,32 +340,78 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    static NSString *cellIdentifier = @"chatHistoryCell";
+    static NSString *cellIdentifier = @"settingCell";
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] init];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }else{
+        
+    }
+    long age = [[HXUserAccountManager manager].userInfo.age integerValue];
+    if(age == 1)
+    {
+        switch (indexPath.row ) {
+            case 0:
+                cell.textLabel.text  = @"申请成为学长";
+                break;
+            case 1:
+                cell.textLabel.text  = @"退出登录";
+                break;
+            default:
+                break;
+        }
+    }
+    else if([[HXUserAccountManager manager].userInfo.age integerValue] >= 100){
+        switch (indexPath.row ) {
+            case 0:
+                cell.textLabel.text  = [NSString stringWithFormat:@"积分: %ld",age - 100];
+                break;
+            case 1:
+                cell.textLabel.text  = @"退出登录";
+                break;
+            default:
+                break;
+        }
+    }
+    else{
+        cell.textLabel.text  = @"退出登录";
+    }
+
     return cell;
 }
 
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if([[HXUserAccountManager manager].userInfo.age integerValue] == 1)
+    {
+        
     if (indexPath.row == 0) {
-        
-            
-        NSDictionary *customData = @{@"name":@"3123",
-                                     @"notification_alert":@"申请信息"};
-        
-        
-        [[[HXIMManager manager]anIM] sendMessage:[NSString stringWithFormat:@"满测斯特大学，计算机系 %@",[HXUserAccountManager manager].userId]
-                                              customData:customData
-                                               toClients:[NSSet setWithObject:@"AIM8F07EKUKNPMX38W656QC"]
-                                          needReceiveACK:YES];
+        ApplyFor *view = [ApplyFor defaultApplyFor];
+        view.parentVC = self;
+        LewPopupViewAnimationSlide *animation = [[LewPopupViewAnimationSlide alloc]init];
+        animation.type = LewPopupViewAnimationSlideTypeBottomBottom;
+        [self lew_presentPopupView:view animation:animation dismissed:^{
+            NSLog(@"动画结束");
+        }];
+
     }
     else if (indexPath.row == 1){
          [self logoutButtonTapped];
+    }
+        
+    }
+    else{
+        if (indexPath.row == 1){
+            [self logoutButtonTapped];
+        }
     }
 }
 

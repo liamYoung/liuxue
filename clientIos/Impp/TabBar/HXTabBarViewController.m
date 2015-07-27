@@ -10,7 +10,7 @@
 #import "MessageUtil.h"
 #import "UIColor+CustomColor.h"
 #import "NotificationCenterUtil.h"
-
+#import "HXUserAccountManager.h"
 @interface HXTabBarViewController ()
 @property (strong, nonatomic) UIImageView *badge;
 @property (strong, nonatomic) UILabel *unreadCountLabel;
@@ -46,6 +46,8 @@
                                               object:nil];
     
     [self initTabbar];
+    
+    
     
 }
 
@@ -103,6 +105,8 @@
     tabBarItem4.title = NSLocalizedString(@"我", nil);
     [tabBarItem4 setImage:[[UIImage imageNamed:@"tab04"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [tabBarItem4 setSelectedImage:[[UIImage imageNamed:@"tab04"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    
+     [[HXUserAccountManager manager] updateUser];
     
 }
 

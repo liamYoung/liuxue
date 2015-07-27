@@ -40,12 +40,14 @@
     self.userName = @"";
     self.clientId = @"";
     self.photoId = @"";
+    self.nickName = @"";
     self.photoURL = @"";
     self.coverPhotoURL = @"";
     self.currentUserId = @"";
     self.topics = nil;
     self.friends = nil;
     self.follows = nil;
+    self.age = [NSNumber numberWithInt:1];
 }
 
 - (BOOL)setValuesFromDictWithoutSaved:(NSDictionary *)dict
@@ -53,11 +55,26 @@
     if ([HXUser isObjectAvailable:dict[@"userId"]])
         self.userId = dict[@"userId"];
     
-    if ([HXUser isObjectAvailable:dict[@"currentUserId"]])
-        self.userId = dict[@"currentUserId"];
+    if ([HXUser isObjectAvailable:dict[@"email"]])
+        self.userId = dict[@"email"];
     
     if ([HXUser isObjectAvailable:dict[@"userName"]])
         self.userName = dict[@"userName"];
+    
+    if ([HXUser isObjectAvailable:dict[@"age"]])
+        self.age = dict[@"age"];
+    
+    if ([HXUser isObjectAvailable:dict[@"collage"]])
+        self.collage = dict[@"collage"];
+    
+    if ([HXUser isObjectAvailable:dict[@"major"]])
+        self.major = dict[@"major"];
+    
+    
+    if ([HXUser isObjectAvailable:dict[@"firstName"]])
+        self.nickName = dict[@"firstName"];
+    else
+        self.nickName = self.userName;
     
     if ([HXUser isObjectAvailable:dict[@"clientId"]])
         self.clientId = dict[@"clientId"];
@@ -76,6 +93,12 @@
 
 - (BOOL)setValuesFromDict:(NSDictionary *)dict
 {
+    if ([HXUser isObjectAvailable:dict[@"collage"]])
+        self.collage = dict[@"collage"];
+    
+    if ([HXUser isObjectAvailable:dict[@"major"]])
+        self.major = dict[@"major"];
+    
     if ([HXUser isObjectAvailable:dict[@"userId"]])
         self.userId = dict[@"userId"];
     
@@ -84,6 +107,15 @@
     
     if ([HXUser isObjectAvailable:dict[@"userName"]])
         self.userName = dict[@"userName"];
+    
+    if ([HXUser isObjectAvailable:dict[@"age"]])
+        self.age = dict[@"age"];
+    
+    if ([HXUser isObjectAvailable:dict[@"firstName"]])
+        self.nickName = dict[@"firstName"];
+    else
+        self.nickName = self.userName;
+    
     
     if ([HXUser isObjectAvailable:dict[@"clientId"]])
         self.clientId = dict[@"clientId"];
@@ -113,7 +145,11 @@
                            @"userId":self.userId,
                            @"clientId":self.clientId,
                            @"photoId":self.photoId,
+                           @"firstName":self.nickName,
                            @"photoURL":self.photoURL,
+                           @"age":self.age,
+                           @"collage":self.collage,
+                           @"major":self.major,
                            @"coverPhotoURL":self.coverPhotoURL,
                            @"currentUserId":self.currentUserId};
     return dict;

@@ -216,6 +216,7 @@
     [params setObject:self.passwordText.text forKey:@"password"];
     [params setObject:self.passwordText.text forKey:@"password_confirmation"];
     
+    [params setObject:self.userNameText.text forKey:@"firstName"];
     // get talk client ID
     [params setObject:@"true" forKey:@"enable_im"];
     

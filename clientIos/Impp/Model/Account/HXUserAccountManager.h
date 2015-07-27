@@ -12,6 +12,7 @@
 @interface HXUserAccountManager : NSObject
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *nickName;
+@property (strong, nonatomic) NSNumber *age;
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *clientId;
@@ -26,4 +27,7 @@
 - (NSDictionary *)getContactInfoForClientId:(NSString *)clientId;
 - (void)userSignedInWithId:(NSString *)userId name:(NSString *)name clientId:(NSString *)clientId;
 - (void)userSignedOut;
+- (void)saveUserIntoDB:(NSDictionary *)userInfo;
+- (void)refreshUserInfo:(NSDictionary *)userInfo;
+- (void)updateUser;
 @end
