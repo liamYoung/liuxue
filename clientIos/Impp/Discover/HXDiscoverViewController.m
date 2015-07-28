@@ -114,18 +114,18 @@
     
 }
 
--(void)AddRecommendUser{
-    CGRect frame = CGRectMake(0,self.view.frame.size.height - 167 ,90,50);
+-(void)AddRecommendUser
+{
+//    CGRect frame = CGRectMake(0,self.view.frame.size.height - 167 ,90,50);
+//    UILabel *pName = [[UILabel alloc] initWithFrame:frame];
+//    pName.textAlignment  = NSTextAlignmentCenter;
+//    [self.view addSubview:pName];
+//    UIFont *font = [UIFont fontWithName:@"STHeitiTC-Medium" size:12];
+//    pName.font = font;
+//    pName.text = @"留学达人：";
     
-    UILabel *pName = [[UILabel alloc] initWithFrame:frame];
-    pName.textAlignment  = NSTextAlignmentCenter;
-    [self.view addSubview:pName];
-    UIFont *font = [UIFont fontWithName:@"STHeitiTC-Medium" size:12];
-    pName.font = font;
-    pName.text = @"留学达人：";
-    
-    for (int i = 0; i < _commentArray.count; i++) {
-        
+    for (int i = 0; i < _commentArray.count; i++)
+    {
         NSDictionary *dic =  [_commentArray objectAtIndex:i];
         UIImage *userimage;
         
@@ -134,20 +134,20 @@
             pUrl = [[dic objectForKey:@"photo"] objectForKey:@"url"];
             
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:pUrl]];
-            
             userimage =  [[UIImage alloc] initWithData:data];
-            
         }
-        else{
+        else
+        {
             userimage =  [UIImage imageNamed:@"friend_default"];
         }
+        
         UIImageView *pView = [[UIImageView alloc] initWithImage:userimage];
         
         [self.view addSubview:pView];
         pView.layer.cornerRadius = 45/2;
         pView.clipsToBounds = YES;
         pView.layer.masksToBounds = YES;
-        pView.frame=CGRectMake(10+i*60,self.view.frame.size.height - 130 ,50,50);
+        pView.frame=CGRectMake(10 + i * 60, self.view.frame.size.height - 130, 50, 50);
         
         UITapGestureRecognizer *singleFingerOne = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                           action:@selector(handleSingleFingerEvent:)];
@@ -157,12 +157,9 @@
 
         [pView addGestureRecognizer:singleFingerOne];
         pView.tag = i;
-        
-        
-       pView.userInteractionEnabled=YES;
+        pView.userInteractionEnabled=YES;
         
         CGRect frame = CGRectMake(10+i*60,self.view.frame.size.height - 90 ,50,50);
-        
         UILabel *pName = [[UILabel alloc] initWithFrame:frame];
         pName.textAlignment  = NSTextAlignmentCenter;
         [self.view addSubview:pName];
@@ -222,14 +219,23 @@
     label.text = [dic objectForKey:@"name"];
     [cell addSubview:label];
 
-    UILabel *labelDes = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, cell.frame.size.width - 20, 135)];
+    NSString *str = [[[dic objectForKey:@"des"] stringByAppendingString:[dic objectForKey:@"des"]] stringByAppendingString:[dic objectForKey:@"des"]];
+    UIFont *font = [UIFont systemFontOfSize:13];
+    CGSize size = CGSizeMake(cell.frame.size.width - 20,135);
+    CGRect labelRect = [str boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)  attributes:[NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName] context:nil];
+    UILabel *labelDes = [[UILabel alloc]initWithFrame:CGRectMake(10, 170, labelRect.size.width, labelRect.size.height)];
+    labelDes.text = str;
+    labelDes.font = [UIFont systemFontOfSize:13];
     labelDes.lineBreakMode = NSLineBreakByWordWrapping;
-    
-    
     labelDes.numberOfLines = 0;
-//    [labelDes setBackgroundColor:[UIColor redColor]];
-    labelDes.text = [dic objectForKey:@"des"];
     [cell addSubview:labelDes];
+    
+//    UILabel *labelDes = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, cell.frame.size.width - 20, 135)];
+//    labelDes.lineBreakMode = NSLineBreakByWordWrapping;
+//    labelDes.numberOfLines = 0;
+////    [labelDes setBackgroundColor:[UIColor redColor]];
+//    labelDes.text = [dic objectForKey:@"des"];
+//    [cell addSubview:labelDes];
 
     return cell;
 }

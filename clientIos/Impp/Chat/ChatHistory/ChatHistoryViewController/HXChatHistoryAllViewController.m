@@ -88,15 +88,23 @@
     
 }
 
+
 - (void)initNavigationBar
 {
     [HXAppUtility initNavigationTitleView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_logo"]]
                              barTintColor:[UIColor color1]
                                 tintColor:[UIColor color5]
                        withViewController:self];
-    
-    UIBarButtonItem *createBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createButtonTapped)];
-    [self.navigationItem setRightBarButtonItem:createBarButton];
+
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(cancelButtonTapped)];
+    [self.navigationItem setRightBarButtonItem:cancelBarButton];
+}
+
+#pragma mark - Listener
+
+- (void)cancelButtonTapped
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)createButtonTapped
