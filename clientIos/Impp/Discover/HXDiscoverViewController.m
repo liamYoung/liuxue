@@ -62,14 +62,16 @@
 - (void)initView
 {
     /* tableView */
+    UIImage *image = [UIImage imageNamed:@"card"];
+
     CGRect frame = self.view.frame;
     frame.size.height -= 64;
     frame.origin.y = -10;
-    
+
     OTPageView *PScrollView = [[OTPageView alloc] initWithFrame:frame];
     PScrollView.pageScrollView.dataSource = self;
     PScrollView.pageScrollView.delegate = self;
-    PScrollView.pageScrollView.padding = 76;
+    PScrollView.pageScrollView.padding = frame.size.width - [image size].width;
     PScrollView.pageScrollView.leftRightOffset = 0;
     PScrollView.pageScrollView.frame = frame;
     [PScrollView.pageScrollView reloadData];

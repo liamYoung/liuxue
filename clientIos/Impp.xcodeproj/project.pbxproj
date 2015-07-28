@@ -69,6 +69,7 @@
 		4EBEE1EC1B11C1D100278866 /* libArrownock-armv7s-2.23.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBEE1E41B11C1D100278866 /* libArrownock-armv7s-2.23.1.a */; };
 		4EBEE1ED1B11C1D100278866 /* libArrownock-i386-2.23.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBEE1E51B11C1D100278866 /* libArrownock-i386-2.23.1.a */; };
 		4EBEE1EE1B11C1D100278866 /* libArrownock-x86_64-2.23.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBEE1E61B11C1D100278866 /* libArrownock-x86_64-2.23.1.a */; };
+		9F7FD6A61B6730C700E38202 /* send.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F7FD6A51B6730C700E38202 /* send.png */; };
 		9F8365421B636AB8009571FB /* HXChatHistoryAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8365411B636AB8009571FB /* HXChatHistoryAllViewController.m */; };
 		9F8B84801B64910F006363B8 /* School.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B847F1B64910F006363B8 /* School.m */; };
 		9F8B84901B64E387006363B8 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848D1B64E387006363B8 /* OTPageScrollView.m */; };
@@ -270,6 +271,7 @@
 		4EBEE1E41B11C1D100278866 /* libArrownock-armv7s-2.23.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libArrownock-armv7s-2.23.1.a"; sourceTree = "<group>"; };
 		4EBEE1E51B11C1D100278866 /* libArrownock-i386-2.23.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libArrownock-i386-2.23.1.a"; sourceTree = "<group>"; };
 		4EBEE1E61B11C1D100278866 /* libArrownock-x86_64-2.23.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libArrownock-x86_64-2.23.1.a"; sourceTree = "<group>"; };
+		9F7FD6A51B6730C700E38202 /* send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send.png; sourceTree = "<group>"; };
 		9F8365401B636AB8009571FB /* HXChatHistoryAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXChatHistoryAllViewController.h; sourceTree = "<group>"; };
 		9F8365411B636AB8009571FB /* HXChatHistoryAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXChatHistoryAllViewController.m; sourceTree = "<group>"; };
 		9F8B847E1B64910F006363B8 /* School.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = School.h; sourceTree = "<group>"; };
@@ -861,6 +863,7 @@
 		9F8B84881B64E32F006363B8 /* Resouce */ = {
 			isa = PBXGroup;
 			children = (
+				9F7FD6A51B6730C700E38202 /* send.png */,
 				9F8B84941B64E51A006363B8 /* liao.png */,
 			);
 			name = Resouce;
@@ -1322,6 +1325,7 @@
 			files = (
 				FEF4165B1AB7D6AA00C7FFC7 /* Main.storyboard in Resources */,
 				13A7E5631ADCB8A300AC0C29 /* Localizable.strings in Resources */,
+				9F7FD6A61B6730C700E38202 /* send.png in Resources */,
 				FC6664811B65C9A70048A7D3 /* ApplyFor.xib in Resources */,
 				FEF416601AB7D6AA00C7FFC7 /* LaunchScreen.xib in Resources */,
 				133A56851ACD620000D5A43A /* LICENSE in Resources */,

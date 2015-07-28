@@ -335,12 +335,13 @@ static CGFloat kTextViewToSuperviewHeightDelta;
         
         UIColor *disabledColor = [UIColor colorWithHue:240.0f/360.0f saturation:0.03f brightness:0.58f alpha:1.0f];
         [_button setTitleColor:disabledColor forState:UIControlStateDisabled];
-        //        UIColor *enabledColor = [UIColor colorWithHue:211.0f/360.0f saturation:1.0f brightness:1.0f alpha:1.0f];
+//        UIColor *enabledColor = [UIColor colorWithHue:211.0f/360.0f saturation:1.0f brightness:1.0f alpha:1.0f];
         UIColor *enabledColor = [UIColor whiteColor];
         [_button setTitleColor:enabledColor forState:UIControlStateNormal];
         UIColor *highlightColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
         [_button setTitleColor:highlightColor forState:UIControlStateHighlighted];
         [_button addTarget:self action:@selector(didPressButton) forControlEvents:UIControlEventTouchUpInside];
+//        [_button setBackgroundImage:[UIImage imageNamed:@"send.png"] forState:UIControlStateNormal];
         
         UILabel *label = [_button titleLabel];
         [label setFont:[UIFont fontWithName:@"STHeitiTC-Light" size:15]];
@@ -626,10 +627,10 @@ static CGFloat kTextViewToSuperviewHeightDelta;
             break;
         }
     }
-    newButtonFrame.size.width += buttonLabelWidth + 12*2;
-    newButtonFrame.size.height = 44;
-    newButtonFrame.origin.y = 0;
-    newButtonFrame.origin.x = self.bounds.size.width -newButtonFrame.size.width;
+    newButtonFrame.size.width = 34;
+    newButtonFrame.size.height = 32;
+    newButtonFrame.origin.y = 6;
+    newButtonFrame.origin.x = self.bounds.size.width -newButtonFrame.size.width - 10;
     
     [[self button] setFrame:newButtonFrame];
     

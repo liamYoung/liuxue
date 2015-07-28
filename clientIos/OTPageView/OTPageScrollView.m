@@ -58,6 +58,8 @@
     _numberOfCell = [self.delegate numberOfPageInPageScrollView:self];
     
     float startX = self.leftRightOffset;
+    NSLog(@"BBBBBBBBBBB %f",startX);
+
     float topY   = (self.frame.size.height - _cellSize.height)/2;
     
     [[self subviews] makeObjectsPerformSelector: @selector(removeFromSuperview)];
@@ -108,6 +110,8 @@
 - (float)leftRightOffset
 {
     if (!_leftRightOffset) {
+        NSLog(@"self.frame.size.width %f",self.frame.size.width);
+        NSLog(@"_cellSize.width %f",_cellSize.width);
         return (self.frame.size.width - _cellSize.width)/2;
     }
     return _leftRightOffset;
