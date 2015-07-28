@@ -71,6 +71,7 @@
 		4EBEE1EE1B11C1D100278866 /* libArrownock-x86_64-2.23.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBEE1E61B11C1D100278866 /* libArrownock-x86_64-2.23.1.a */; };
 		9F7FD6A61B6730C700E38202 /* send.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F7FD6A51B6730C700E38202 /* send.png */; };
 		9F7FD6A81B67790800E38202 /* ImageBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F7FD6A71B67790800E38202 /* ImageBg.png */; };
+		9F7FD6AA1B67805D00E38202 /* ApplyFor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F7FD6A91B67805D00E38202 /* ApplyFor.xib */; };
 		9F8365421B636AB8009571FB /* HXChatHistoryAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8365411B636AB8009571FB /* HXChatHistoryAllViewController.m */; };
 		9F8B84801B64910F006363B8 /* School.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B847F1B64910F006363B8 /* School.m */; };
 		9F8B84901B64E387006363B8 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848D1B64E387006363B8 /* OTPageScrollView.m */; };
@@ -80,7 +81,6 @@
 		FC42F9EC1B672C1000F2F9D9 /* HXChatViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = FC42F9EB1B672C1000F2F9D9 /* HXChatViewController2.m */; };
 		FC42F9EF1B672CEE00F2F9D9 /* HXMessageTableViewCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = FC42F9EE1B672CEE00F2F9D9 /* HXMessageTableViewCell2.m */; };
 		FC42F9F41B6742E800F2F9D9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC42F9F31B6742E800F2F9D9 /* search.png */; };
-		FC6664811B65C9A70048A7D3 /* ApplyFor.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC6664801B65C9A70048A7D3 /* ApplyFor.xib */; };
 		FC6664841B65C9EF0048A7D3 /* ApplyFor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664831B65C9EF0048A7D3 /* ApplyFor.m */; };
 		FC6664921B65CAD80048A7D3 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664871B65CAD80048A7D3 /* LewPopupBackgroundView.m */; };
 		FC6664931B65CAD80048A7D3 /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664891B65CAD80048A7D3 /* LewPopupViewAnimationDrop.m */; };
@@ -278,6 +278,7 @@
 		4EBEE1E61B11C1D100278866 /* libArrownock-x86_64-2.23.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libArrownock-x86_64-2.23.1.a"; sourceTree = "<group>"; };
 		9F7FD6A51B6730C700E38202 /* send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send.png; sourceTree = "<group>"; };
 		9F7FD6A71B67790800E38202 /* ImageBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageBg.png; sourceTree = "<group>"; };
+		9F7FD6A91B67805D00E38202 /* ApplyFor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyFor.xib; sourceTree = "<group>"; };
 		9F8365401B636AB8009571FB /* HXChatHistoryAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXChatHistoryAllViewController.h; sourceTree = "<group>"; };
 		9F8365411B636AB8009571FB /* HXChatHistoryAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXChatHistoryAllViewController.m; sourceTree = "<group>"; };
 		9F8B847E1B64910F006363B8 /* School.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = School.h; sourceTree = "<group>"; };
@@ -294,7 +295,6 @@
 		FC42F9ED1B672CEE00F2F9D9 /* HXMessageTableViewCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMessageTableViewCell2.h; sourceTree = "<group>"; };
 		FC42F9EE1B672CEE00F2F9D9 /* HXMessageTableViewCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMessageTableViewCell2.m; sourceTree = "<group>"; };
 		FC42F9F31B6742E800F2F9D9 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
-		FC6664801B65C9A70048A7D3 /* ApplyFor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ApplyFor.xib; path = ../ApplyFor.xib; sourceTree = "<group>"; };
 		FC6664821B65C9EF0048A7D3 /* ApplyFor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyFor.h; sourceTree = "<group>"; };
 		FC6664831B65C9EF0048A7D3 /* ApplyFor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyFor.m; sourceTree = "<group>"; };
 		FC6664861B65CAD80048A7D3 /* LewPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupBackgroundView.h; sourceTree = "<group>"; };
@@ -1197,7 +1197,7 @@
 			children = (
 				FC6664821B65C9EF0048A7D3 /* ApplyFor.h */,
 				FC6664831B65C9EF0048A7D3 /* ApplyFor.m */,
-				FC6664801B65C9A70048A7D3 /* ApplyFor.xib */,
+				9F7FD6A91B67805D00E38202 /* ApplyFor.xib */,
 				FCE72C2C1B64E42F00823CEA /* HXSetinitViewController.h */,
 				FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */,
 				FEF416831AB7E3D800C7FFC7 /* HXSettingsViewController.h */,
@@ -1346,10 +1346,10 @@
 			files = (
 				9F7FD6A81B67790800E38202 /* ImageBg.png in Resources */,
 				FEF4165B1AB7D6AA00C7FFC7 /* Main.storyboard in Resources */,
+				9F7FD6AA1B67805D00E38202 /* ApplyFor.xib in Resources */,
 				FC42F9F41B6742E800F2F9D9 /* search.png in Resources */,
 				13A7E5631ADCB8A300AC0C29 /* Localizable.strings in Resources */,
 				9F7FD6A61B6730C700E38202 /* send.png in Resources */,
-				FC6664811B65C9A70048A7D3 /* ApplyFor.xib in Resources */,
 				FEF416601AB7D6AA00C7FFC7 /* LaunchScreen.xib in Resources */,
 				133A56851ACD620000D5A43A /* LICENSE in Resources */,
 				FEF4165D1AB7D6AA00C7FFC7 /* Images.xcassets in Resources */,
