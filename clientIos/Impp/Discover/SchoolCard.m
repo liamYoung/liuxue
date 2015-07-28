@@ -106,6 +106,8 @@
         NSArray *array = [[response objectForKey:@"response"] objectForKey:@"users"];
         
         [self.dicData setObject:array forKey:@"usersss"];
+        
+        [self performSelectorOnMainThread:@selector(showNoneXuezhang) withObject:nil waitUntilDone:NO];
         //缓存一下信息
         for (NSDictionary *user in array)
         {
@@ -130,6 +132,16 @@
     
 }
 
+- (void)showNoneXuezhang
+{
+    NSArray *array = [self.dicData objectForKey:@"usersss"];
+    if (array.count == 0)
+    {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(80, 200, 160, 40)];
+        label.text = @"暂无学长...";
+        [_cell addSubview:label];
+    }
+}
 
 #pragma mark - Table view delegate method
 
@@ -145,8 +157,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-     NSArray *array = [self.dicData objectForKey:@"usersss"];
-    
+    NSArray *array = [self.dicData objectForKey:@"usersss"];
     return array.count;
 }
 
@@ -189,10 +200,10 @@
         [btnLiao addTarget:self action:@selector(talkAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell addSubview:btnLiao];
 
-        UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(60, 5, 90, 30)];
+        UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(60, 7, 90, 30)];
 
         labelName.text = [dic objectForKey:@"firstName"];
-        labelName.font = [UIFont systemFontOfSize:18];
+        labelName.font = [UIFont systemFontOfSize:16];
         [cell addSubview:labelName];
         
         UILabel *labelXi = [[UILabel alloc] initWithFrame:CGRectMake(60, 37, 70, 20)];

@@ -116,13 +116,14 @@
 
 -(void)AddRecommendUser
 {
-//    CGRect frame = CGRectMake(0,self.view.frame.size.height - 167 ,90,50);
-//    UILabel *pName = [[UILabel alloc] initWithFrame:frame];
+    CGRect frame = CGRectMake(8, self.view.frame.size.height - 123, 15, 70);
+    UILabel *pName = [[UILabel alloc] initWithFrame:frame];
 //    pName.textAlignment  = NSTextAlignmentCenter;
-//    [self.view addSubview:pName];
-//    UIFont *font = [UIFont fontWithName:@"STHeitiTC-Medium" size:12];
-//    pName.font = font;
-//    pName.text = @"留学达人：";
+    pName.font = [UIFont fontWithName:@"STHeitiTC-Medium" size:13];
+    pName.text = @"留学达人";
+    pName.lineBreakMode = NSLineBreakByWordWrapping;
+    pName.numberOfLines = 0;
+    [self.view addSubview:pName];
     
     for (int i = 0; i < _commentArray.count; i++)
     {
@@ -142,13 +143,11 @@
         }
         
         UIImageView *pView = [[UIImageView alloc] initWithImage:userimage];
-        
         [self.view addSubview:pView];
         pView.layer.cornerRadius = 45/2;
         pView.clipsToBounds = YES;
         pView.layer.masksToBounds = YES;
-        pView.frame=CGRectMake(10 + i * 60, self.view.frame.size.height - 120, 50, 50);
-        
+        pView.frame=CGRectMake(30 + i * 50, self.view.frame.size.height - 120, 40, 40);
         UITapGestureRecognizer *singleFingerOne = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                           action:@selector(handleSingleFingerEvent:)];
         singleFingerOne.numberOfTouchesRequired = 1; //手指数
@@ -159,7 +158,7 @@
         pView.tag = i;
         pView.userInteractionEnabled=YES;
         
-        CGRect frame = CGRectMake(10+i*60,self.view.frame.size.height - 85 ,50,50);
+        CGRect frame = CGRectMake(30 + i * 50,self.view.frame.size.height - 85, 40, 40);
         UILabel *pName = [[UILabel alloc] initWithFrame:frame];
         pName.textAlignment  = NSTextAlignmentCenter;
         [self.view addSubview:pName];
@@ -221,7 +220,7 @@
 
     NSString *str = [[[dic objectForKey:@"des"] stringByAppendingString:[dic objectForKey:@"des"]] stringByAppendingString:[dic objectForKey:@"des"]];
     UIFont *font = [UIFont systemFontOfSize:13];
-    CGSize size = CGSizeMake(cell.frame.size.width - 20,135);
+    CGSize size = CGSizeMake(cell.frame.size.width - 20, 180);
     CGRect labelRect = [str boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)  attributes:[NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName] context:nil];
     UILabel *labelDes = [[UILabel alloc]initWithFrame:CGRectMake(10, 170, labelRect.size.width, labelRect.size.height)];
     labelDes.text = str;

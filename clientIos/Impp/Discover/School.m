@@ -132,15 +132,15 @@
     
 }
 -(void)AddRecommendUser{
-//    CGRect frame = CGRectMake(0,self.view.frame.size.height - 167 ,90,50);
-    
-//    UILabel *pName = [[UILabel alloc] initWithFrame:frame];
-//    pName.textAlignment  = NSTextAlignmentCenter;
-//    [self.view addSubview:pName];
-//    UIFont *font = [UIFont fontWithName:@"STHeitiTC-Medium" size:12];
-//    pName.font = font;
-//    pName.text = [NSString stringWithFormat:@"%@达人学长：",_country];
-    
+    CGRect frame = CGRectMake(8, self.view.frame.size.height - 123, 15, 70);
+    UILabel *pName = [[UILabel alloc] initWithFrame:frame];
+    //    pName.textAlignment  = NSTextAlignmentCenter;
+    pName.font = [UIFont fontWithName:@"STHeitiTC-Medium" size:13];
+    pName.text = @"达人学长";//[NSString stringWithFormat:@"%@达人学长",_country];
+    pName.lineBreakMode = NSLineBreakByWordWrapping;
+    pName.numberOfLines = 0;
+    [self.view addSubview:pName];
+
     for (int i = 0; i < _commentArray.count; i++) {
         
         NSDictionary *dic =  [_commentArray objectAtIndex:i];
@@ -164,7 +164,7 @@
         pView.layer.cornerRadius = 45/2;
         pView.clipsToBounds = YES;
         pView.layer.masksToBounds = YES;
-        pView.frame=CGRectMake(10+i*60,self.view.frame.size.height - 120 ,50,50);
+        pView.frame=CGRectMake(30 + i * 50, self.view.frame.size.height - 120 ,40, 40);
         
         UITapGestureRecognizer *singleFingerOne = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                           action:@selector(handleSingleFingerEvent:)];
@@ -178,7 +178,7 @@
         
         pView.userInteractionEnabled=YES;
         
-        CGRect frame = CGRectMake(10+i*60,self.view.frame.size.height - 85 ,50,50);
+        CGRect frame = CGRectMake(30 + i * 50, self.view.frame.size.height - 85,40, 40);
         
         UILabel *pName = [[UILabel alloc] initWithFrame:frame];
         pName.textAlignment  = NSTextAlignmentCenter;
