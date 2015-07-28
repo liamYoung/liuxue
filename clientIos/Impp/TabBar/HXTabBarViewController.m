@@ -11,6 +11,7 @@
 #import "UIColor+CustomColor.h"
 #import "NotificationCenterUtil.h"
 #import "HXUserAccountManager.h"
+#import "HXAppUtility.h"
 @interface HXTabBarViewController ()
 @property (strong, nonatomic) UIImageView *badge;
 @property (strong, nonatomic) UILabel *unreadCountLabel;
@@ -75,7 +76,8 @@
     UITabBar *tabBar = tabBarController.tabBar;
     tabBar.selectedImageTintColor = [UIColor color3];
     tabBar.barTintColor = UIBarButtonItemStylePlain;
-
+    
+    [self.view setBackgroundColor:[HXAppUtility colorWithHexString:@"#ecf0f3" alpha:1.0f]];
     
     tabBarItem1 = [tabBar.items objectAtIndex:0];
     tabBarItem2 = [tabBar.items objectAtIndex:1];

@@ -107,7 +107,6 @@
     [params setObject:pDic forKey:@"custom_fields"];
     
     [[HXAnSocialManager manager] sendRequest:@"users/search.json" method:AnSocialManagerGET params:params success:^(NSDictionary *response) {
-        
         NSArray *array = [[response objectForKey:@"response"] objectForKey:@"users"];
         
         [self.dicData setObject:array forKey:@"usersss"];
@@ -163,45 +162,47 @@
     
     if (cell == nil)
     {
+        NSArray *array = [self.dicData objectForKey:@"usersss"];
+        NSDictionary *dic = [array objectAtIndex:indexPath.row];
+        cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, 65)];
+        
+        UIButton *btnInfo = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnInfo setFrame:CGRectMake(0, 0, 320, 65)];
+        [btnInfo addTarget:self action:@selector(cellAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell addSubview:btnInfo];
+        
+        UIButton *btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnHead setFrame:CGRectMake(10, 17, 30, 30)];
+        NSString *pUrl = @"";
+        if ([dic objectForKey:@"photo"] && [[dic objectForKey:@"photo"] objectForKey:@"url"]) {
+            pUrl = [[dic objectForKey:@"photo"] objectForKey:@"url"];
+        }
+       
+        [btnHead setImageWithURL:[NSURL URLWithString:pUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"explore_circle"]];
+        [btnHead addTarget:self action:@selector(headAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell addSubview:btnHead];
 
-                        NSArray *array = [self.dicData objectForKey:@"usersss"];
-                        NSDictionary *dic = [array objectAtIndex:indexPath.row];
-                        cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, 65)];
-                        
-                        UIButton *btnInfo = [UIButton buttonWithType:UIButtonTypeCustom];
-                        [btnInfo setFrame:CGRectMake(0, 0, 320, 65)];
-//                        [btnInfo setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"pic"]] forState:UIControlStateNormal];
-                        [btnInfo addTarget:self action:@selector(cellAction:) forControlEvents:UIControlEventTouchUpInside];
-                        [cell addSubview:btnInfo];
-                        
-                        UIButton *btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
-                        [btnHead setFrame:CGRectMake(10, 17, 30, 30)];
-                        NSString *pUrl = @"";
-                        if ([dic objectForKey:@"photo"] && [[dic objectForKey:@"photo"] objectForKey:@"url"]) {
-                            pUrl = [[dic objectForKey:@"photo"] objectForKey:@"url"];
-                        }
-                       
-                        [btnHead setImageWithURL:[NSURL URLWithString:pUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"explore_circle"]];
-                        [btnHead addTarget:self action:@selector(headAction:) forControlEvents:UIControlEventTouchUpInside];
-                        [cell addSubview:btnHead];
+        UIImage *imageLiao = [UIImage imageNamed:@"liao.png"];
+        UIButton *btnLiao = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnLiao setTag:indexPath.row];
+        [btnLiao setFrame:CGRectMake(160, 15, imageLiao.size.width, imageLiao.size.height)];
+        [btnLiao setImage:imageLiao forState:UIControlStateNormal];
+        [btnLiao addTarget:self action:@selector(talkAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell addSubview:btnLiao];
 
-                        UIImage *imageLiao = [UIImage imageNamed:@"liao.png"];
-                        UIButton *btnLiao = [UIButton buttonWithType:UIButtonTypeCustom];
-                        [btnLiao setTag:indexPath.row];
-                        [btnLiao setFrame:CGRectMake(160, 15, imageLiao.size.width, imageLiao.size.height)];
-                        [btnLiao setImage:imageLiao forState:UIControlStateNormal];
-                        [btnLiao addTarget:self action:@selector(talkAction:) forControlEvents:UIControlEventTouchUpInside];
-                        [cell addSubview:btnLiao];
+        UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 100, 30)];
 
-                        
-                        UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 100, 30)];
-
-                        labelName.text = [dic objectForKey:@"firstName"];
-                        labelName.font = [UIFont systemFontOfSize:18];
-                        [cell addSubview:labelName];
-                        
-                        UILabel *labelXi = [[UILabel alloc] initWithFrame:CGRectMake(50, 40, 80, 20)];
-                        labelXi.text = [dic objectForKey:@"updated_at"];
+        labelName.text = [dic objectForKey:@"firstName"];
+        labelName.font = [UIFont systemFontOfSize:18];
+        [cell addSubview:labelName];
+        
+        UILabel *labelXi = [[UILabel alloc] initWithFrame:CGRectMake(50, 40, 80, 20)];
+        
+        if ([dic objectForKey:@"customFields"] && [[dic objectForKey:@"customFields"] objectForKey:@"major"]) {
+              labelXi.text = [[dic objectForKey:@"customFields"] objectForKey:@"major"];
+        }
+        
+        
                         [labelXi setTextColor:[UIColor grayColor]];
                         labelXi.font = [UIFont systemFontOfSize:12];
                         [cell addSubview:labelXi];
@@ -235,7 +236,7 @@
                     NSArray *array = [self.dicData objectForKey:@"usersss"];
                     NSDictionary *dic = [array objectAtIndex:btn.tag];
                     NSString *strClientId = [dic objectForKey:@"clientId"];
-                    NSString *strName = [dic objectForKey:@"nickName"];
+                    NSString *strName = [dic objectForKey:@"username"];
                     
                     HXChatViewController *chatVc = [[HXIMManager manager] getChatViewWithTargetClientId:strClientId targetUserName:strName currentUserName:[HXUserAccountManager manager].userName];
                     [_theSchool.navigationController pushViewController:chatVc animated:YES];

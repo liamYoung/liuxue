@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface School : UIViewController
-
+@property (strong, nonatomic) NSString *country;
 - (id)initWithData:(NSArray *)array;
 
 @end

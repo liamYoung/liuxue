@@ -83,6 +83,7 @@
 		FC6664961B65CAD80048A7D3 /* LewPopupViewAnimationSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = FC66648F1B65CAD80048A7D3 /* LewPopupViewAnimationSpring.m */; };
 		FC6664971B65CAD80048A7D3 /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664911B65CAD80048A7D3 /* UIViewController+LewPopupViewController.m */; };
 		FC860FD71B6654B90090A4C4 /* SchoolCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FC860FD61B6654B90090A4C4 /* SchoolCard.m */; };
+		FC860FDA1B665E970090A4C4 /* HXFriendChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC860FD91B665E970090A4C4 /* HXFriendChatTableViewCell.m */; };
 		FCE72C2E1B64E42F00823CEA /* HXSetinitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */; };
 		FE0758311AD563A100D14F46 /* HXCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758301AD563A100D14F46 /* HXCommentViewController.m */; };
 		FE0758341AD5661700D14F46 /* HXCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0758331AD5661700D14F46 /* HXCommentView.m */; };
@@ -295,6 +296,8 @@
 		FC6664911B65CAD80048A7D3 /* UIViewController+LewPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LewPopupViewController.m"; sourceTree = "<group>"; };
 		FC860FD51B6654B90090A4C4 /* SchoolCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolCard.h; sourceTree = "<group>"; };
 		FC860FD61B6654B90090A4C4 /* SchoolCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolCard.m; sourceTree = "<group>"; };
+		FC860FD81B665E970090A4C4 /* HXFriendChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFriendChatTableViewCell.h; sourceTree = "<group>"; };
+		FC860FD91B665E970090A4C4 /* HXFriendChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXFriendChatTableViewCell.m; sourceTree = "<group>"; };
 		FCE72C2C1B64E42F00823CEA /* HXSetinitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSetinitViewController.h; sourceTree = "<group>"; };
 		FCE72C2D1B64E42F00823CEA /* HXSetinitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSetinitViewController.m; sourceTree = "<group>"; };
 		FE07582F1AD563A100D14F46 /* HXCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommentViewController.h; sourceTree = "<group>"; };
@@ -491,6 +494,8 @@
 		134E05341AC2976E00ADFA33 /* second */ = {
 			isa = PBXGroup;
 			children = (
+				FC860FD81B665E970090A4C4 /* HXFriendChatTableViewCell.h */,
+				FC860FD91B665E970090A4C4 /* HXFriendChatTableViewCell.m */,
 				134E05351AC2976E00ADFA33 /* HXFriendViewController.h */,
 				134E05361AC2976E00ADFA33 /* HXFriendViewController.m */,
 			);
@@ -1403,6 +1408,7 @@
 				13D4BD0C1AD4CF0F0059FF4A /* HXPostTableViewCell.m in Sources */,
 				13D4BCF11AD3ABE90059FF4A /* HXLike+Additions.m in Sources */,
 				133A56831ACD620000D5A43A /* PHFComposeBarView_Button.m in Sources */,
+				FC860FDA1B665E970090A4C4 /* HXFriendChatTableViewCell.m in Sources */,
 				134E05811AC507CC00ADFA33 /* HXChatHistoryViewController.m in Sources */,
 				FC6664941B65CAD80048A7D3 /* LewPopupViewAnimationFade.m in Sources */,
 				13D4BD1D1AD6457E0059FF4A /* HXRoundButton.m in Sources */,

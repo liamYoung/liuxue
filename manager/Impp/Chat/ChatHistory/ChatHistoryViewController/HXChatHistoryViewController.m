@@ -250,7 +250,7 @@
         //1 用户  0 管理员  X 》 100 学长  X-100 = 积分
         [params setObject:[NSNumber numberWithInt:100] forKey:@"age"];
         [params setObject:@"曼彻斯特大学" forKey:@"last_name"];
-         NSDictionary *customData = @{@"collage":@"曼彻斯特大学",@"major":@"计算机系"};
+         NSDictionary *customData = @{@"collage":@"曼彻斯特大学",@"major":@"计算机系",@"recommend1":@"ALL",@"recommend2":@"英国"};
         [params setObject:customData forKey:@"custom_fields"];
         
         

@@ -1,18 +1,18 @@
 //
-//  HXChatHistoryTableViewCell.m
+//  HXFriendChatTableViewCell.m
 //  Impp
 //
 //  Created by Herxun on 2015/4/9.
 //  Copyright (c) 2015年 hsujahhu. All rights reserved.
 //
 
-#import "HXChatHistoryTableViewCell.h"
+#import "HXFriendChatTableViewCell.h"
 #import "HXNumberBadge.h"
 #import "UIColor+CustomColor.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #define SCREEN_WIDTH [[UIScreen mainScreen] applicationFrame].size.width
-@interface HXChatHistoryTableViewCell()
+@interface HXFriendChatTableViewCell()
 @property (strong, nonatomic) NSString *photoUrl;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *lastMessage;
@@ -25,7 +25,7 @@
 @property  NSInteger badgeValue;
 @end
 
-@implementation HXChatHistoryTableViewCell
+@implementation HXFriendChatTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier title:(NSString *)title subtitle:(NSString *)subtitle timestamp:(NSNumber *)timestamp photoUrl:(NSString *)photoUrl placeholderImage:(UIImage *)placeholderImage badgeValue:(NSInteger)badgeValue
 {
@@ -38,6 +38,7 @@
         self.badgeValue = badgeValue;
         self.timestamp = timestamp;
         self.lastMessage = subtitle;
+        
         [self initView];
     }
     return self;
@@ -52,7 +53,7 @@
 {
     CGRect frame;
     self.imageView.image = self.placeholderImage;
-    self.imageView.layer.cornerRadius = 64/2;
+    self.imageView.layer.cornerRadius = 34/2;
     self.imageView.clipsToBounds = YES;
     self.imageView.layer.masksToBounds = YES;
     self.badge = [[HXNumberBadge alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 30 - 18, 74/2 - 18/2, 18, 18) badgeNumber:self.badgeValue];
@@ -79,17 +80,16 @@
 //        [self.contentView addSubview:self.timestampLabel];
 //    }
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(104, 30, 200, 16)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(74, 10, 200, 16)];
     self.titleLabel.text = self.title;
     self.titleLabel.font = [UIFont fontWithName:@"STHeitiTC-Medium" size:16];
     self.titleLabel.textColor = [UIColor color4];
     self.titleLabel.numberOfLines = 1;
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-    
     [self.contentView addSubview:self.titleLabel];
     
-    self.lastMessageLabel = [[UILabel alloc]initWithFrame:CGRectMake(104,
-                                                                     self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 12,
+    self.lastMessageLabel = [[UILabel alloc]initWithFrame:CGRectMake(74,
+                                                                     self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 6,
                                                                      self.badge.frame.origin.x - 74 - 15 , 28)];
     self.lastMessageLabel.text = self.lastMessage;
     self.lastMessageLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:28.0f/2];
@@ -100,6 +100,7 @@
     [self addSubview:self.lastMessageLabel];
     
     [self updatePhotoIcon];
+    
 }
 
 - (void)updatePhotoIcon
@@ -125,10 +126,10 @@
 {
     [super layoutSubviews];
     CGRect frame = self.imageView.frame;
-    frame.size = CGSizeMake(64, 64);
-    frame.origin = CGPointMake(25, 20);
+    frame.size = CGSizeMake(34, 34);
+    frame.origin = CGPointMake(30, 10);
     self.imageView.frame = frame;
-    self.separatorInset = UIEdgeInsetsMake(0, 74, 0, 0);
+    self.separatorInset = UIEdgeInsetsMake(0, 44, 0, 0);
     
 }
 @end

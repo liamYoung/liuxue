@@ -24,6 +24,7 @@
 #import "HXChatHistoryAllViewController.h"
 #import "UIColor+CustomColor.h"
 #import <CoreData/CoreData.h>
+#import "HXAnSocialManager.h"
 #define VIEW_WIDTH self.view.frame.size.width
 
 @interface HXChatHistoryViewController ()<UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate, UISearchDisplayDelegate, UIActionSheetDelegate>
@@ -83,8 +84,30 @@
     self.tableView.dataSource = self;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     //self.tableView.backgroundColor = [UIColor clearColor];
+    
+    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.tableView];
+        [self.tableView setBackgroundColor:[UIColor clearColor]];
+    [self.view setBackgroundColor:[HXAppUtility colorWithHexString:@"#ecf0f3" alpha:1.0f]];
+    
+    NSLog(@"success log: %@",[HXUserAccountManager manager].clientId);
+    NSDictionary* params = @{@"parties":[HXUserAccountManager manager].clientId};
+    
+    [[HXAnSocialManager manager]sendRequest:@"http://api.arrownock.com/v1/im/topics/query.json" method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
+        NSLog(@"success log: %@",[response description]);
+        
+        NSDictionary *friendInfo = response[@"response"][@"friend"];
+        HXUser * friend = [UserUtil saveUserIntoDB:friendInfo];
+        [UserUtil updatedUserFriendsWithCurrentUser:[HXUserAccountManager manager].userInfo targetUser:friend];
+        [[NSNotificationCenter defaultCenter] postNotificationName:RefreshFriendList object:nil];
+        
+    } failure:^(NSDictionary* response){
+        
+        NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
+    }];
+    
+    
     
 }
 
@@ -110,7 +133,7 @@
 
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return 74;
+    return 94;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
@@ -142,9 +165,11 @@
     NSInteger unreadCount = [ChatUtil unreadCount:chatSession];
     
     NSString *userName = [NSString stringWithFormat:@"%@",chatSession.topicName];
+    NSLog(@"chatSession.topicOwner:%@",chatSession.topicOwner.userName);
+    
     NSString *photoUrl = chatSession.topicOwner.photoURL;
 
-    if ([lastStr isEqualToString:@""]) lastStr = @"...";
+   // if ([lastStr isEqualToString:@""]) lastStr = @"...";
     
     HXChatHistoryTableViewCell *cell = [[HXChatHistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                                          reuseIdentifier:cellIdentifier
@@ -156,7 +181,7 @@
                                                                               badgeValue:unreadCount];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryNone;
     return cell;
 }
 

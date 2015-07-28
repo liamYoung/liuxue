@@ -20,7 +20,7 @@
 #import "NotificationCenterUtil.h"
 #import "HXTabBarViewController.h"
 #import "HXIMManager.h"
-#import "HXChatHistoryTableViewCell.h"
+#import "HXFriendChatTableViewCell.h"
 #import "UIColor+CustomColor.h"
 #import <CoreData/CoreData.h>
 #import "HXAnSocialManager.h"
@@ -85,7 +85,13 @@
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     //self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.tableView];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    
+    [self.view setBackgroundColor:[HXAppUtility colorWithHexString:@"#ecf0f3" alpha:1.0f]];
     
 }
 
@@ -119,7 +125,7 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    static NSString *cellIdentifier = @"chatHistoryCell";
+    static NSString *cellIdentifier = @"HXFriendChatTableViewCell";
     
     HXChat *chatSession;
     
@@ -134,7 +140,7 @@
     
     if (![chatSession.topicId isEqualToString:@""]) {
         NSString *topicName = [NSString stringWithFormat:@"%@ ",chatSession.topicName];
-        HXChatHistoryTableViewCell *cell = [[HXChatHistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+        HXFriendChatTableViewCell *cell = [[HXFriendChatTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                                              reuseIdentifier:cellIdentifier
                                                                                        title:topicName
                                                                                     subtitle:lastStr
@@ -165,7 +171,7 @@
             [chatSession addUsersObject:user];
         }
         
-        HXChatHistoryTableViewCell *cell = [[HXChatHistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+        HXFriendChatTableViewCell *cell = [[HXFriendChatTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                                              reuseIdentifier:cellIdentifier
                                                                                        title:userName
                                                                                     subtitle:lastStr
@@ -174,8 +180,8 @@
                                                                             placeholderImage:[UIImage imageNamed:@"friend_default"]
                                                                                   badgeValue:unreadCount];
         cell.backgroundColor = [UIColor clearColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         return cell;
     }
     

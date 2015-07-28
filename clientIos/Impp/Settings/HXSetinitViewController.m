@@ -124,6 +124,7 @@
             NSMutableArray *selectedItems = [[NSMutableArray alloc]initWithCapacity:0];
             [selectedItems addObject:currentUser];
             
+            
             HXChat *topicChatSession = [ChatUtil createChatSessionWithUser:selectedItems                                                               topicId:@"55b32733f38d6648f7000005"
                                                                  topicName:[dic objectForKey:@"name"]
                                                            currentUserName:[HXUserAccountManager manager].userInfo.userName
