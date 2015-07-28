@@ -11,6 +11,7 @@
 @interface ApplyFor : UIView <UITextFieldDelegate>
 @property (nonatomic, strong)IBOutlet UIView *innerView;
 @property (nonatomic, strong)IBOutlet UITextField *text1,*text2,*text3;
+@property (nonatomic, strong)IBOutlet UILabel *label;
 @property (nonatomic, weak)UIViewController *parentVC;
 
 

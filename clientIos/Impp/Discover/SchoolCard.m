@@ -71,11 +71,6 @@
 
 - (void)initView
 {
-    /* tableView */
-    CGRect frame = self.view.frame;
-    frame.size.height -= 124;
-    frame.origin.y = 0;
-
     NSDictionary *dic = [self.dicData copy];
     
     UIImage *image = [UIImage imageNamed:@"card"];
@@ -95,7 +90,8 @@
     
     _cell =cell;
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 156, cell.frame.size.width, 201) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 159, cell.frame.size.width, 193) style:UITableViewStylePlain];
+    [_tableView setBackgroundColor:[UIColor clearColor]];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -172,7 +168,10 @@
         [cell addSubview:btnInfo];
         
         UIButton *btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnHead setFrame:CGRectMake(10, 17, 30, 30)];
+        [btnHead setFrame:CGRectMake(10, 12.5, 40, 40)];
+        btnHead.layer.cornerRadius = 3;
+        btnHead.layer.masksToBounds = YES;
+
         NSString *pUrl = @"";
         if ([dic objectForKey:@"photo"] && [[dic objectForKey:@"photo"] objectForKey:@"url"]) {
             pUrl = [[dic objectForKey:@"photo"] objectForKey:@"url"];
@@ -190,13 +189,13 @@
         [btnLiao addTarget:self action:@selector(talkAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell addSubview:btnLiao];
 
-        UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 100, 30)];
+        UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(60, 5, 90, 30)];
 
         labelName.text = [dic objectForKey:@"firstName"];
         labelName.font = [UIFont systemFontOfSize:18];
         [cell addSubview:labelName];
         
-        UILabel *labelXi = [[UILabel alloc] initWithFrame:CGRectMake(50, 40, 80, 20)];
+        UILabel *labelXi = [[UILabel alloc] initWithFrame:CGRectMake(60, 37, 70, 20)];
         
         if ([dic objectForKey:@"customFields"] && [[dic objectForKey:@"customFields"] objectForKey:@"major"]) {
               labelXi.text = [[dic objectForKey:@"customFields"] objectForKey:@"major"];

@@ -41,6 +41,7 @@
     [_text1 setDelegate:self];
     [_text2 setDelegate:self];
     [_text3 setDelegate:self];
+
     return self;
 }
 
@@ -55,7 +56,9 @@
 }
 
 - (IBAction)dismissAction:(id)sender{
-    if (self.text1.text.length <= 0 || self.text2.text.length <= 0 ) {
+    if (self.text1.text.length <= 0 || self.text2.text.length <= 0 )
+    {
+        [_label setText:@"请输入您的大学和专业。"];
         return;
     }
     
@@ -69,7 +72,7 @@
                                   customData:customData
                                    toClients:[NSSet setWithObject:@"AIMRWRND8L1EI9XPAC7YAWM"]
                               needReceiveACK:YES];
-
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

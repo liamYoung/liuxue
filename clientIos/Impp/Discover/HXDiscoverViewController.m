@@ -147,7 +147,7 @@
         pView.layer.cornerRadius = 45/2;
         pView.clipsToBounds = YES;
         pView.layer.masksToBounds = YES;
-        pView.frame=CGRectMake(10 + i * 60, self.view.frame.size.height - 130, 50, 50);
+        pView.frame=CGRectMake(10 + i * 60, self.view.frame.size.height - 120, 50, 50);
         
         UITapGestureRecognizer *singleFingerOne = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                           action:@selector(handleSingleFingerEvent:)];
@@ -159,7 +159,7 @@
         pView.tag = i;
         pView.userInteractionEnabled=YES;
         
-        CGRect frame = CGRectMake(10+i*60,self.view.frame.size.height - 90 ,50,50);
+        CGRect frame = CGRectMake(10+i*60,self.view.frame.size.height - 85 ,50,50);
         UILabel *pName = [[UILabel alloc] initWithFrame:frame];
         pName.textAlignment  = NSTextAlignmentCenter;
         [self.view addSubview:pName];
