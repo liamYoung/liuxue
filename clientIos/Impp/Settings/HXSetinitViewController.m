@@ -110,9 +110,9 @@
 
 -(void)addInitGroubs{
     NSMutableArray *pTops = [[NSMutableArray alloc] initWithCapacity:10];
-    NSMutableDictionary *t1 = [NSMutableDictionary dictionaryWithObject:@"55b32733f38d6648f7000005" forKey:@"id"];
-    [t1 setObject:@"留学联盟" forKey:@"name"];
-    [t1 setObject:@"AIMTUQUOEQIQFOEPFQC8Q06" forKey:@"owner"];
+    NSMutableDictionary *t1 = [NSMutableDictionary dictionaryWithObject:@"55b725b4f38d6646e2000006" forKey:@"id"];
+    [t1 setObject:@"留学联盟官方" forKey:@"name"];
+    //[t1 setObject:@"55b725b4f38d6646e2000006" forKey:@"owner"];
     [pTops addObject:t1];
     
     for (int i = 0; i < [pTops count]; i++) {

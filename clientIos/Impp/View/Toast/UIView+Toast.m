@@ -102,6 +102,10 @@ NSString * const CSToastPositionBottom          = @"bottom";
 
 - (void)makeImppToast:(NSString *)message navigationBarHeight:(CGFloat)navH
 {
+    if ([message isEqual:@"IM Connect"] ) {
+        return;
+    }
+    
     CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
     UILabel *messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, 44)];
     messageLabel.text = message;

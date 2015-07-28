@@ -3,7 +3,7 @@
     "pic": "http://7xkmqv.com1.z0.glb.clouddn.com/imagepic_english.png",
     "name": "英国",
     "name_2": "english",
-    "des": "拥有众多留学资源的国家，牛逼的办",
+    "des": "英国，全称大不列颠及北爱尔兰联合王国（The United Kingdom of Great Britain and Northern Ireland），是一个发达的资本主义国家。英国本土位于欧洲大陆西北面的不列颠群岛，被北海、英吉利海峡、凯尔特海、爱尔兰海和大西洋包围。是由大不列颠岛上的英格兰、苏格兰和威尔士，以及爱尔兰岛东北部的北爱尔兰以及一系列附属岛屿共同组成的一个西欧岛国。除了英国本土之外，还包括十四个海外领地[1] 。人口超过6400万，以英格兰人为主体民族。",
     "school": [
       {
         "pic": "http://7xkmqv.com1.z0.glb.clouddn.com/imagepic_man.jpg",
@@ -12,7 +12,7 @@
         "name": "曼彻斯特大学"
       },
       {
-        "pic": "http://7xkmqv.com1.z0.glb.clouddn.com/imagepic_man.jpg",
+        "pic": "http://7xkmqv.com1.z0.glb.clouddn.com/imagepic_man_city.jpg",
         "des": "good,man,falmel,good,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmel",
         "name_2": "mamamamamam",
         "name": "曼彻斯特城市大学"
@@ -20,22 +20,16 @@
     ]
   },
   {
-    "pic": "http://7xkmqv.com1.z0.glb.clouddn.com/imagepic_english.png",
-    "name": "英国",
+    "pic": "http://7xkmqv.com1.z0.glb.clouddn.com/imagepic_aodaliya.jpg",
+    "name": "澳大利亚",
     "name_2": "english",
-    "des": "拥有众多留学资源的国家，牛逼的办",
+    "des": "澳大利亚（Australia），全称为澳大利亚联邦（The Commonwealth of Australia），是一个发达的资本主义国家。1788年至1900年，曾是英国的殖民地。1901年，殖民统治结束，成为一个独立的联邦国家。澳大利亚一词，意即“南方大陆”，欧洲人在17世纪初叶发现这块大陆时，误以为是一块直通南极的陆地，故取名“澳大利亚”，Australia 即由拉丁文 terraaustralis （南方的土地）变化而来。澳大利亚四面环海，是世界上唯一一个国土覆盖整个大陆的国家，拥有很多自己特有的动植物和自然景观。澳大利亚是一个移民国家，奉行多元文化。",
     "school": [
       {
-        "pic": "http://7xkmqv.com1.z0.glb.clouddn.com/imagepic_man.jpg",
+        "pic": "http://7xkmqv.com1.z0.glb.clouddn.com/configpic_weiduoliya.jpg",
         "des": "good,man,falmel,good,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmel",
         "name_2": "mamamamamam",
-        "name": "曼彻斯特大学"
-      },
-      {
-        "pic": "http://7xkmqv.com1.z0.glb.clouddn.com/imagepic_man.jpg",
-        "des": "good,man,falmel,good,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmelgood,man,falmel",
-        "name_2": "mamamamamam",
-        "name": "曼彻斯特大学"
+        "name": "维多利亚大学"
       }
     ]
   }

@@ -132,7 +132,8 @@
         [[HXAnSocialManager manager]sendRequest:@"users/search.json" method:AnSocialManagerGET params:params success:^(NSDictionary* response){
             NSLog(@"GetOwerInfo success log: %@",[response description]);
             NSMutableArray *tempUsersArray = [response[@"response"][@"users"] mutableCopy];
-            [_chatHistoryUserArray setObject:tempUsersArray forKey:[NSString stringWithFormat:@"%d",i]];
+            
+            [_chatHistoryUserArray setObject:tempUsersArray forKey:[NSString stringWithFormat:@"%@",ower]];
             
             for (NSDictionary *user in tempUsersArray)
             {
@@ -249,7 +250,7 @@
     NSString *photoUrl = chatSession.topicOwner.photoURL;
     
     
-    NSArray *pusers =  [_chatHistoryUserArray objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+    NSArray *pusers =  [_chatHistoryUserArray objectForKey:[NSString stringWithFormat:@"%@",chatSession.topicOwner.clientId]];
     
     NSLog(@"[dic objectForKey:%@",pusers);
     if (pusers && [pusers count] > 0) {

@@ -230,7 +230,7 @@
         
         
         [currentUser addTopicsObject:topicChatSession];
-        //[[NSNotificationCenter defaultCenter]postNotificationName:RefreshChatHistory object:nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:RefreshChatHistory object:nil];
 
         [self dismissViewControllerAnimated:YES completion:nil];
         

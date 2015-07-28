@@ -75,12 +75,73 @@
     self.usersArray = [[NSMutableArray alloc]initWithCapacity:0];
     self.allusersArray = [[NSMutableArray alloc]initWithCapacity:0];
 }
+-(void)LetUserTOMaster{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    //        //[HXUserAccountManager manager].userInfo.userId
+    //        HXChat* chat = chatSessions[indexPath.row];
+    //        NSSet *pusers = chat.users;
+    //        HXUser *target = (HXUser*)[pusers.allObjects  objectAtIndex:0];
+    //        NSLog(@"clientId%@",target.userId);
+    //        NSLog(@"userName%@",target.userName);
+    //
+    //        NSLog(@"userName%@",target.clientId);
+    //
+    //        NSLog(@"userName%@",target.currentUserId);
+    [params setObject:@"55b7271f3641d800000008af" forKey:@"user_id"];
+    
+    //1 用户  0 管理员  X 》 100 学长  X-100 = 积分
+    [params setObject:[NSNumber numberWithInt:100] forKey:@"age"];
+    [params setObject:@"曼彻斯特大学" forKey:@"last_name"];
+    NSDictionary *customData = @{@"collage":@"曼彻斯特城市大学",@"major":@"会计系",@"recommend2":@"英国"};
+    //@"recommend1":@"ALL",
+    [params setObject:customData forKey:@"custom_fields"];
+    
+    
+    [[HXAnSocialManager manager]sendRequest:@"users/update.json" method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
+        
+        NSLog(@"success log: %@",[response description]);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (response[@"response"][@"user"][@"photo"]) {
+                NSString *photoUrl = response[@"response"][@"user"][@"photo"][@"url"];
+                [HXUserAccountManager manager].userInfo.photoURL = photoUrl;
+                NSError *error;
+                [[CoreDataUtil sharedContext] save:&error];
+                if (error) {
+                    NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                }
+            }
+            
+        });
+        
+        
+    }failure:^(NSDictionary* response){
+        NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
+        
+        if ([response objectForKey:@"meta"]) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"無法更改"
+                                                            message:@"出現一點問題"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"好"
+                                                  otherButtonTitles:nil, nil];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [alert show];
+            });
+        }
+        
+    }];
+    
+}
 -(void)lookAllUser{
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
    [params setObject:@"999" forKey:@"limit"];
+    [params setObject:@"U001" forKey:@"userName"];
     
     [[HXAnSocialManager manager]sendRequest:@"users/search.json" method:AnSocialManagerGET params:params success:^(NSDictionary* response){
-        NSLog(@"success log: %@",[response description]);
+        NSLog(@"lookAllUser success log: %@",[response description]);
         NSMutableArray *tempUsersArray = [response[@"response"][@"users"] mutableCopy];
         
         
@@ -112,7 +173,7 @@
     [params setObject:string forKey:@"user_ids"];
     
     [[HXAnSocialManager manager] sendRequest:@"users/delete.json" method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
-        NSLog(@"success log: %@",[response description]);
+        NSLog(@"deleteAllUser success log: %@",[response description]);
         
         dispatch_async(dispatch_get_main_queue(), ^{
          
@@ -149,7 +210,7 @@
     
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(100, 100, 200, 75);
+    button.frame = CGRectMake(50, 50, 200, 75);
     button.tag = 0;
     
     [button setTitle:@"deleteAllUser" forState:UIControlStateNormal];
@@ -157,6 +218,17 @@
     [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
     [button addTarget:self action:@selector(lookAllUser)  forControlEvents :UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
+    
+    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button2.frame = CGRectMake(50, 90, 200, 75);
+    button2.tag = 0;
+    
+    [button2 setTitle:@"beMaster" forState:UIControlStateNormal];
+    
+    [button2.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+    [button2 addTarget:self action:@selector(LetUserTOMaster)  forControlEvents :UIControlEventTouchUpInside];
+    [self.view addSubview:button2];
     
 }
 

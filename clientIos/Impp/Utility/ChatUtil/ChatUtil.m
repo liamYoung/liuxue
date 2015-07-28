@@ -293,9 +293,9 @@
 + (HXMessage *)getLastMessage:(HXChat *)chatSession
 {
     NSLog(@"chatSession: %@",chatSession);
-//    if (chatSession.) {
-//        <#statements#>
-//    }
+    if (chatSession.messages == nil) {
+        return nil;
+    }
     NSArray* results =
     [CoreDataUtil getWithEntityName:@"HXMessage"
                           predicate:[NSPredicate predicateWithFormat:
