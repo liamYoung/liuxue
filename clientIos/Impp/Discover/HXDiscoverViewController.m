@@ -211,12 +211,18 @@
     
     UIImageView *imageViewPic = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [image size].width, 160)];
     [imageViewPic setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"pic"]]];
+    imageViewPic.layer.cornerRadius = 6;
+    imageViewPic.layer.masksToBounds = YES;
     [cell addSubview:imageViewPic];
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, cell.frame.size.width - 40, 40)];
+    UIImageView *imageViewNameBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 125, cell.frame.size.width, 40)];
+    [imageViewNameBg setImage:[UIImage imageNamed:@"ImageBg.png"]];
+    [cell addSubview:imageViewNameBg];
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, cell.frame.size.width - 40, 30)];
     label.textColor = [UIColor whiteColor];
     label.text = [dic objectForKey:@"name"];
-    [cell addSubview:label];
+    [imageViewNameBg addSubview:label];
 
     NSString *str = [[[dic objectForKey:@"des"] stringByAppendingString:[dic objectForKey:@"des"]] stringByAppendingString:[dic objectForKey:@"des"]];
     UIFont *font = [UIFont systemFontOfSize:13];
