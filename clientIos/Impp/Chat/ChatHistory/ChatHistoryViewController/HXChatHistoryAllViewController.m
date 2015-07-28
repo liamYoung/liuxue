@@ -23,11 +23,14 @@
 #import "HXCustomTableViewCell.h"
 #import "UIColor+CustomColor.h"
 #import <CoreData/CoreData.h>
+#import "HXAnSocialManager.h"
+#import "HXAddChatHistoryTableViewCell.h"
 #define VIEW_WIDTH self.view.frame.size.width
 
 @interface HXChatHistoryAllViewController ()<UITableViewDataSource, UITableViewDelegate,NSFetchedResultsControllerDelegate,UISearchBarDelegate, UISearchDisplayDelegate, UIActionSheetDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *chatHistoryArray;
+@property (strong, nonatomic) NSMutableDictionary *chatHistoryUserArray;
 @property (strong, nonatomic) NSMutableArray *chatHistoryFilterArray;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) UISearchBar* searchBar;
@@ -65,6 +68,7 @@
 
 - (void)initData
 {
+    self.chatHistoryUserArray = [[NSMutableDictionary alloc]initWithCapacity:0];
     self.chatHistoryArray = [[NSMutableArray alloc]initWithCapacity:0];
     self.chatHistoryFilterArray = [[NSMutableArray alloc]initWithCapacity:0];
 }
@@ -82,6 +86,10 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
+    
+    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     //self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.tableView];
@@ -116,7 +124,7 @@
 
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return 48;
+    return 94;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
@@ -136,9 +144,9 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    static NSString *cellIdentifier = @"friendListCell";
+    static NSString *cellIdentifier = @"chatHistoryCell";
     
-    HXCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//    HXCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSString *title;
     NSString *photoUrl;
     NSInteger badgeValue = 0;
@@ -151,25 +159,47 @@
     }else{
         NSMutableDictionary *dic = self.chatHistoryArray[indexPath.row];
         title = [dic objectForKey:@"name"];
+        
+        
+        NSArray *pusers =  [_chatHistoryUserArray objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        
+        NSLog(@"[dic objectForKey:%@",pusers);
+        if (pusers && [pusers count] > 0) {
+            NSDictionary *puser = [pusers objectAtIndex:0];
+            if ([puser objectForKey:@"photo"] && [[puser objectForKey:@"photo"] objectForKey:@"url"]) {
+                
+                photoUrl = [[puser objectForKey:@"photo"] objectForKey:@"url"];
+            }
+        }
+        
 //        photoUrl = user.photoURL;
     }
     NSLog(@"title %@",title);
     
-    if (cell == nil)
-    {
-        cell = [[HXCustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                            reuseIdentifier:cellIdentifier
-                                                      title:title
-                                                   photoUrl:photoUrl
-                                                      image:[UIImage imageNamed:@"friend_default"]
-                                                 badgeValue:badgeValue
-                                                      style:HXCustomCellStyleDefault];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }else{
-        [cell reuseCellWithTitle:title photoUrl:photoUrl image:[UIImage imageNamed:@"friend_default"] badgeValue:badgeValue];
-    }
-//    cell.defaultDelegate = self;
-    [cell setIndexValue:indexPath.row];
+//    if (cell == nil)
+//    {
+//        cell = [[HXCustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+//                                            reuseIdentifier:cellIdentifier
+//                                                      title:title
+//                                                   photoUrl:photoUrl
+//                                                      image:[UIImage imageNamed:@"friend_default"]
+//                                                 badgeValue:badgeValue
+//                                                      style:HXCustomCellStyleDefault];
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    }else{
+//        [cell reuseCellWithTitle:title photoUrl:photoUrl image:[UIImage imageNamed:@"friend_default"] badgeValue:badgeValue];
+//    }
+////    cell.defaultDelegate = self;
+//    [cell setIndexValue:indexPath.row];
+    HXAddChatHistoryTableViewCell *cell = [[HXAddChatHistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                                                         reuseIdentifier:cellIdentifier
+                                                                                   title:title
+                                                                                subtitle:@"推荐"
+                                                                               timestamp:[NSNumber numberWithInt:-1]
+                                                                                photoUrl:photoUrl
+                                                                        placeholderImage:[UIImage imageNamed:@"friend_default"]
+                                                                              badgeValue:0];
+    
     return cell;
 }
 
@@ -203,6 +233,9 @@
         //[[NSNotificationCenter defaultCenter]postNotificationName:RefreshChatHistory object:nil];
 
         [self dismissViewControllerAnimated:YES completion:nil];
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshData" object:nil];
+
 
     } failure:^(ArrownockException *exception) {
         NSLog(@"AnIm addClients failed, error : %@", exception.getMessage);
@@ -267,7 +300,7 @@
         for (int i = 0; i < [self.chatHistoryArray count]; i ++)
         {
             NSMutableDictionary *dic = [self.chatHistoryArray objectAtIndex:i];
-           // NSLog(@"HHHHHHHHHHHH  %@", [self.chatHistoryArray objectAtIndex:i]);
+            
             NSArray *ppar = [dic objectForKey:@"parties"];
             for (int j = 0; j < [ppar count]; j++) {
                 if ([[ppar objectAtIndex:j] isEqualToString:[HXIMManager manager].clientId]) {
@@ -279,11 +312,66 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            [self GetOwerInfo];
         });
 
     } failure:^(ArrownockException *exception) {
         NSLog(@"failrue log get All TopicList : %@",[exception getMessage]);
     }];
+}
+-(void)GetOwerInfo{
+//    for (int i = 0; i < self.chatHistoryArray.count; i++) {
+//         NSDictionary *pDIc =  [self.chatHistoryArray objectAtIndex:i];
+//        [[[HXIMManager manager] anIM] removeTopic:[pDIc objectForKey:@"id"] success:^(NSString *topicId) {
+//            
+//        } failure:^(ArrownockException *exception) {
+//            
+//        }];
+//        
+//        
+//    }
+    for (int i = 0; i < self.chatHistoryArray.count; i++) {
+        NSDictionary *pDIc =  [self.chatHistoryArray objectAtIndex:i];
+        NSString* ower = [pDIc objectForKey:@"owner"];
+        
+        if (ower == nil || [ower isKindOfClass:[NSNull class]]) {
+            continue;
+        }
+        
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [params setObject:ower forKey:@"clientId"];
+        
+        [[HXAnSocialManager manager]sendRequest:@"users/search.json" method:AnSocialManagerGET params:params success:^(NSDictionary* response){
+            NSLog(@"GetOwerInfo success log: %@",[response description]);
+            NSMutableArray *tempUsersArray = [response[@"response"][@"users"] mutableCopy];
+            [_chatHistoryUserArray setObject:tempUsersArray forKey:[NSString stringWithFormat:@"%d",i]];
+            
+            for (NSDictionary *user in tempUsersArray)
+            {
+                
+                NSDictionary *reformedUser = [UserUtil reformUserInfoDic:user];
+                
+                HXUser *hxUser = [UserUtil getHXUserByUserId:reformedUser[@"userId"]];
+                
+                if (hxUser == nil) {
+                    hxUser = [HXUser initWithDict:reformedUser];
+                }else{
+                    //update
+                    [hxUser setValuesFromDict:reformedUser];
+                }
+                
+                
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+            
+        } failure:^(NSDictionary* response){
+            
+            NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
+        }];
+        
+    }
 }
 #pragma mark - UISearchBar Delegate
 

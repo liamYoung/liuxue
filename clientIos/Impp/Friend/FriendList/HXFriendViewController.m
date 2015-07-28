@@ -28,6 +28,7 @@
 
 @interface HXFriendViewController ()<UITableViewDataSource, UITableViewDelegate,NSFetchedResultsControllerDelegate,UISearchBarDelegate, UISearchDisplayDelegate>
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UILabel *userNameLabel;
 @property (strong, nonatomic) NSMutableArray *chatHistoryArray;
 @property (strong, nonatomic) NSMutableArray *chatHistoryFilterArray;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -74,6 +75,15 @@
 {
     CGRect frame;
     
+    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,200,self.view.frame.size.width, 28)];
+    [self.userNameLabel setBackgroundColor:[UIColor clearColor]];
+    [self.userNameLabel setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:15]];
+    [self.userNameLabel setTextColor:[UIColor color1]];
+    self.userNameLabel.text = @"还没有任何信息哦";
+    self.userNameLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.userNameLabel];
+    self.userNameLabel.hidden = true;
+    
     
     frame = self.view.frame;
     frame.origin.y = self.searchBar.frame.size.height + self.searchBar.frame.origin.y;
@@ -92,9 +102,11 @@
     
     
     [self.view setBackgroundColor:[HXAppUtility colorWithHexString:@"#ecf0f3" alpha:1.0f]];
-    
 }
-
+-(void)zoomInAction
+{
+    //self.parentViewController.tabBarController.
+}
 - (void)initNavigationBar
 {
     [HXAppUtility initNavigationTitleView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_logo"]]
@@ -117,6 +129,12 @@
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.chatHistoryArray.count == 0) {
+        self.userNameLabel.hidden = false;
+    }
+    else{
+        self.userNameLabel.hidden = true;
+    }
     if (tableView == self.searchController.searchResultsTableView)
         return self.chatHistoryFilterArray.count;
     else

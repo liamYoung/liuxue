@@ -67,7 +67,7 @@
     
     [[[HXIMManager manager]anIM] sendMessage:pmessage
                                   customData:customData
-                                   toClients:[NSSet setWithObject:@"AIM8F07EKUKNPMX38W656QC"]
+                                   toClients:[NSSet setWithObject:@"AIMRWRND8L1EI9XPAC7YAWM"]
                               needReceiveACK:YES];
 
 }

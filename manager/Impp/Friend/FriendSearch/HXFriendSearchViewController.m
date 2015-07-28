@@ -26,6 +26,8 @@
 @interface HXFriendSearchViewController ()<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, HXCustomCellSearchDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *usersArray;
+
+@property (strong, nonatomic) NSMutableArray *allusersArray;
 @property (strong, nonatomic) UISearchBar* searchBar;
 @end
 
@@ -71,8 +73,56 @@
 - (void)initData
 {
     self.usersArray = [[NSMutableArray alloc]initWithCapacity:0];
+    self.allusersArray = [[NSMutableArray alloc]initWithCapacity:0];
 }
-
+-(void)lookAllUser{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+   [params setObject:@"999" forKey:@"limit"];
+    
+    [[HXAnSocialManager manager]sendRequest:@"users/search.json" method:AnSocialManagerGET params:params success:^(NSDictionary* response){
+        NSLog(@"success log: %@",[response description]);
+        NSMutableArray *tempUsersArray = [response[@"response"][@"users"] mutableCopy];
+        
+        
+        /* To sync with server*/
+        [self.allusersArray removeAllObjects];
+        [self.allusersArray addObjectsFromArray:tempUsersArray];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self   deleteAllUser];
+        });
+        
+    } failure:^(NSDictionary* response){
+        
+        NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
+    }];
+}
+-(void)deleteAllUser{
+    
+     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    NSMutableArray *paramsis = [[NSMutableArray alloc] init];
+    for (int i=0; i < self.allusersArray.count; i++) {
+       NSDictionary *PPro =   [self.allusersArray objectAtIndex:i];
+       [paramsis addObject:[PPro objectForKey:@"id"]];
+    }
+    
+    NSString *string = [paramsis componentsJoinedByString:@","];
+    
+    [params setObject:string forKey:@"user_ids"];
+    
+    [[HXAnSocialManager manager] sendRequest:@"users/delete.json" method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
+        NSLog(@"success log: %@",[response description]);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+         
+        });
+        
+    } failure:^(NSDictionary* response){
+        
+        NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
+    }];
+}
 - (void)initView
 {
     /* search bar */
@@ -96,6 +146,18 @@
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.tableView];
+    
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(100, 100, 200, 75);
+    button.tag = 0;
+    
+    [button setTitle:@"deleteAllUser" forState:UIControlStateNormal];
+    
+    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+    [button addTarget:self action:@selector(lookAllUser)  forControlEvents :UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
 }
 
 - (void)initNavigationBar

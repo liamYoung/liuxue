@@ -8,7 +8,7 @@
 
 #import "HXChatHistoryViewController.h"
 #import "HXAppUtility.h"
-#import "HXChatViewController.h"
+#import "HXChatViewController2.h"
 #import "HXChat+Additions.h"
 #import "HXMessage+Additions.h"
 #import "HXUser+Additions.h"
@@ -30,6 +30,9 @@
 @interface HXChatHistoryViewController ()<UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate, UISearchDisplayDelegate, UIActionSheetDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *chatHistoryArray;
+
+@property (strong, nonatomic) NSMutableArray *mychatHistoryArray;
+@property (strong, nonatomic) NSMutableDictionary *chatHistoryUserArray;
 @property (strong, nonatomic) NSMutableArray *chatHistoryFilterArray;
 @property (strong, nonatomic) UISearchBar* searchBar;
 @property (strong, nonatomic) UISearchDisplayController* searchController;
@@ -55,6 +58,11 @@
                                             selector:@selector(showMessageFromNotification:)
                                                 name:ShowMessageFromNotificaiton
                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(refreshData)
+                                                name:@"refreshData"
+                                              object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,10 +74,93 @@
 
 - (void)initData
 {
+    self.chatHistoryUserArray = [[NSMutableDictionary alloc] initWithCapacity:0];
     self.chatHistoryArray = [[NSMutableArray alloc]initWithCapacity:0];
     self.chatHistoryFilterArray = [[NSMutableArray alloc]initWithCapacity:0];
+     self.mychatHistoryArray = [[NSMutableArray alloc]initWithCapacity:0];
+
+    [self refreshData];
 }
 
+-(void)refreshData{
+    [[[HXIMManager manager] anIM] getTopicList:[HXIMManager manager].clientId success:^(NSMutableArray *topicList) {
+        NSLog(@"success log get All TopicList : %@",topicList);
+        [self.mychatHistoryArray removeAllObjects];
+        
+        [self.mychatHistoryArray addObjectsFromArray:topicList];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // [self.tableView reloadData];
+            [self GetOwerInfo];
+            [self GetHistoryInfo];
+        });
+        
+    } failure:^(ArrownockException *exception) {
+        NSLog(@"failrue log get All TopicList : %@",[exception getMessage]);
+    }];
+}
+-(void)GetHistoryInfo{
+    for (int i = 0; i < self.mychatHistoryArray.count; i++) {
+        NSDictionary *pDIc =  [self.mychatHistoryArray objectAtIndex:i];
+    
+        
+        NSNumber *timestamp = [NSNumber numberWithLongLong:[[NSDate date] timeIntervalSince1970]*1000];
+        NSLog(@"timestamp%@",timestamp);
+        [[[HXIMManager manager] anIM] getFullTopicHistory:[pDIc objectForKey:@"id"] limit:30 timestamp:timestamp success:^(NSArray *messages) {
+              NSLog(@"GetHistoryInfo : %@",messages);
+            [MessageUtil saveTopicMessageToLocal:messages];
+            
+        } failure:^(ArrownockException *exception) {
+             NSLog(@"GetHistoryInfo fail: %@",exception);
+        }];
+        
+        
+    }
+}
+-(void)GetOwerInfo{
+    for (int i = 0; i < self.mychatHistoryArray.count; i++) {
+        NSDictionary *pDIc =  [self.mychatHistoryArray objectAtIndex:i];
+        NSString* ower = [pDIc objectForKey:@"owner"];
+        
+        if (ower == nil || [ower isKindOfClass:[NSNull class]]) {
+            continue;
+        }
+        
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [params setObject:ower forKey:@"clientId"];
+        
+        [[HXAnSocialManager manager]sendRequest:@"users/search.json" method:AnSocialManagerGET params:params success:^(NSDictionary* response){
+            NSLog(@"GetOwerInfo success log: %@",[response description]);
+            NSMutableArray *tempUsersArray = [response[@"response"][@"users"] mutableCopy];
+            [_chatHistoryUserArray setObject:tempUsersArray forKey:[NSString stringWithFormat:@"%d",i]];
+            
+            for (NSDictionary *user in tempUsersArray)
+            {
+                
+                NSDictionary *reformedUser = [UserUtil reformUserInfoDic:user];
+                
+                HXUser *hxUser = [UserUtil getHXUserByUserId:reformedUser[@"userId"]];
+                
+                if (hxUser == nil) {
+                    hxUser = [HXUser initWithDict:reformedUser];
+                }else{
+                    //update
+                    [hxUser setValuesFromDict:reformedUser];
+                }
+                
+                
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+            
+        } failure:^(NSDictionary* response){
+            
+            NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
+        }];
+        
+    }
+}
 - (void)initView
 {
     CGRect frame;
@@ -94,19 +185,7 @@
     NSLog(@"success log: %@",[HXUserAccountManager manager].clientId);
     NSDictionary* params = @{@"parties":[HXUserAccountManager manager].clientId};
     
-    [[HXAnSocialManager manager]sendRequest:@"http://api.arrownock.com/v1/im/topics/query.json" method:AnSocialManagerPOST params:params success:^(NSDictionary* response){
-        NSLog(@"success log: %@",[response description]);
-        
-        NSDictionary *friendInfo = response[@"response"][@"friend"];
-        HXUser * friend = [UserUtil saveUserIntoDB:friendInfo];
-        [UserUtil updatedUserFriendsWithCurrentUser:[HXUserAccountManager manager].userInfo targetUser:friend];
-        [[NSNotificationCenter defaultCenter] postNotificationName:RefreshFriendList object:nil];
-        
-    } failure:^(NSDictionary* response){
-        
-        NSLog(@"Error: %@", [[response objectForKey:@"meta"] objectForKey:@"message"]);
-    }];
-    
+
     
     
 }
@@ -168,6 +247,19 @@
     NSLog(@"chatSession.topicOwner:%@",chatSession.topicOwner.userName);
     
     NSString *photoUrl = chatSession.topicOwner.photoURL;
+    
+    
+    NSArray *pusers =  [_chatHistoryUserArray objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+    
+    NSLog(@"[dic objectForKey:%@",pusers);
+    if (pusers && [pusers count] > 0) {
+        NSDictionary *puser = [pusers objectAtIndex:0];
+        if ([puser objectForKey:@"photo"] && [[puser objectForKey:@"photo"] objectForKey:@"url"]) {
+            
+            photoUrl = [[puser objectForKey:@"photo"] objectForKey:@"url"];
+        }
+    }
+    
 
    // if ([lastStr isEqualToString:@""]) lastStr = @"...";
     
@@ -196,7 +288,7 @@
         chatSession = self.chatHistoryArray[indexPath.row];
     
     BOOL isTopicMode = [chatSession.topicId isEqualToString:@""] ? NO:YES;
-    HXChatViewController *chatVc = [[HXChatViewController alloc]initWithChatInfo:chatSession setTopicMode:isTopicMode];
+    HXChatViewController2 *chatVc = [[HXChatViewController2 alloc]initWithChatInfo:chatSession setTopicMode:isTopicMode];
     [self.navigationController pushViewController:chatVc animated:YES];
 }
 
@@ -288,7 +380,7 @@
     NSDictionary *noticeInfo = notice.object;
     HXChat *chatSession = noticeInfo[@"chatSession"];
     BOOL isTopicMode = [noticeInfo[@"mode"] isEqualToString:@"topic"] ? YES:NO;
-    HXChatViewController *chatVc = [[HXChatViewController alloc]initWithChatInfo:chatSession setTopicMode:isTopicMode];
+    HXChatViewController2 *chatVc = [[HXChatViewController2 alloc]initWithChatInfo:chatSession setTopicMode:isTopicMode];
     [self.navigationController pushViewController:chatVc animated:NO];
 }
 

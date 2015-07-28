@@ -103,12 +103,12 @@
                        }];
     }
     
-    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,30,SCREEN_WIDTH, 28)];
+    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,30,SCREEN_WIDTH, 28)];
     [self.userNameLabel setBackgroundColor:[UIColor clearColor]];
-    [self.userNameLabel setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:28]];
+    [self.userNameLabel setFont:[UIFont fontWithName:@"STHeitiTC-Medium" size:25]];
     [self.userNameLabel setTextColor:[UIColor whiteColor]];
     self.userNameLabel.text = [HXUserAccountManager manager].userInfo.nickName;
-    self.userNameLabel.textAlignment = NSTextAlignmentCenter;
+    self.userNameLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:self.userNameLabel];
     
     

@@ -75,6 +75,10 @@
 		9F8B84901B64E387006363B8 /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848D1B64E387006363B8 /* OTPageScrollView.m */; };
 		9F8B84911B64E387006363B8 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B848F1B64E387006363B8 /* OTPageView.m */; };
 		9F8B84951B64E51A006363B8 /* liao.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F8B84941B64E51A006363B8 /* liao.png */; };
+		FC42F9E91B6729D200F2F9D9 /* HXAddChatHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC42F9E81B6729D200F2F9D9 /* HXAddChatHistoryTableViewCell.m */; };
+		FC42F9EC1B672C1000F2F9D9 /* HXChatViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = FC42F9EB1B672C1000F2F9D9 /* HXChatViewController2.m */; };
+		FC42F9EF1B672CEE00F2F9D9 /* HXMessageTableViewCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = FC42F9EE1B672CEE00F2F9D9 /* HXMessageTableViewCell2.m */; };
+		FC42F9F41B6742E800F2F9D9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC42F9F31B6742E800F2F9D9 /* search.png */; };
 		FC6664811B65C9A70048A7D3 /* ApplyFor.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC6664801B65C9A70048A7D3 /* ApplyFor.xib */; };
 		FC6664841B65C9EF0048A7D3 /* ApplyFor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664831B65C9EF0048A7D3 /* ApplyFor.m */; };
 		FC6664921B65CAD80048A7D3 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6664871B65CAD80048A7D3 /* LewPopupBackgroundView.m */; };
@@ -281,6 +285,13 @@
 		9F8B848E1B64E387006363B8 /* OTPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageView.h; sourceTree = "<group>"; };
 		9F8B848F1B64E387006363B8 /* OTPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageView.m; sourceTree = "<group>"; };
 		9F8B84941B64E51A006363B8 /* liao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liao.png; sourceTree = "<group>"; };
+		FC42F9E71B6729D200F2F9D9 /* HXAddChatHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAddChatHistoryTableViewCell.h; sourceTree = "<group>"; };
+		FC42F9E81B6729D200F2F9D9 /* HXAddChatHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAddChatHistoryTableViewCell.m; sourceTree = "<group>"; };
+		FC42F9EA1B672C1000F2F9D9 /* HXChatViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HXChatViewController2.h; path = ../../ChatHistory/ChatHistoryViewController/HXChatViewController2.h; sourceTree = "<group>"; };
+		FC42F9EB1B672C1000F2F9D9 /* HXChatViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HXChatViewController2.m; path = ../../ChatHistory/ChatHistoryViewController/HXChatViewController2.m; sourceTree = "<group>"; };
+		FC42F9ED1B672CEE00F2F9D9 /* HXMessageTableViewCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMessageTableViewCell2.h; sourceTree = "<group>"; };
+		FC42F9EE1B672CEE00F2F9D9 /* HXMessageTableViewCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMessageTableViewCell2.m; sourceTree = "<group>"; };
+		FC42F9F31B6742E800F2F9D9 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FC6664801B65C9A70048A7D3 /* ApplyFor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ApplyFor.xib; path = ../ApplyFor.xib; sourceTree = "<group>"; };
 		FC6664821B65C9EF0048A7D3 /* ApplyFor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyFor.h; sourceTree = "<group>"; };
 		FC6664831B65C9EF0048A7D3 /* ApplyFor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyFor.m; sourceTree = "<group>"; };
@@ -531,6 +542,8 @@
 			children = (
 				134E05421AC29B7F00ADFA33 /* HXChatViewController.h */,
 				134E05431AC29B7F00ADFA33 /* HXChatViewController.m */,
+				FC42F9EA1B672C1000F2F9D9 /* HXChatViewController2.h */,
+				FC42F9EB1B672C1000F2F9D9 /* HXChatViewController2.m */,
 			);
 			path = ChatViewController;
 			sourceTree = "<group>";
@@ -538,6 +551,8 @@
 		134E05441AC29B7F00ADFA33 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FC42F9ED1B672CEE00F2F9D9 /* HXMessageTableViewCell2.h */,
+				FC42F9EE1B672CEE00F2F9D9 /* HXMessageTableViewCell2.m */,
 				135FD22B1ACBFF0900FB3BDD /* HXComposeView.h */,
 				135FD22C1ACBFF0900FB3BDD /* HXComposeView.m */,
 				135FD22F1ACBFF0900FB3BDD /* HXMessageTableViewCell.h */,
@@ -610,6 +625,8 @@
 		134E057A1AC5075F00ADFA33 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FC42F9E71B6729D200F2F9D9 /* HXAddChatHistoryTableViewCell.h */,
+				FC42F9E81B6729D200F2F9D9 /* HXAddChatHistoryTableViewCell.m */,
 				13D4BD1E1AD6715A0059FF4A /* HXChatHistoryTableViewCell.h */,
 				13D4BD1F1AD6715A0059FF4A /* HXChatHistoryTableViewCell.m */,
 			);
@@ -864,6 +881,7 @@
 			isa = PBXGroup;
 			children = (
 				9F7FD6A51B6730C700E38202 /* send.png */,
+				FC42F9F31B6742E800F2F9D9 /* search.png */,
 				9F8B84941B64E51A006363B8 /* liao.png */,
 			);
 			name = Resouce;
@@ -1324,6 +1342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEF4165B1AB7D6AA00C7FFC7 /* Main.storyboard in Resources */,
+				FC42F9F41B6742E800F2F9D9 /* search.png in Resources */,
 				13A7E5631ADCB8A300AC0C29 /* Localizable.strings in Resources */,
 				9F7FD6A61B6730C700E38202 /* send.png in Resources */,
 				FC6664811B65C9A70048A7D3 /* ApplyFor.xib in Resources */,
@@ -1357,6 +1376,7 @@
 				135FD20B1ACBCAE100FB3BDD /* HXFriendSelectionViewController.m in Sources */,
 				FE6CF4901AB82A3900D27905 /* HXMessage.m in Sources */,
 				FE0758371AD56C2F00D14F46 /* HXCommentTableViewCell.m in Sources */,
+				FC42F9EF1B672CEE00F2F9D9 /* HXMessageTableViewCell2.m in Sources */,
 				FE6CF48F1AB82A3900D27905 /* HXMessage+Additions.m in Sources */,
 				FCE72C2E1B64E42F00823CEA /* HXSetinitViewController.m in Sources */,
 				FE6CF47C1AB81D5C00D27905 /* HXUser+Additions.m in Sources */,
@@ -1417,6 +1437,7 @@
 				FC6664941B65CAD80048A7D3 /* LewPopupViewAnimationFade.m in Sources */,
 				13D4BD1D1AD6457E0059FF4A /* HXRoundButton.m in Sources */,
 				134E056B1AC29CA000ADFA33 /* HXAnSocialManager.m in Sources */,
+				FC42F9E91B6729D200F2F9D9 /* HXAddChatHistoryTableViewCell.m in Sources */,
 				135FD1EA1AC9059400FB3BDD /* UILabel+customLabel.m in Sources */,
 				9F8365421B636AB8009571FB /* HXChatHistoryAllViewController.m in Sources */,
 				FE0758341AD5661700D14F46 /* HXCommentView.m in Sources */,
@@ -1431,6 +1452,7 @@
 				134E053F1AC2976E00ADFA33 /* HXFriendRequestViewController.m in Sources */,
 				13D4BCEE1AD3A65E0059FF4A /* HXComment+Additions.m in Sources */,
 				135FD1E81AC9059400FB3BDD /* UIColor+CustomColor.m in Sources */,
+				FC42F9EC1B672C1000F2F9D9 /* HXChatViewController2.m in Sources */,
 				FC6664921B65CAD80048A7D3 /* LewPopupBackgroundView.m in Sources */,
 				FEF416521AB7D6AA00C7FFC7 /* main.m in Sources */,
 				13D4BCF81AD3C0A30059FF4A /* PostUtil.m in Sources */,
